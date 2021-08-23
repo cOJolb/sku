@@ -1,0 +1,526 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="gameNode">
+      <UniqueIdentifier>{2a0be0e6-62fd-43de-a606-55b511847593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="singleton">
+      <UniqueIdentifier>{87bf2d5b-3654-459b-adb0-5178817b9f2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mainGame">
+      <UniqueIdentifier>{f28c5d41-82f0-4ccf-9c33-7c155409d006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{77fc1430-c839-4247-ae8d-f85644be1aa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UTIL">
+      <UniqueIdentifier>{693a5e0e-cac8-4d85-bbd8-7c6f50294b06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="image">
+      <UniqueIdentifier>{f246c95e-8530-4564-a361-9e48ca56eb83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class">
+      <UniqueIdentifier>{011017d1-9c30-4bff-8197-2f21ef5d0bd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Object">
+      <UniqueIdentifier>{265f3389-4d73-413b-9efa-932d175879fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Object\Character">
+      <UniqueIdentifier>{4ec8cb71-1a84-44a7-89dc-e1816cae22b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Object\Character\Player">
+      <UniqueIdentifier>{d23488f3-a235-43eb-8dad-05f9ee5e6787}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Object\Character\Monster">
+      <UniqueIdentifier>{697fb866-ee17-4cfb-90aa-57c0bb3b758e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Object\Character\Monster\Minion">
+      <UniqueIdentifier>{59c1afbb-7668-45b8-9041-ce3a77de8151}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Object\Character\Monster\Boss">
+      <UniqueIdentifier>{f52bcc81-d888-4e44-8207-3568a04fb30c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Object\Bullet">
+      <UniqueIdentifier>{1f89b7a3-2b37-4ae9-afff-7a23acf7df19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Camera">
+      <UniqueIdentifier>{e3acd339-ff43-4b37-af98-ffd61cc92660}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FSM">
+      <UniqueIdentifier>{642cba5f-b034-4fdb-bc11-95ca97c1305f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Object\Character\Monster\Minion\Hopper">
+      <UniqueIdentifier>{c85077b7-4ef6-4582-ab76-8356ad9517e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Object\Character\Monster\Minion\Fly">
+      <UniqueIdentifier>{6d3e9542-08a6-47b4-a14b-55bbe1f581ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Object\Character\Monster\Minion\Host">
+      <UniqueIdentifier>{3b10bfaf-fefb-4563-8592-350d4776e02e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Object\Character\Monster\Minion\Mulligan">
+      <UniqueIdentifier>{e4bf7fc7-d80a-4845-8618-c5481166499b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Object\Character\Monster\Minion\Worm">
+      <UniqueIdentifier>{c1597ffa-df23-43a5-9f26-e26a71243bf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Object\Character\Monster\Minion\Smallfly">
+      <UniqueIdentifier>{ab404b7a-453a-432c-87e8-477f467531c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Map">
+      <UniqueIdentifier>{149a66a1-f757-4f34-be47-0de900c4fac3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Stage">
+      <UniqueIdentifier>{78637745-41ce-4559-9535-7df4147dba3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Object\Obstacle">
+      <UniqueIdentifier>{1023ed69-b497-4c2e-beb0-24713024a34b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Object\UI">
+      <UniqueIdentifier>{3590669d-8137-4361-bf81-2d3f7d6a6929}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Object\UI\Minimap">
+      <UniqueIdentifier>{d0923157-3d5d-46e9-b3cc-6a9243c28afe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Object\Item">
+      <UniqueIdentifier>{f1b7a51b-02f9-439d-b68a-c723d7772307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Object\UI\Player">
+      <UniqueIdentifier>{a14d084b-6205-4f1a-9661-9a04058e99b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Object\UI\Boss">
+      <UniqueIdentifier>{0a033754-9f4d-423f-b42a-0e460e32b738}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{797dce04-c70b-4f96-8f90-b693172104d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="timer">
+      <UniqueIdentifier>{153e0e81-aff6-49db-8d0b-f53ec02a7782}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="effect">
+      <UniqueIdentifier>{799f9037-ac59-46a7-8c21-272e269886bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="animation">
+      <UniqueIdentifier>{f76728bc-10bf-45ed-82bd-a7a8932a210f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="header">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="API_FrameWork.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="commonMacroFunction.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="singleton.h">
+      <Filter>singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="gameNode.h">
+      <Filter>gameNode</Filter>
+    </ClInclude>
+    <ClInclude Include="mainGame.h">
+      <Filter>mainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="randomFunction.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>UTIL</Filter>
+    </ClInclude>
+    <ClInclude Include="image.h">
+      <Filter>image</Filter>
+    </ClInclude>
+    <ClInclude Include="imageManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="timer.h">
+      <Filter>timer</Filter>
+    </ClInclude>
+    <ClInclude Include="timeManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="soundManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="animation.h">
+      <Filter>animation</Filter>
+    </ClInclude>
+    <ClInclude Include="animationManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="effect.h">
+      <Filter>effect</Filter>
+    </ClInclude>
+    <ClInclude Include="effectManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="vector2.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="CCharacter.h">
+      <Filter>Class\Object\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonster.h">
+      <Filter>Class\Object\Character\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>Class\Object\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CMap.h">
+      <Filter>Class\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="CMapSetting.h">
+      <Filter>Class\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="CObject.h">
+      <Filter>Class\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CBullet.h">
+      <Filter>Class\Object\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="CMapSettingSub.h">
+      <Filter>Class\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Class\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollider.h">
+      <Filter>Class</Filter>
+    </ClInclude>
+    <ClInclude Include="CFSM.h">
+      <Filter>FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="collisionManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="enemyManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CHopper.h">
+      <Filter>Class\Object\Character\Monster\Minion\Hopper</Filter>
+    </ClInclude>
+    <ClInclude Include="HopperState.h">
+      <Filter>Class\Object\Character\Monster\Minion\Hopper</Filter>
+    </ClInclude>
+    <ClInclude Include="CFly.h">
+      <Filter>Class\Object\Character\Monster\Minion\Fly</Filter>
+    </ClInclude>
+    <ClInclude Include="PooterState.h">
+      <Filter>Class\Object\Character\Monster\Minion\Fly</Filter>
+    </ClInclude>
+    <ClInclude Include="CHost.h">
+      <Filter>Class\Object\Character\Monster\Minion\Host</Filter>
+    </ClInclude>
+    <ClInclude Include="CMulligan.h">
+      <Filter>Class\Object\Character\Monster\Minion\Mulligan</Filter>
+    </ClInclude>
+    <ClInclude Include="CWORM.h">
+      <Filter>Class\Object\Character\Monster\Minion\Worm</Filter>
+    </ClInclude>
+    <ClInclude Include="HostState.h">
+      <Filter>Class\Object\Character\Monster\Minion\Host</Filter>
+    </ClInclude>
+    <ClInclude Include="MulliganState.h">
+      <Filter>Class\Object\Character\Monster\Minion\Mulligan</Filter>
+    </ClInclude>
+    <ClInclude Include="WormState.h">
+      <Filter>Class\Object\Character\Monster\Minion\Worm</Filter>
+    </ClInclude>
+    <ClInclude Include="AniAddList.h">
+      <Filter>gameNode</Filter>
+    </ClInclude>
+    <ClInclude Include="CGurdy.h">
+      <Filter>Class\Object\Character\Monster\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="GurdyState.h">
+      <Filter>Class\Object\Character\Monster\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="CState.h">
+      <Filter>FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Csmallfly.h">
+      <Filter>Class\Object\Character\Monster\Minion\Smallfly</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallflyState.h">
+      <Filter>Class\Object\Character\Monster\Minion\Smallfly</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>Class\Object\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage.h">
+      <Filter>Class\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="CObstacle.h">
+      <Filter>Class\Object\Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="stageManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CUI.h">
+      <Filter>Class\Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CMinimap.h">
+      <Filter>Class\Object\UI\Minimap</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomMapGenerator.h">
+      <Filter>Class\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="CItem.h">
+      <Filter>Class\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="itemManager.h">
+      <Filter>Class\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerUI.h">
+      <Filter>Class\Object\UI\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="mapManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="UseItem.h">
+      <Filter>Class\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CBossUI.h">
+      <Filter>Class\Object\UI\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="CMainMenu.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CMapTool.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="API_FrameWork.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="gameNode.cpp">
+      <Filter>gameNode</Filter>
+    </ClCompile>
+    <ClCompile Include="mainGame.cpp">
+      <Filter>mainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>UTIL</Filter>
+    </ClCompile>
+    <ClCompile Include="image.cpp">
+      <Filter>image</Filter>
+    </ClCompile>
+    <ClCompile Include="imageManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="timer.cpp">
+      <Filter>timer</Filter>
+    </ClCompile>
+    <ClCompile Include="timeManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="soundManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="animation.cpp">
+      <Filter>animation</Filter>
+    </ClCompile>
+    <ClCompile Include="animationManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="effect.cpp">
+      <Filter>effect</Filter>
+    </ClCompile>
+    <ClCompile Include="effectManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CCharacter.cpp">
+      <Filter>Class\Object\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonster.cpp">
+      <Filter>Class\Object\Character\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>Class\Object\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CMap.cpp">
+      <Filter>Class\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="CMapSetting.cpp">
+      <Filter>Class\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="CBullet.cpp">
+      <Filter>Class\Object\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CMapSettingSub.cpp">
+      <Filter>Class\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Class\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="CFSM.cpp">
+      <Filter>FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="CObject.cpp">
+      <Filter>Class\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="collisionManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="enemyManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CHopper.cpp">
+      <Filter>Class\Object\Character\Monster\Minion\Hopper</Filter>
+    </ClCompile>
+    <ClCompile Include="HopperState.cpp">
+      <Filter>Class\Object\Character\Monster\Minion\Hopper</Filter>
+    </ClCompile>
+    <ClCompile Include="CFly.cpp">
+      <Filter>Class\Object\Character\Monster\Minion\Fly</Filter>
+    </ClCompile>
+    <ClCompile Include="PooterState.cpp">
+      <Filter>Class\Object\Character\Monster\Minion\Fly</Filter>
+    </ClCompile>
+    <ClCompile Include="CHost.cpp">
+      <Filter>Class\Object\Character\Monster\Minion\Host</Filter>
+    </ClCompile>
+    <ClCompile Include="CMulligan.cpp">
+      <Filter>Class\Object\Character\Monster\Minion\Mulligan</Filter>
+    </ClCompile>
+    <ClCompile Include="CWORM.cpp">
+      <Filter>Class\Object\Character\Monster\Minion\Worm</Filter>
+    </ClCompile>
+    <ClCompile Include="HostState.cpp">
+      <Filter>Class\Object\Character\Monster\Minion\Host</Filter>
+    </ClCompile>
+    <ClCompile Include="MulliganState.cpp">
+      <Filter>Class\Object\Character\Monster\Minion\Mulligan</Filter>
+    </ClCompile>
+    <ClCompile Include="WormState.cpp">
+      <Filter>Class\Object\Character\Monster\Minion\Worm</Filter>
+    </ClCompile>
+    <ClCompile Include="AniAddList.cpp">
+      <Filter>gameNode</Filter>
+    </ClCompile>
+    <ClCompile Include="CGurdy.cpp">
+      <Filter>Class\Object\Character\Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="GurdyState.cpp">
+      <Filter>Class\Object\Character\Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="CState.cpp">
+      <Filter>FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="Csmallfly.cpp">
+      <Filter>Class\Object\Character\Monster\Minion\Smallfly</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallflyState.cpp">
+      <Filter>Class\Object\Character\Monster\Minion\Smallfly</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>Class\Object\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage.cpp">
+      <Filter>Class\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="CObstacle.cpp">
+      <Filter>Class\Object\Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="stageManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CUI.cpp">
+      <Filter>Class\Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CMinimap.cpp">
+      <Filter>Class\Object\UI\Minimap</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomMapGenerator.cpp">
+      <Filter>Class\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="CItem.cpp">
+      <Filter>Class\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="itemManager.cpp">
+      <Filter>Class\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerUI.cpp">
+      <Filter>Class\Object\UI\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="mapManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="UseItem.cpp">
+      <Filter>Class\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CBossUI.cpp">
+      <Filter>Class\Object\UI\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="CMainMenu.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CMapTool.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="API_FrameWork.rc">
+      <Filter>resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="API_FrameWork.ico">
+      <Filter>resource</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

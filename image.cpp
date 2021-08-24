@@ -456,6 +456,67 @@ void image::frameRender(HDC hdc, const int destX, const int destY, const int cur
 	}
 }
 
+void image::frameRender(HDC hdc, vector2 _pt, const int currentFrameX, const int currentFrameY)
+{
+
+	_imageInfo->currentFrameX = currentFrameX;
+	_imageInfo->currentFrameY = currentFrameY;
+
+	if (_isTrans)
+	{
+		//비트맵을 불러올때 특정 색상을 제외하고 복사해주는 함수
+		GdiTransparentBlt(
+			hdc,													//복삳될 장소의 DC
+			_pt.x,													//복사될 좌표의 시작점X
+			_pt.y,													//복사될 좌표의 시작점Y
+			_imageInfo->frameWidth,									//복사될 이미지 가로크기
+			_imageInfo->frameHeight,								//복사될 이미지 세로크기
+			_imageInfo->hMemDC,										//복사될 대상DC
+			_imageInfo->currentFrameX * _imageInfo->frameWidth,		//복사시작 지점 X
+			_imageInfo->currentFrameY * _imageInfo->frameHeight,	//복사시작 지점 Y
+			_imageInfo->frameWidth,									//복사영역 가로크기
+			_imageInfo->frameHeight,								//복사영역 세로크기
+			_transColor);
+	}
+	else {
+		//BitBlt : DC영역끼리 고속복사
+		BitBlt(hdc, _pt.x, _pt.y, _imageInfo->frameWidth, _imageInfo->frameHeight,
+			_imageInfo->hMemDC,
+			_imageInfo->currentFrameX * _imageInfo->frameWidth,
+			_imageInfo->currentFrameY * _imageInfo->frameHeight, SRCCOPY);
+	}
+}
+
+void image::frameRenderCenter(HDC hdc, vector2 _pt, const int currentFrameX, const int currentFrameY)
+{
+	_imageInfo->currentFrameX = currentFrameX;
+	_imageInfo->currentFrameY = currentFrameY;
+
+	if (_isTrans)
+	{
+		//비트맵을 불러올때 특정 색상을 제외하고 복사해주는 함수
+		GdiTransparentBlt(
+			hdc,													//복삳될 장소의 DC
+			_pt.x - this->getFrameWidth() / 2,													//복사될 좌표의 시작점X
+			_pt.y - this->getFrameHeight() / 2,													//복사될 좌표의 시작점Y
+			_imageInfo->frameWidth,									//복사될 이미지 가로크기
+			_imageInfo->frameHeight,								//복사될 이미지 세로크기
+			_imageInfo->hMemDC,										//복사될 대상DC
+			_imageInfo->currentFrameX * _imageInfo->frameWidth,		//복사시작 지점 X
+			_imageInfo->currentFrameY * _imageInfo->frameHeight,	//복사시작 지점 Y
+			_imageInfo->frameWidth,									//복사영역 가로크기
+			_imageInfo->frameHeight,								//복사영역 세로크기
+			_transColor);
+	}
+	else {
+		//BitBlt : DC영역끼리 고속복사
+		BitBlt(hdc, _pt.x - this->getFrameWidth() / 2, _pt.y - this->getFrameHeight() / 2, _imageInfo->frameWidth, _imageInfo->frameHeight,
+			_imageInfo->hMemDC,
+			_imageInfo->currentFrameX * _imageInfo->frameWidth,
+			_imageInfo->currentFrameY * _imageInfo->frameHeight, SRCCOPY);
+	}
+}
+
 void image::loopRender(HDC hdc, const LPRECT drawArea, int offsetX, int offsetY)
 {
 	//보정하기

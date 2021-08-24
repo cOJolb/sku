@@ -13,7 +13,7 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
-
+#include <assert.h>
 
 //==========================================
 //					STL
@@ -25,6 +25,8 @@
 //==========================================
 //				 내가만든 헤더파일
 //==========================================
+#include"vector2.h"
+
 #include"commonMacroFunction.h"
 #include"Input.h"
 #include"imageManager.h"
@@ -36,6 +38,7 @@
 #include"randomFunction.h"
 #include"utils.h"
 #include"txtData.h"
+#include "obstacleManager.h"
 
 //======================================
 //##			매니저들			  ##
@@ -49,14 +52,15 @@
 #define SOUND			soundManager::getSingleton()
 #define ANIMATION		animationManager::getSingleton()
 #define EFFECT			effectManager::getSingleton()
+#define OBSTACLE		obstacleManager::getSingleton()
 //==========================================
 //				 매크로 설정
 //==========================================
 #define WINNAME			(LPTSTR)(TEXT("지옥으로 떠나는 여행"))
 #define WINSTARTX		100
 #define WINSTARTY		100
-#define WINSIZEX		1024
-#define WINSIZEY		768
+#define WINSIZEX		1080
+#define WINSIZEY		720
 #define	WINSTYLE		WS_CAPTION | WS_SYSMENU
 
 
@@ -65,8 +69,6 @@
 //==========================================
 
 #define SAFE_DELETE(p) {if(p) {delete(p);(p) = nullptr;}}
-
-
 
 //========================================================
 //		전역변수 아이들(인스턴스,윈도우 핸들, 마우스 좌표)

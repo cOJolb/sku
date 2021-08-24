@@ -27,8 +27,8 @@ public:
 		int currentFrameY;		//현재 프레임 Y
 		int maxFrameX;			//최대 X프레임 갯수
 		int maxFrameY;			//최대 Y프레임 갯수
-		int frameWidth;			//1프레임  가로길이
-		int frameHeight;		//1프레임  세로길이
+		float frameWidth;			//1프레임  가로길이
+		float frameHeight;		//1프레임  세로길이
 		
 		tagImage()
 		{
@@ -94,6 +94,8 @@ public:
 	//프레임 렌더
 	void frameRender(HDC hdc, const int destX, const int destY);
 	void frameRender(HDC hdc, const int destX, const int destY, const int currentFrameX, const int currentFrameY);
+	void frameRender(HDC hdc, vector2 _pt, const int currentFrameX, const int currentFrameY);
+	void frameRenderCenter(HDC hdc, vector2 _pt, const int currentFrameX, const int currentFrameY);
 
 
 	//루프렌더
@@ -164,8 +166,8 @@ public:
 	}
 
 	//1프레임 가로세크로기 얻기
-	inline int getFrameWidth()const { return _imageInfo->frameWidth; }
-	inline int getFrameHeight()const { return _imageInfo->frameHeight; }
+	inline float getFrameWidth()const { return _imageInfo->frameWidth; }
+	inline float getFrameHeight()const { return _imageInfo->frameHeight; }
 
 
 

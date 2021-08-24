@@ -1,6 +1,6 @@
 #pragma once
 #include"image.h"
-
+#include"imageList.h"
 static image* _backBuffer = IMAGE->addImage("backBuffer", WINSIZEX, WINSIZEY);
 class gameNode
 {
@@ -10,7 +10,7 @@ private:
 	//image* _backBuffer;	//백버퍼
 	//void setBackBuffer();//백버퍼 셋팅
 
-
+	C_imageList* imageList;
 
 	HDC _hdc;
 	bool  _managerInit;

@@ -9,9 +9,14 @@ mainGame::~mainGame()
 HRESULT mainGame::init()
 {
 	gameNode::init(true);
-
-
-
+	player = new C_player;
+	for (float i = 0; i < 60; i++)
+	{
+		OBSTACLE->createObstacle(OBSTACLE_TYPE::LTC_LAND, { 18*i,500 });
+	}
+	OBSTACLE->createObstacle(OBSTACLE_TYPE::LTC_LAND, { 400,464 });
+	OBSTACLE->createObstacle(OBSTACLE_TYPE::LTC_LAND, { 400,364 });
+	OBSTACLE->createObstacle(OBSTACLE_TYPE::LTC_LAND, { 400,264 });
 	return S_OK;
 }
 
@@ -26,6 +31,7 @@ void mainGame::update()
 {
 
 	gameNode::update();
+	player->update();
 	//SCENE->update();
 	//ANIMATION->update();
 	//EFFECT->update();
@@ -37,8 +43,9 @@ void mainGame::render(/*HDC hdc*/)
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//==============================================
 	//IMAGE->render("배경화면", getMemDC());
-	RECT rc = RectMakeCenter(500, 500, 200, 200);
-	Rectangle(getMemDC(),rc.left,rc.top,rc.right,rc.bottom );
+	gameNode::render();
+	player->render();
+
 	//SCENE->render();
 	//EFFECT->render();
 	//==============================================

@@ -23,6 +23,8 @@ HRESULT gameNode::init()
 
 	_hdc = GetDC(m_hWnd);
 	_managerInit = false;
+
+	imageList = new C_imageList;
 	return S_OK;
 }
 
@@ -42,7 +44,7 @@ HRESULT gameNode::init(bool managerInit)
 	}
 
 
-
+	imageList = new C_imageList;
 	return E_NOTIMPL;
 }
 
@@ -54,8 +56,7 @@ HRESULT gameNode::init(bool managerInit)
 
 void gameNode::release()
 {	//타이머 해제
-
-
+	imageList->release();
 
 	if (_managerInit)
 	{
@@ -79,6 +80,7 @@ void gameNode::release()
 		SOUND->release();
 		ANIMATION->release();
 		EFFECT->release();
+		OBSTACLE->release();
 	}
 
 	ReleaseDC(m_hWnd, _hdc);
@@ -90,11 +92,14 @@ void gameNode::release()
 
 void gameNode::update()
 {
+	ANIMATION->update();
+	OBSTACLE->update();
 	//더블버퍼 이후 사용하지 않는다 true->false
 	InvalidateRect(m_hWnd, NULL, false);
 }
 void gameNode::render(/*HDC hdc*/)
 {
+	OBSTACLE->render();
 }
 
 LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)

@@ -44,6 +44,8 @@ public:
 	//프레임
 	void frameRender(string strKey, HDC hdc, const int destX, const int destY);
 	void frameRender(string strKey, HDC hdc, const int destX, const int destY, const int currentFrameX, const int currentFrameY);
+	void frameRender(string strKey, HDC hdc, vector2 _pt, const int currentFrameX, const int currentFrameY);
+	void frameRenderCenter(string strKey, HDC hdc, vector2 _pt, const int currentFrameX, const int currentFrameY);
 
 	//루프
 	void loopRender(string strKey, HDC hdc, const LPRECT drawArea, int offSetX, int offSetY);

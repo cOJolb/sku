@@ -58,6 +58,18 @@
     <Filter Include="SCENE\manager">
       <UniqueIdentifier>{3ccb80a3-3107-40ab-a079-f194516977e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="OBJECT">
+      <UniqueIdentifier>{95876101-4811-4637-a286-7d7e2d132735}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OBJECT\player">
+      <UniqueIdentifier>{94f80030-1d76-4754-b799-29bd828953c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OBJECT\obstacle">
+      <UniqueIdentifier>{c870c12c-14a9-4dd7-a7e7-6921f8bddbd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="COLLISION">
+      <UniqueIdentifier>{9b191145-22bd-45e5-8e3f-fb2fe35fcc3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -126,6 +138,36 @@
     <ClInclude Include="sceneManager.h">
       <Filter>SCENE\manager</Filter>
     </ClInclude>
+    <ClInclude Include="fsm.h">
+      <Filter>PATTERN\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="state.h">
+      <Filter>PATTERN\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="object.h">
+      <Filter>OBJECT</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>OBJECT\player</Filter>
+    </ClInclude>
+    <ClInclude Include="imageList.h">
+      <Filter>IMAGE</Filter>
+    </ClInclude>
+    <ClInclude Include="vector2.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="obstacle.h">
+      <Filter>OBJECT\obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="collision.h">
+      <Filter>COLLISION</Filter>
+    </ClInclude>
+    <ClInclude Include="obstacleManager.h">
+      <Filter>OBJECT\obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="collider.h">
+      <Filter>OBJECT</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -175,6 +217,30 @@
     </ClCompile>
     <ClCompile Include="sceneManager.cpp">
       <Filter>SCENE\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="fsm.cpp">
+      <Filter>PATTERN\fsm</Filter>
+    </ClCompile>
+    <ClCompile Include="state.cpp">
+      <Filter>PATTERN\fsm</Filter>
+    </ClCompile>
+    <ClCompile Include="object.cpp">
+      <Filter>OBJECT</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>OBJECT\player</Filter>
+    </ClCompile>
+    <ClCompile Include="imageList.cpp">
+      <Filter>IMAGE</Filter>
+    </ClCompile>
+    <ClCompile Include="obstacle.cpp">
+      <Filter>OBJECT\obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="collision.cpp">
+      <Filter>COLLISION</Filter>
+    </ClCompile>
+    <ClCompile Include="obstacleManager.cpp">
+      <Filter>OBJECT\obstacle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,7 @@ protected:
 	float playerDashSpeed;
 	int DashTime;
 	int DashDelay;
+	int DashCount;
 	bool playerDoubleDash;
 	bool DashFoward;
 	bool isDash;
@@ -14,6 +15,12 @@ protected:
 	bool playerDoubleJump;
 	
 	bool isLeft;
+
+	string unitName;
+	string unitFoward;
+	string unitState;
+
+	SKUL_TYPE type;
 private:
 
 public:
@@ -30,5 +37,6 @@ public:
 	void playerMove();
 	void playerJump();
 	void playerDash();
+	SKUL_TYPE getSkulType(){return type;}
 };
 

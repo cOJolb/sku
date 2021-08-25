@@ -70,6 +70,12 @@
     <Filter Include="COLLISION">
       <UniqueIdentifier>{9b191145-22bd-45e5-8e3f-fb2fe35fcc3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="OBJECT\player\skul">
+      <UniqueIdentifier>{a3b2b820-47ae-4cb7-a87f-64ef7bdf1251}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OBJECT\item">
+      <UniqueIdentifier>{ac0e0f1e-a36b-4be8-b52c-be412f5a2005}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -168,6 +174,18 @@
     <ClInclude Include="collider.h">
       <Filter>OBJECT</Filter>
     </ClInclude>
+    <ClInclude Include="changePlayer.h">
+      <Filter>OBJECT\player</Filter>
+    </ClInclude>
+    <ClInclude Include="skul.h">
+      <Filter>OBJECT\player\skul</Filter>
+    </ClInclude>
+    <ClInclude Include="crown.h">
+      <Filter>OBJECT\player\skul</Filter>
+    </ClInclude>
+    <ClInclude Include="item.h">
+      <Filter>OBJECT\item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -241,6 +259,18 @@
     </ClCompile>
     <ClCompile Include="obstacleManager.cpp">
       <Filter>OBJECT\obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="changePlayer.cpp">
+      <Filter>OBJECT\player</Filter>
+    </ClCompile>
+    <ClCompile Include="skul.cpp">
+      <Filter>OBJECT\player\skul</Filter>
+    </ClCompile>
+    <ClCompile Include="crown.cpp">
+      <Filter>OBJECT\player\skul</Filter>
+    </ClCompile>
+    <ClCompile Include="item.cpp">
+      <Filter>OBJECT\item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

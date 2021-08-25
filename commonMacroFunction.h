@@ -154,6 +154,12 @@ enum class OBSTACLE_TYPE
 	SLAND
 };
 
+enum class SKUL_TYPE
+{
+	SKUL,
+	CLOWN
+};
+
 const int GRAVITY = 10;
 
 
@@ -166,3 +172,4 @@ struct tagTile
 	Vec2 monsterFrame;
 	Vec2 pt;
 };
+

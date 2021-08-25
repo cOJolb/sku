@@ -145,7 +145,7 @@ void animation::setPlayFrame(int start, int end, bool reverse, bool loop)
 		}
 		else
 		{
-			for (int i = start; i <= end; i--)
+			for (int i = start ; i >= end; i--)
 			{
 				_playList.push_back(i);
 			}

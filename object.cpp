@@ -54,13 +54,13 @@ bool C_object::isCollision(C_collider* _left, C_collider* _right)
 	float fDist = abs(_left->getPos().x - _right->getPos().x);
 	float fSize = _left->getSize().x / 2.f + _right->getSize().x / 2.f;
 
-	if (fDist < fSize)
+	if (fDist <= fSize)
 	{
 		// x 축으로 겹친다.
 		fDist = abs(_left->getPos().y - _right->getPos().y);
 		fSize = _left->getSize().y / 2.f + _right->getSize().y / 2.f;
 
-		if (fDist < fSize)
+		if (fDist <= fSize)
 		{
 			// y축으로 겹친다.
 			return true;
@@ -96,29 +96,51 @@ void C_object::isLand()
 	}
 }
 
+void C_object::isBump()
+{
+}
 
-void C_object::isWall()
+void C_object::isClogged()
 {
 	for (int i = 0; i < OBSTACLE->getvObstacle().size(); i++)
 	{
-		float tileLeft = (*OBSTACLE->getviObstacle(i))->getPt().x - (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().x / 2;
-		float tileRight = (*OBSTACLE->getviObstacle(i))->getPt().x + (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().x / 2;
-		float tileTop = (*OBSTACLE->getviObstacle(i))->getPt().y - (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().y / 2;
-		float tileBottom = (*OBSTACLE->getviObstacle(i))->getPt().y + (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().y / 2;
-
+		RECT tile = RectMakeCenter((*OBSTACLE->getviObstacle(i))->getPt(), (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().x, (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().y);
+		RECT unit = RectMakeCenter(pt, collider->getSize().x, collider->getSize().y);
+		RECT prevUnit = RectMakeCenter(prevPt, collider->getSize().x, collider->getSize().y);
 		bool collision = isCollision((*OBSTACLE->getviObstacle(i))->getCollider(), collider);
-		bool inRangeX = pt.x > tileLeft - collider->getSize().x / 2 && pt.x < tileRight + collider->getSize().x / 2;
-		bool inRangeY = pt.y > tileTop - collider->getSize().y / 2 && pt.y < tileBottom + collider->getSize().y / 2;
-		bool isLeft = prevPt.x < pt.x;
+		bool inRangeX = prevUnit.left < tile.right && prevUnit.right > tile.left;
+		bool inRangeY = prevUnit.top < tile.bottom && prevUnit.bottom > tile.top;
+		bool test1 = prevUnit.bottom > tile.bottom;
+		bool test2 = prevUnit.top < tile.top;
+		bool test3 = prevUnit.left > tile.left;
+		bool test4 = prevUnit.right < tile.right;
 		bool isUp = prevPt.y > pt.y;
-		if (collision && isLeft && inRangeY)
+		bool isLeft = prevPt.x > pt.x;
+		bool isDown = prevPt.y < pt.y;
+		bool isRight = prevPt.x < pt.x;
+		
+		if (collision && inRangeX  && test1 && isUp )
 		{
-			pt.x = tileLeft - collider->getSize().x / 2;
+			unit.top = tile.bottom;
+			unit.bottom = unit.top + collider->getSize().y;
+			jumpPower = GRAVITY;
 		}
-
-		if (collision && inRangeX && isUp)
+		else if (collision && inRangeY  && test4  && isRight )
 		{
-			pt.y = tileBottom + collider->getSize().y / 2;
+			unit.right = tile.left;
+			unit.left = unit.right - collider->getSize().x;
 		}
+		else if (collision && inRangeY  && test3 && isLeft)
+		{
+			unit.left = tile.right;
+			unit.right = unit.left + collider->getSize().x;
+		}
+		pt = { RectX(unit), RectY(unit) };
 	}
+}
+
+
+void C_object::isWall()
+{
+	
 }

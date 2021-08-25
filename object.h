@@ -41,6 +41,7 @@ public:
 	bool isCollision(C_collider* _left, C_collider* _right);
 	void Gravity();
 	void isLand();
+	void isBump();
 	void isClogged();
 	void isWall();
 

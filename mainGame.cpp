@@ -9,7 +9,7 @@ mainGame::~mainGame()
 HRESULT mainGame::init()
 {
 	gameNode::init(true);
-	player = new C_player;
+	player = new changePlayer;
 	for (float i = 0; i < 60; i++)
 	{
 		OBSTACLE->createObstacle(OBSTACLE_TYPE::LTC_LAND, { 18*i,500 });

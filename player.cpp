@@ -4,19 +4,18 @@
 
 C_player::C_player()
 {
-	ani = ANIMATION->findAnimation("skulRightMove");
-	pt = { 200, 200 };
 	
-	collider = new C_collider(pt, { 16,16 });
-	//rc = RectMakeCenter(pt, 20, 20);
-	
-	ANIMATION->start("skulRightMove");
-
+	pt = { 200, 200 }; // 이것들 저장어떻게 하지 ..
+	prevPt = pt;
+	collider = new C_collider(pt, { 20,20 });
 	playerSpeed = 5;
-	playerDashSpeed = 45;
-	playerDoubleJump = false;
+	playerDashSpeed = 30;
 	DashDelay = 34;
 	DashTime = 34;
+
+	playerDoubleJump = false;
+
+	DashCount = 0;
 	isLeft = false;
 }
 
@@ -40,27 +39,19 @@ void C_player::update()
 	playerDash();
 	if (DashDelay > DashTime /2) Gravity();
 	isLand();
-	for (int i = 0; i < OBSTACLE->getvObstacle().size(); i++)
-	{
-		float tileLeft = (*OBSTACLE->getviObstacle(i))->getPt().x - (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().x / 2;
-		float tileRight = (*OBSTACLE->getviObstacle(i))->getPt().x + (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().x / 2;
-		float tileTop = (*OBSTACLE->getviObstacle(i))->getPt().y - (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().y / 2;
-		float tileBottom = (*OBSTACLE->getviObstacle(i))->getPt().y + (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().y / 2;
-
-		bool collision = isCollision((*OBSTACLE->getviObstacle(i))->getCollider(), collider);
-		if (tileLeft <= pt.x + 8 && pt.y >tileTop && pt.y <tileBottom)
-		{
-			pt.x = tileLeft - 8;
-		}
-		
-	}
-	ptUpdate();
+	isClogged();
 	collider->setPos(pt);
+	ptUpdate();
+	ani = ANIMATION->findAnimation(unitName + unitFoward + unitState);
 }
 
 void C_player::render()
 {
-	IMAGE->findImage("skul")->aniRender(getMemDC(), pt.x - IMAGE->findImage("skul")->getFrameWidth()/2, pt.y - IMAGE->findImage("skul")->getFrameHeight()/2, ani);
+	RECT rec = RectMakeCenter(pt, 20, 20);
+	Rectangle(getMemDC(), rec.left, rec.top, rec.right, rec.bottom);
+	
+	
+	IMAGE->findImage(unitName)->aniRender(getMemDC(), pt.x - IMAGE->findImage(unitName)->getFrameWidth()/2, pt.y - IMAGE->findImage(unitName)->getFrameHeight()/2, ani);
 }
 
 void C_player::playerMove()
@@ -69,15 +60,27 @@ void C_player::playerMove()
 	{
 		bool goLeft = InputManager->isStayKeyDown(VK_LEFT);
 		bool goRight = InputManager->isStayKeyDown(VK_RIGHT);
+		if (InputManager->isOnceKeyDown(VK_LEFT)) ANIMATION->start(unitName + "LeftMove");
+		
+		if (InputManager->isOnceKeyDown(VK_RIGHT)) ANIMATION->start(unitName + "RightMove");
+		
 		if (goLeft && !goRight)
 		{
 			pt = vector2(pt.x - playerSpeed, pt.y);
 			isLeft = true;
+			unitFoward = "Left";
+			unitState = "Move";
 		}
 		if (goRight && !goLeft)
 		{
 			pt = vector2(pt.x + playerSpeed, pt.y);
 			isLeft = false;
+			unitFoward = "Right";
+			unitState = "Move";
+		}
+		if (!goLeft && !goRight && !isJump)
+		{
+			unitState = "Idle";
 		}
 	}
 }
@@ -95,33 +98,52 @@ void C_player::playerJump()
 		jumpPower = 25;
 		playerDoubleJump = false;
 	}
+	if (jumpPower > 10) unitState = "Jump";
+	if (jumpPower == 10 || DashDelay == DashTime / 2)
+	{
+		ANIMATION->start(unitName + "RightFall");
+		ANIMATION->start(unitName + "LeftFall");
+	}
+	if ( isJump  && jumpPower <= 10 && DashDelay > DashTime / 2)  unitState = "Fall";
 }
 
 void C_player::playerDash()
 {
 	bool goDash = InputManager->isOnceKeyDown('Z');
+	
 	if (goDash && DashDelay >= DashTime && !isDash)
 	{
 		jumpPower = 0;
 		isDash = true;
 		DashDelay = 0;
 		DashFoward = isLeft;
-		if (DashFoward)
-			pt.x -= playerDashSpeed;
-		else if (!DashFoward)
-			pt.x += playerDashSpeed;
+		DashCount = 3;
 	}
+
 	else if (goDash && playerDoubleDash && DashDelay <= DashTime / 2)
 	{
-		if (DashFoward)
-			pt.x -= playerDashSpeed;
-		else if (!DashFoward)
-			pt.x += playerDashSpeed;
-
 		playerDoubleDash = false;
 		isDash = true;
 		DashDelay = 0;
+		DashCount = 3;
 	}
+
+	if (DashCount > 0)
+	{
+		DashCount--;
+		if (DashFoward)
+		{
+			pt.x -= playerDashSpeed;
+			unitState = "Dash";
+		}
+
+		else if (!DashFoward)
+		{
+			pt.x += playerDashSpeed;
+			unitState = "Dash";
+		}
+	}
+
 	DashDelay++;
 	if (DashDelay >= DashTime)
 	{

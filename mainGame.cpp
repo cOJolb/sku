@@ -17,6 +17,7 @@ HRESULT mainGame::init()
 	OBSTACLE->createObstacle(OBSTACLE_TYPE::LTC_LAND, { 400,464 });
 	OBSTACLE->createObstacle(OBSTACLE_TYPE::LTC_LAND, { 400,364 });
 	OBSTACLE->createObstacle(OBSTACLE_TYPE::LTC_LAND, { 400,264 });
+	ENEMY->respawnEnemy(UNIT_TYPE::KNIGHT, { 500,200 });
 	return S_OK;
 }
 
@@ -32,6 +33,11 @@ void mainGame::update()
 
 	gameNode::update();
 	player->update();
+	if (InputManager->isOnceKeyDown(VK_SPACE))
+	{
+		player->changeSkul();
+	}
+	ENEMY->update();
 	//SCENE->update();
 	//ANIMATION->update();
 	//EFFECT->update();
@@ -45,7 +51,7 @@ void mainGame::render(/*HDC hdc*/)
 	//IMAGE->render("배경화면", getMemDC());
 	gameNode::render();
 	player->render();
-
+	ENEMY->render();
 	//SCENE->render();
 	//EFFECT->render();
 	//==============================================

@@ -1,11 +1,11 @@
 #include "framework.h"
 #include "changePlayer.h"
 #include "skul.h"
-#include "crown.h"
+#include "clown.h"
 changePlayer::changePlayer()
 {
 	Cur_Player = new C_skul;
-	Stanby_Player = nullptr;
+	Stanby_Player = new C_clown;
 	Temp_Player = nullptr;
 }
 
@@ -33,7 +33,7 @@ void changePlayer::addSkulType(SKUL_TYPE _type)
 			Stanby_Player = new C_skul;
 			break;
 		case SKUL_TYPE::CLOWN:
-			Stanby_Player = new C_crown;
+			Stanby_Player = new C_clown;
 			break;
 		default:
 			break;
@@ -47,7 +47,7 @@ void changePlayer::addSkulType(SKUL_TYPE _type)
 			Cur_Player = new C_skul;
 			break;
 		case SKUL_TYPE::CLOWN:
-			Cur_Player = new C_crown;
+			Cur_Player = new C_clown;
 			break;
 		default:
 			break;
@@ -62,7 +62,7 @@ void changePlayer::changeSkul()
 		Temp_Player = Cur_Player;
 		Cur_Player->release();
 		Cur_Player = Stanby_Player;
-		Stanby_Player = Cur_Player;
+		Stanby_Player = Temp_Player;
 
 		Cur_Player->init();
 	}

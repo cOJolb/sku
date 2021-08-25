@@ -1,13 +1,13 @@
 #pragma once
 #include "player.h"
-class C_crown : public C_player
+class C_clown : public C_player
 {
 protected:
 private:
 
 public:
-	C_crown();
-	virtual~C_crown();
+	C_clown();
+	virtual~C_clown();
 
 public:
 	virtual HRESULT init();

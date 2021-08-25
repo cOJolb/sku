@@ -38,8 +38,8 @@
 #include"randomFunction.h"
 #include"utils.h"
 #include"txtData.h"
-#include "obstacleManager.h"
-
+#include"obstacleManager.h"
+#include"enemyManager.h"
 //======================================
 //##			매니저들			  ##
 //======================================
@@ -53,6 +53,7 @@
 #define ANIMATION		animationManager::getSingleton()
 #define EFFECT			effectManager::getSingleton()
 #define OBSTACLE		obstacleManager::getSingleton()
+#define ENEMY			enemyManager::getSingleton()
 //==========================================
 //				 매크로 설정
 //==========================================

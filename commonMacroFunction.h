@@ -160,6 +160,44 @@ enum class SKUL_TYPE
 	CLOWN
 };
 
+enum class UNIT_TYPE
+{
+	PLAYER,
+	KNIGHT
+};
+
+enum class MONSTER_TYPE
+{
+	BOSS,
+	MINION
+};
+
+enum class ITEM_TYPE
+{
+	SKUL,
+	PASSIVE,
+	ACTIVE
+};
+
+enum class PASSIVEITEM
+{
+	BOOTS,
+	CRISTAL
+};
+
+enum class SKULITEM
+{
+	SKUL,
+	CROWN
+};
+
+enum class ACTIVEITEM
+{
+	IM,
+	NOT,
+	OKAY
+};
+
 const int GRAVITY = 10;
 
 

@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="activeItem.h" />
     <ClInclude Include="animation.h" />
     <ClInclude Include="animationManager.h" />
     <ClInclude Include="API_FrameWork.h" />
@@ -149,9 +150,11 @@
     <ClInclude Include="collider.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="commonMacroFunction.h" />
-    <ClInclude Include="crown.h" />
+    <ClInclude Include="clown.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
+    <ClInclude Include="enemy.h" />
+    <ClInclude Include="enemyManager.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="fsm.h" />
     <ClInclude Include="gameNode.h" />
@@ -160,16 +163,21 @@
     <ClInclude Include="imageManager.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="item.h" />
+    <ClInclude Include="itemManager.h" />
+    <ClInclude Include="knight.h" />
+    <ClInclude Include="knightState.h" />
     <ClInclude Include="mainGame.h" />
     <ClInclude Include="obstacle.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="obstacleManager.h" />
+    <ClInclude Include="passiveItem.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="singleton.h" />
     <ClInclude Include="skul.h" />
+    <ClInclude Include="skulItem.h" />
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="targetver.h" />
@@ -180,6 +188,7 @@
     <ClInclude Include="vector2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="activeItem.cpp" />
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="animationManager.cpp" />
     <ClCompile Include="API_FrameWork.cpp">
@@ -187,9 +196,11 @@
     </ClCompile>
     <ClCompile Include="changePlayer.cpp" />
     <ClCompile Include="collision.cpp" />
-    <ClCompile Include="crown.cpp" />
+    <ClCompile Include="clown.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
+    <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="enemyManager.cpp" />
     <ClCompile Include="fsm.cpp" />
     <ClCompile Include="gameNode.cpp" />
     <ClCompile Include="image.cpp" />
@@ -197,13 +208,18 @@
     <ClCompile Include="imageManager.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="item.cpp" />
+    <ClCompile Include="itemManager.cpp" />
+    <ClCompile Include="knight.cpp" />
+    <ClCompile Include="knightState.cpp" />
     <ClCompile Include="mainGame.cpp" />
     <ClCompile Include="obstacle.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="obstacleManager.cpp" />
+    <ClCompile Include="passiveItem.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="skul.cpp" />
+    <ClCompile Include="skulItem.cpp" />
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="state.cpp" />
     <ClCompile Include="timeManager.cpp" />

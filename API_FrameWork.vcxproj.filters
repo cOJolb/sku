@@ -76,6 +76,36 @@
     <Filter Include="OBJECT\item">
       <UniqueIdentifier>{ac0e0f1e-a36b-4be8-b52c-be412f5a2005}</UniqueIdentifier>
     </Filter>
+    <Filter Include="OBJECT\enemy">
+      <UniqueIdentifier>{e04664f3-b2f7-458b-b465-fb0b621e0436}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OBJECT\enemy\type">
+      <UniqueIdentifier>{57f1723c-038d-4d5c-b49d-72d6bc7a79b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OBJECT\enemy\type\knight">
+      <UniqueIdentifier>{2f3195c0-c29c-46ab-973c-dacb0cbdad0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OBJECT\enemy\base">
+      <UniqueIdentifier>{106abe70-5682-42b5-9430-027328b71fb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OBJECT\player\base">
+      <UniqueIdentifier>{20dd7846-727e-47d8-b4fb-af064dfbb9fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OBJECT\base">
+      <UniqueIdentifier>{24e9508e-8e53-4184-b515-7330b5f387ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OBJECT\item\base">
+      <UniqueIdentifier>{40ccc2dc-ecab-4d6b-9203-f64753dc6fc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OBJECT\item\skul">
+      <UniqueIdentifier>{1a17d786-670c-4fc8-a9ca-355ccb76f494}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OBJECT\item\passive">
+      <UniqueIdentifier>{d7b350d8-b2bf-49d6-bb6c-040ed4092e63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OBJECT\item\active">
+      <UniqueIdentifier>{585e3a32-6f2c-422c-9b7a-a028dcfe4cf8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -150,12 +180,6 @@
     <ClInclude Include="state.h">
       <Filter>PATTERN\fsm</Filter>
     </ClInclude>
-    <ClInclude Include="object.h">
-      <Filter>OBJECT</Filter>
-    </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>OBJECT\player</Filter>
-    </ClInclude>
     <ClInclude Include="imageList.h">
       <Filter>IMAGE</Filter>
     </ClInclude>
@@ -171,20 +195,50 @@
     <ClInclude Include="obstacleManager.h">
       <Filter>OBJECT\obstacle</Filter>
     </ClInclude>
-    <ClInclude Include="collider.h">
-      <Filter>OBJECT</Filter>
-    </ClInclude>
-    <ClInclude Include="changePlayer.h">
-      <Filter>OBJECT\player</Filter>
-    </ClInclude>
     <ClInclude Include="skul.h">
       <Filter>OBJECT\player\skul</Filter>
     </ClInclude>
-    <ClInclude Include="crown.h">
+    <ClInclude Include="clown.h">
       <Filter>OBJECT\player\skul</Filter>
     </ClInclude>
+    <ClInclude Include="knight.h">
+      <Filter>OBJECT\enemy\type\knight</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy.h">
+      <Filter>OBJECT\enemy\base</Filter>
+    </ClInclude>
+    <ClInclude Include="enemyManager.h">
+      <Filter>OBJECT\enemy\base</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>OBJECT\player\base</Filter>
+    </ClInclude>
+    <ClInclude Include="changePlayer.h">
+      <Filter>OBJECT\player\base</Filter>
+    </ClInclude>
+    <ClInclude Include="object.h">
+      <Filter>OBJECT\base</Filter>
+    </ClInclude>
+    <ClInclude Include="collider.h">
+      <Filter>OBJECT\base</Filter>
+    </ClInclude>
     <ClInclude Include="item.h">
-      <Filter>OBJECT\item</Filter>
+      <Filter>OBJECT\item\base</Filter>
+    </ClInclude>
+    <ClInclude Include="itemManager.h">
+      <Filter>OBJECT\item\base</Filter>
+    </ClInclude>
+    <ClInclude Include="skulItem.h">
+      <Filter>OBJECT\item\skul</Filter>
+    </ClInclude>
+    <ClInclude Include="passiveItem.h">
+      <Filter>OBJECT\item\passive</Filter>
+    </ClInclude>
+    <ClInclude Include="activeItem.h">
+      <Filter>OBJECT\item\active</Filter>
+    </ClInclude>
+    <ClInclude Include="knightState.h">
+      <Filter>OBJECT\enemy\type\knight</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -242,12 +296,6 @@
     <ClCompile Include="state.cpp">
       <Filter>PATTERN\fsm</Filter>
     </ClCompile>
-    <ClCompile Include="object.cpp">
-      <Filter>OBJECT</Filter>
-    </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>OBJECT\player</Filter>
-    </ClCompile>
     <ClCompile Include="imageList.cpp">
       <Filter>IMAGE</Filter>
     </ClCompile>
@@ -260,17 +308,47 @@
     <ClCompile Include="obstacleManager.cpp">
       <Filter>OBJECT\obstacle</Filter>
     </ClCompile>
-    <ClCompile Include="changePlayer.cpp">
-      <Filter>OBJECT\player</Filter>
-    </ClCompile>
     <ClCompile Include="skul.cpp">
       <Filter>OBJECT\player\skul</Filter>
     </ClCompile>
-    <ClCompile Include="crown.cpp">
+    <ClCompile Include="clown.cpp">
       <Filter>OBJECT\player\skul</Filter>
     </ClCompile>
+    <ClCompile Include="knight.cpp">
+      <Filter>OBJECT\enemy\type\knight</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy.cpp">
+      <Filter>OBJECT\enemy\base</Filter>
+    </ClCompile>
+    <ClCompile Include="enemyManager.cpp">
+      <Filter>OBJECT\enemy\base</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>OBJECT\player\base</Filter>
+    </ClCompile>
+    <ClCompile Include="changePlayer.cpp">
+      <Filter>OBJECT\player\base</Filter>
+    </ClCompile>
+    <ClCompile Include="object.cpp">
+      <Filter>OBJECT\base</Filter>
+    </ClCompile>
     <ClCompile Include="item.cpp">
-      <Filter>OBJECT\item</Filter>
+      <Filter>OBJECT\item\base</Filter>
+    </ClCompile>
+    <ClCompile Include="itemManager.cpp">
+      <Filter>OBJECT\item\base</Filter>
+    </ClCompile>
+    <ClCompile Include="skulItem.cpp">
+      <Filter>OBJECT\item\skul</Filter>
+    </ClCompile>
+    <ClCompile Include="passiveItem.cpp">
+      <Filter>OBJECT\item\passive</Filter>
+    </ClCompile>
+    <ClCompile Include="activeItem.cpp">
+      <Filter>OBJECT\item\active</Filter>
+    </ClCompile>
+    <ClCompile Include="knightState.cpp">
+      <Filter>OBJECT\enemy\type\knight</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

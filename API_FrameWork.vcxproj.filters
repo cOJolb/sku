@@ -106,6 +106,21 @@
     <Filter Include="OBJECT\item\active">
       <UniqueIdentifier>{585e3a32-6f2c-422c-9b7a-a028dcfe4cf8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MAP">
+      <UniqueIdentifier>{624cf7b4-43da-4ea3-b560-0263d13c33c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OBJECT\bullet">
+      <UniqueIdentifier>{c59dde3b-80d0-4471-bfa0-840895d9aafc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OBJECT\bullet\base">
+      <UniqueIdentifier>{ce088957-baa3-448c-9052-3710db0bd832}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OBJECT\bullet\skulBullet">
+      <UniqueIdentifier>{371fd690-17b4-40f0-9e7a-a3aab7686e78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OBJECT\bullet\enemyBullet">
+      <UniqueIdentifier>{99689e36-e55b-4fa7-8ef7-4c27f96b454c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -240,6 +255,24 @@
     <ClInclude Include="knightState.h">
       <Filter>OBJECT\enemy\type\knight</Filter>
     </ClInclude>
+    <ClInclude Include="playerData.h">
+      <Filter>OBJECT\player\base</Filter>
+    </ClInclude>
+    <ClInclude Include="mapSetting.h">
+      <Filter>MAP</Filter>
+    </ClInclude>
+    <ClInclude Include="bullet.h">
+      <Filter>OBJECT\bullet\base</Filter>
+    </ClInclude>
+    <ClInclude Include="bulletManager.h">
+      <Filter>OBJECT\bullet\base</Filter>
+    </ClInclude>
+    <ClInclude Include="skulBullet.h">
+      <Filter>OBJECT\bullet\skulBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="enemyBullet.h">
+      <Filter>OBJECT\bullet\enemyBullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -349,6 +382,24 @@
     </ClCompile>
     <ClCompile Include="knightState.cpp">
       <Filter>OBJECT\enemy\type\knight</Filter>
+    </ClCompile>
+    <ClCompile Include="playerData.cpp">
+      <Filter>OBJECT\player\base</Filter>
+    </ClCompile>
+    <ClCompile Include="mapSetting.cpp">
+      <Filter>MAP</Filter>
+    </ClCompile>
+    <ClCompile Include="bullet.cpp">
+      <Filter>OBJECT\bullet\base</Filter>
+    </ClCompile>
+    <ClCompile Include="bulletManager.cpp">
+      <Filter>OBJECT\bullet\base</Filter>
+    </ClCompile>
+    <ClCompile Include="skulBullet.cpp">
+      <Filter>OBJECT\bullet\skulBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="enemyBullet.cpp">
+      <Filter>OBJECT\bullet\enemyBullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

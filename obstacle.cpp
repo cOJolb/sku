@@ -92,6 +92,10 @@ void C_obstacle::setObstacleValue()
 		break;
 	case OBSTACLE_TYPE::SLAND:
 		break;
+	case OBSTACLE_TYPE::NONE:
+		frame = { 5,3 };
+		setValue(false, false);
+		break;
 	}
 }
 

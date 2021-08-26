@@ -139,6 +139,7 @@ enum FOWARD
 
 enum class OBSTACLE_TYPE
 {
+	NONE,
 	LT_LAND,
 	LTC_LAND,
 	RTC_LAND,
@@ -159,6 +160,7 @@ enum class SKUL_TYPE
 	SKUL,
 	CLOWN
 };
+
 
 enum class UNIT_TYPE
 {
@@ -198,16 +200,22 @@ enum class ACTIVEITEM
 	OKAY
 };
 
+enum class BULLET_TYPE
+{
+
+};
+
+
 const int GRAVITY = 10;
 
 
-struct tagTile
+struct S_tagTile
 {
 	OBSTACLE_TYPE type;
-	RECT rcTile;
+	//RECT rcTile;
 
-	Vec2 objFrame;
-	Vec2 monsterFrame;
-	Vec2 pt;
+	//vector2 objFrame;
+	//vector2 monsterFrame;
+	vector2 pt;
 };
 

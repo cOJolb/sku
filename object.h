@@ -13,8 +13,11 @@ protected:
 	C_fsm* ai;
 	vector<C_fsm*> vAi;
 
-	int jumpPower;
+	float jumpPower;
 	bool isJump;
+
+	float unitDamage;
+
 private:
 
 public:
@@ -29,7 +32,7 @@ public:
 
 public:
 	C_fsm* getAi() { return ai; }
-	void AI_init(C_object* _object);
+	void AI_init(C_object* _object, UNIT_TYPE _type);
 	void AI_update();
 	STATE_TYPE getstate();
 
@@ -39,6 +42,7 @@ public:
 	C_collider* getCollider() { return collider; }
 
 	bool isCollision(C_collider* _left, C_collider* _right);
+	//void Jump();
 	void Gravity();
 	void isLand();
 	void isBump();

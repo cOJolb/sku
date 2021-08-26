@@ -17,9 +17,9 @@ C_skul::~C_skul()
 {
 }
 
-HRESULT C_skul::init()
+HRESULT C_skul::init(vector2 _pt)
 {
-
+	pt = _pt;
 	return S_OK;
 }
 

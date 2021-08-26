@@ -11,6 +11,10 @@ C_enemy::~C_enemy()
 
 HRESULT C_enemy::init()
 {
+	AI_init(this, type);
+	ani = ANIMATION->findAnimation(unitName + "RightIdle");
+	ANIMATION->start(unitName + "RightIdle");
+	ANIMATION->start(unitName + "LeftIdle");
     return S_OK;
 }
 

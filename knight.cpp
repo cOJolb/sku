@@ -3,6 +3,7 @@
 
 C_knight::C_knight()
 {
+	C_enemy::init();
 }
 
 C_knight::C_knight(vector2 _pt)
@@ -13,9 +14,8 @@ C_knight::C_knight(vector2 _pt)
 	unitState = "Idle";
 	type = UNIT_TYPE::KNIGHT;
 	collider = new C_collider(pt, { 20,20 });
-	ani = ANIMATION->findAnimation(unitName + "RightIdle");
-	ANIMATION->start(unitName + "RightIdle");
-	ANIMATION->start(unitName + "LeftIdle");
+
+	C_enemy::init();
 }
 
 C_knight::~C_knight()

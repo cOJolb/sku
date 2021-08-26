@@ -16,6 +16,7 @@ changePlayer::~changePlayer()
 void changePlayer::update()
 {
 	Cur_Player->update();
+	//PLAYERDATA->savePlayerData(Cur_Player->getPt(),Cur_Player->getCollider());
 }
 
 void changePlayer::render()
@@ -64,7 +65,7 @@ void changePlayer::changeSkul()
 		Cur_Player = Stanby_Player;
 		Stanby_Player = Temp_Player;
 
-		Cur_Player->init();
+		Cur_Player->init(PLAYERDATA->getPlayerData().playerPt);
 	}
 }
 

@@ -3,6 +3,8 @@
 #include "fsm.h"
 #include "state.h"
 #include "obstacle.h"
+
+#include "knightState.h"
 C_object::C_object()
 {
 	isJump = false;
@@ -32,9 +34,20 @@ void C_object::render()
 {
 }
 
-void C_object::AI_init(C_object* _object)
+void C_object::AI_init(C_object* _object, UNIT_TYPE _type)
 {
 	ai = new C_fsm(_object);
+	switch (_type)
+	{
+	case UNIT_TYPE::PLAYER:
+		break;
+	case UNIT_TYPE::KNIGHT:
+		ai->AddState(new knight_Idle);
+		ai->SetState(STATE_TYPE::IDLE);
+		break;
+	default:
+		break;
+	}
 }
 
 
@@ -70,9 +83,17 @@ bool C_object::isCollision(C_collider* _left, C_collider* _right)
 	return false;
 }
 
+//void C_object::Jump()
+//{
+//	if (jumpPower > 0) jumpPower = jumpPower - 0.5;
+//	else if (jumpPower <= 0) jumpPower = 0;
+//	pt.y -= jumpPower;
+//}
+
 void C_object::Gravity()
 {
-	if (jumpPower > 0) jumpPower--;
+	if (jumpPower > 0) jumpPower = jumpPower - 0.5;
+	else if (jumpPower <= 0) jumpPower = 0;
 	pt.y -= jumpPower;
 	pt.y += GRAVITY;
 }

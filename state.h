@@ -11,9 +11,10 @@ public:
 	virtual ~C_state();
 
 public:
-	virtual void Enter() = 0;
+
+	virtual void enter() = 0;
 	virtual void update() = 0;
-	virtual void Exit() = 0;
+	virtual void exit() = 0;
 
 public:
 	STATE_TYPE GetStateType() { return stateType; }

@@ -9,13 +9,18 @@ C_player::C_player()
 	prevPt = pt;
 	collider = new C_collider(pt, { 20,20 });
 	playerSpeed = 5;
-	playerDashSpeed = 30;
-	DashDelay = 34;
-	DashTime = 34;
 
+	playerDashInfo.playerDashSpeed = 8;
+	playerDashInfo.DashDelay = 34;
+	playerDashInfo.DashTime = 34;
+	playerDashInfo.DashCount = 0;
+	playerDashInfo.DashTerm = 10;
+
+	playerJumpPower = 20;
 	playerDoubleJump = false;
-
-	DashCount = 0;
+	playerDashJump = false;
+	DashJumpCount = 0;
+	
 	isLeft = false;
 }
 
@@ -23,8 +28,9 @@ C_player::~C_player()
 {
 }
 
-HRESULT C_player::init()
+HRESULT C_player::init(vector2 _pt)
 {
+	pt = _pt;
 	return S_OK;
 }
 
@@ -37,12 +43,18 @@ void C_player::update()
 	playerMove();
 	playerJump();
 	playerDash();
-	if (DashDelay > DashTime /2) Gravity();
+	playerDash_Jump();
+	//Jump();
+	
+	if (playerDashInfo.DashDelay >= playerDashInfo.DashTime / 2 ) Gravity();
+	
+
 	isLand();
 	isClogged();
 	collider->setPos(pt);
 	ptUpdate();
 	ani = ANIMATION->findAnimation(unitName + unitFoward + unitState);
+	PLAYERDATA->savePlayerData(pt, collider);
 }
 
 void C_player::render()
@@ -56,7 +68,7 @@ void C_player::render()
 
 void C_player::playerMove()
 {
-	if (DashDelay >= DashTime/2)
+	if (playerDashInfo.DashDelay >= playerDashInfo.DashTime/2)
 	{
 		bool goLeft = InputManager->isStayKeyDown(VK_LEFT);
 		bool goRight = InputManager->isStayKeyDown(VK_RIGHT);
@@ -89,66 +101,118 @@ void C_player::playerJump()
 {
 	bool goJump = InputManager->isOnceKeyDown('C');
 	if (!isJump) playerDoubleJump = true;
-	if (goJump && !isJump )
+	if (goJump && !isJump)
 	{
-		jumpPower = 25;
+		playerDashJump = true;
+		jumpPower = playerJumpPower;
 	}
 	else if (goJump && playerDoubleJump && isJump)
 	{
-		jumpPower = 25;
+		playerDashJump = true;
+		jumpPower = playerJumpPower;
 		playerDoubleJump = false;
 	}
 	if (jumpPower > 10) unitState = "Jump";
-	if (jumpPower == 10 || DashDelay == DashTime / 2)
+	if (jumpPower == 10 || playerDashInfo.DashDelay == playerDashInfo.DashTime / 2)
 	{
 		ANIMATION->start(unitName + "RightFall");
 		ANIMATION->start(unitName + "LeftFall");
 	}
-	if ( isJump  && jumpPower <= 10 && DashDelay > DashTime / 2)  unitState = "Fall";
+	if ( isJump  && jumpPower <= 10 && playerDashInfo.DashDelay > playerDashInfo.DashTime / 2)  unitState = "Fall";
 }
 
 void C_player::playerDash()
 {
 	bool goDash = InputManager->isOnceKeyDown('Z');
-	
-	if (goDash && DashDelay >= DashTime && !isDash)
+	if (goDash && playerDashInfo.DashDelay >= playerDashInfo.DashTime && !playerDashInfo.isDash)
 	{
+		playerDashJump = false;
 		jumpPower = 0;
-		isDash = true;
-		DashDelay = 0;
-		DashFoward = isLeft;
-		DashCount = 3;
+		playerDashInfo.isDash = true;
+		playerDashInfo.DashDelay = 0;
+		playerDashInfo.DashFoward = isLeft;
+		playerDashInfo.DashCount = playerDashInfo.DashTerm;
 	}
 
-	else if (goDash && playerDoubleDash && DashDelay <= DashTime / 2)
+	else if (goDash && playerDashInfo.playerDoubleDash && playerDashInfo.DashDelay <= playerDashInfo.DashTime / 2)
 	{
-		playerDoubleDash = false;
-		isDash = true;
-		DashDelay = 0;
-		DashCount = 3;
+		playerDashJump = false;
+		playerDashInfo.playerDoubleDash = false;
+		playerDashInfo.isDash = true;
+		playerDashInfo.DashDelay = 0;
+		playerDashInfo.DashCount = playerDashInfo.DashTerm;
 	}
 
-	if (DashCount > 0)
+	if (playerDashInfo.DashCount > 0 && !playerDashJump)
 	{
-		DashCount--;
-		if (DashFoward)
+		playerDashInfo.DashCount--;
+		if (playerDashInfo.DashFoward)
 		{
-			pt.x -= playerDashSpeed;
+			pt.x -= playerDashInfo.playerDashSpeed;
 			unitState = "Dash";
 		}
 
-		else if (!DashFoward)
+		else if (!playerDashInfo.DashFoward)
 		{
-			pt.x += playerDashSpeed;
+			pt.x += playerDashInfo.playerDashSpeed;
 			unitState = "Dash";
 		}
 	}
 
-	DashDelay++;
-	if (DashDelay >= DashTime)
+	playerDashInfo.DashDelay++;
+	if (playerDashInfo.DashDelay >= playerDashInfo.DashTime)
 	{
-		DashDelay = DashTime;
-		playerDoubleDash = true;
-		isDash = false;
+		playerDashInfo.DashDelay = playerDashInfo.DashTime;
+		playerDashInfo.playerDoubleDash = true;
+		playerDashInfo.isDash = false;
 	}
+}
+
+void C_player::playerDash_Jump()
+{
+	if (playerDashInfo.DashDelay < playerDashInfo.DashTime / 2 && playerDashJump)
+	{
+		Gravity();
+		playerDashInfo.DashCount = 0;
+		//playerDashInfo.DashDelay = 0;
+		DashJumpCount++;
+
+		if (playerDashInfo.DashFoward)
+		{
+			pt.x -= playerDashInfo.playerDashSpeed;
+			unitState = "Jump";
+		}
+
+		else if (!playerDashInfo.DashFoward)
+		{
+			pt.x += playerDashInfo.playerDashSpeed;
+			unitState = "Jump";
+		}
+
+		if (DashJumpCount >= 10)
+		{
+			DashJumpCount = 0;
+			playerDashJump = false;
+			playerDashInfo.DashDelay = playerDashInfo.DashTime / 2;
+		}
+	}
+}
+
+
+
+void C_player::playerAtk()
+{
+	bool goAtk = InputManager->isOnceKeyDown('X');
+	if (goAtk)
+	{
+
+	}
+}
+
+void C_player::playerSkillA()
+{
+}
+
+void C_player::playerSkillS()
+{
 }

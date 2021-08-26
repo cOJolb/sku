@@ -23,14 +23,14 @@ void C_fsm::AddState(C_state* _pState)
 
 void C_fsm::ChangeState(STATE_TYPE _eType)
 {
-	CurState->Exit();
+	CurState->exit();
 
 	for (UINT i = 0; i < vState.size(); ++i)
 	{
 		if (_eType == vState[i]->GetStateType())
 		{
 			CurState = vState[i];
-			CurState->Enter();
+			CurState->enter();
 			return;
 		}
 	}
@@ -45,7 +45,7 @@ void C_fsm::SetState(STATE_TYPE _eType)
 		if (_eType == vState[i]->GetStateType())
 		{
 			CurState = vState[i];
-			CurState->Enter();
+			CurState->enter();
 			return;
 		}
 	}

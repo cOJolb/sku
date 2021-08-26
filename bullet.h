@@ -1,13 +1,12 @@
 #pragma once
-#include "player.h"
-class C_skul : public C_player
+#include "object.h"
+class C_bullet : public C_object
 {
-protected:
 private:
-
+	bool playerBullet;
 public:
-	C_skul();
-	virtual~C_skul();
+	C_bullet();
+	~C_bullet();
 
 public:
 	virtual HRESULT init(vector2 _pt);
@@ -16,6 +15,6 @@ public:
 	virtual void render();
 
 public:
-
+	bool isPlayerBullet() { return playerBullet; }
 };
 

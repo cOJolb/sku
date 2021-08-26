@@ -17,8 +17,9 @@ C_clown::~C_clown()
 {
 }
 
-HRESULT C_clown::init()
+HRESULT C_clown::init(vector2 _pt)
 {
+	pt = _pt;
     return S_OK;
 }
 

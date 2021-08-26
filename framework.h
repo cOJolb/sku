@@ -40,6 +40,7 @@
 #include"txtData.h"
 #include"obstacleManager.h"
 #include"enemyManager.h"
+#include"playerData.h"
 //======================================
 //##			매니저들			  ##
 //======================================
@@ -54,14 +55,15 @@
 #define EFFECT			effectManager::getSingleton()
 #define OBSTACLE		obstacleManager::getSingleton()
 #define ENEMY			enemyManager::getSingleton()
+#define PLAYERDATA		C_playerData::getSingleton()
 //==========================================
 //				 매크로 설정
 //==========================================
 #define WINNAME			(LPTSTR)(TEXT("지옥으로 떠나는 여행"))
 #define WINSTARTX		100
 #define WINSTARTY		100
-#define WINSIZEX		1080
-#define WINSIZEY		720
+#define WINSIZEX		36*30
+#define WINSIZEY		36*20
 #define	WINSTYLE		WS_CAPTION | WS_SYSMENU
 
 

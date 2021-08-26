@@ -10,7 +10,7 @@ public:
 	virtual~C_clown();
 
 public:
-	virtual HRESULT init();
+	virtual HRESULT init(vector2 _pt);
 	virtual void release();
 	virtual void update();
 	virtual void render();

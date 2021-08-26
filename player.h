@@ -1,19 +1,28 @@
 #pragma once
 #include "object.h"
-class C_player : public C_object
+struct S_playerDashInfo
 {
-protected:
-	float playerSpeed;
 	float playerDashSpeed;
 	int DashTime;
 	int DashDelay;
 	int DashCount;
+	int DashTerm;
 	bool playerDoubleDash;
 	bool DashFoward;
 	bool isDash;
-
-	bool playerDoubleJump;
+};
+class C_player : public C_object
+{
+protected:
+	float playerSpeed;
 	
+	S_playerDashInfo playerDashInfo;
+
+	float playerJumpPower;
+	bool playerDoubleJump;
+	bool playerDashJump;
+	int DashJumpCount;
+
 	bool isLeft;
 
 	string unitName;
@@ -28,7 +37,7 @@ public:
 	virtual~C_player();
 
 public:
-	virtual HRESULT init();
+	virtual HRESULT init(vector2 _pt);
 	virtual void release();
 	virtual void update();
 	virtual void render();
@@ -37,6 +46,10 @@ public:
 	void playerMove();
 	void playerJump();
 	void playerDash();
+	void playerDash_Jump();
+	void playerAtk();
+	void playerSkillA();
+	void playerSkillS();
 	SKUL_TYPE getSkulType(){return type;}
 };
 

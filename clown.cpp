@@ -3,14 +3,14 @@
 
 C_clown::C_clown()
 {
-	unitName = "clown";
-	unitFoward = "Right";
-	unitState = "Idle";
+	unitImageInfo.unitName = "clown";
+	unitImageInfo.unitFoward = "Right";
+	unitImageInfo.unitState = "Idle";
 	type = SKUL_TYPE::CLOWN;
 
-	ani = ANIMATION->findAnimation(unitName + "RightIdle");
-	ANIMATION->start(unitName + "RightIdle");
-	ANIMATION->start(unitName + "LeftIdle");
+	ani = ANIMATION->findAnimation(unitImageInfo.unitName + "RightIdle");
+	ANIMATION->start(unitImageInfo.unitName + "RightIdle");
+	ANIMATION->start(unitImageInfo.unitName + "LeftIdle");
 }
 
 C_clown::~C_clown()

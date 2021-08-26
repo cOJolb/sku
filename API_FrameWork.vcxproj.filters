@@ -121,6 +121,9 @@
     <Filter Include="OBJECT\bullet\enemyBullet">
       <UniqueIdentifier>{99689e36-e55b-4fa7-8ef7-4c27f96b454c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="OBJECT\item\goods">
+      <UniqueIdentifier>{2d39bdd4-8a11-42d8-b165-3b9e42afcd65}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">

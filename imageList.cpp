@@ -22,17 +22,17 @@ C_imageList::C_imageList()
 	ANIMATION->addAnimation("skulLeftFall", "skul", 658, 654, 7, false, false);
 	//=========================skul:clown=================================================================================
 	//=========================skul:clown=================================================================================
-	IMAGE->addFrameImage("clown", "images/skul/skul_clown.bmp", 800, 1600, 8, 16, true, RGB(255, 0, 255));
-	ANIMATION->addAnimation("clownRightIdle", "clown", 0, 3, 7, false, true);
-	ANIMATION->addAnimation("clownRightMove", "clown", 3, 5, 7, false, true);
-	ANIMATION->addAnimation("clownRightDash", "clown", 3, 5, 7, false,true);
-	ANIMATION->addAnimation("clownLeftIdle", "clown", 3, 5, 7, false, true);
-	ANIMATION->addAnimation("clownLeftMove", "clown", 3, 5, 7, false, true);
-	ANIMATION->addAnimation("clownLeftDash", "clown", 3, 5, 7, false, true);
-	ANIMATION->addAnimation("clownRightJump", "clown", 3, 5, 7, false, true);
-	ANIMATION->addAnimation("clownRightFall", "clown", 3, 5, 7, false, true);
-	ANIMATION->addAnimation("clownLeftJump", "clown", 3, 5, 7, false, true);
-	ANIMATION->addAnimation("clownLeftFall", "clown", 3, 5, 7, false, true);
+	IMAGE->addFrameImage("clown", "images/skul/skul_clown.bmp", 800, 1800, 8, 18, true, RGB(255, 0, 255));
+	ANIMATION->addAnimation("clownRightIdle", "clown", 0, 7, 7, false, true);
+	ANIMATION->addAnimation("clownRightMove", "clown", 16, 23, 7, false, true);
+	ANIMATION->addAnimation("clownRightDash", "clown", 32, 38, 10, false,true);
+	ANIMATION->addAnimation("clownLeftIdle", "clown", 15, 8, 7, false, true);
+	ANIMATION->addAnimation("clownLeftMove", "clown", 31, 24, 7, false, true);
+	ANIMATION->addAnimation("clownLeftDash", "clown", 46, 40, 10, false, true);
+	ANIMATION->addAnimation("clownRightJump", "clown", 128, 131, 7, false, true);
+	ANIMATION->addAnimation("clownRightFall", "clown", 132, 135, 7, false, true);
+	ANIMATION->addAnimation("clownLeftJump", "clown", 143, 140, 7, false, true);
+	ANIMATION->addAnimation("clownLeftFall", "clown", 139, 136, 7, false, true);
 
 	//=========================monster:knight=================================================================================
 	//=========================monster:knight=================================================================================

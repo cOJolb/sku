@@ -3,14 +3,14 @@
 
 C_skul::C_skul()
 {
-	unitName = "skul";
-	unitFoward = "Right";
-	unitState = "Idle";
+	unitImageInfo.unitName = "skul";
+	unitImageInfo.unitFoward = "Right";
+	unitImageInfo.unitState = "Idle";
 	type = SKUL_TYPE::SKUL;
 
-	ani = ANIMATION->findAnimation(unitName + "RightIdle");
-	ANIMATION->start(unitName + "RightIdle");
-	ANIMATION->start(unitName + "LeftIdle");
+	ani = ANIMATION->findAnimation(unitImageInfo.unitName + "RightIdle");
+	ANIMATION->start(unitImageInfo.unitName + "RightIdle");
+	ANIMATION->start(unitImageInfo.unitName + "LeftIdle");
 }
 
 C_skul::~C_skul()

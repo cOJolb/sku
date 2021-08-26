@@ -4,6 +4,7 @@ class C_bullet : public C_object
 {
 private:
 	bool playerBullet;
+
 public:
 	C_bullet();
 	~C_bullet();

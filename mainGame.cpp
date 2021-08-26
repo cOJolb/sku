@@ -20,7 +20,7 @@ HRESULT mainGame::init()
 	//OBSTACLE->createObstacle(OBSTACLE_TYPE::LTC_LAND, { 400,464 });
 	//OBSTACLE->createObstacle(OBSTACLE_TYPE::LTC_LAND, { 400,364 });
 	//OBSTACLE->createObstacle(OBSTACLE_TYPE::LTC_LAND, { 400,264 });
-	for (int i = 300; i < 330; i++)
+	for (int i = 300; i < 320; i++)
 	{
 		mapSetting->tileSet(i, OBSTACLE_TYPE::LTC_LAND);
 	}

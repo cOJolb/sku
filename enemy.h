@@ -3,10 +3,6 @@
 class C_enemy : public C_object
 {
 protected:
-	string unitName;
-	string unitFoward;
-	string unitState;
-
 	UNIT_TYPE type;
 private:
 

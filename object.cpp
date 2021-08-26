@@ -5,6 +5,7 @@
 #include "obstacle.h"
 
 #include "knightState.h"
+
 C_object::C_object()
 {
 	isJump = false;
@@ -43,6 +44,10 @@ void C_object::AI_init(C_object* _object, UNIT_TYPE _type)
 		break;
 	case UNIT_TYPE::KNIGHT:
 		ai->AddState(new knight_Idle);
+		ai->AddState(new knight_Trace);
+		ai->AddState(new knight_Atk);
+		ai->AddState(new knight_Die);
+		ai->AddState(new knight_Damage);
 		ai->SetState(STATE_TYPE::IDLE);
 		break;
 	default:
@@ -107,6 +112,7 @@ void C_object::isLand()
 		bool inRangeY = (*OBSTACLE->getviObstacle(i))->getPt().y - (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().y / 2 + GRAVITY >= pt.y + collider->getSize().y
 			&& pt.y + collider->getSize().y >= (*OBSTACLE->getviObstacle(i))->getPt().y - (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().y / 2;
 		bool isDown = prevPt.y <= pt.y;
+
 		if (inRangeX && inRangeY && isDown)
 		{
 			pt.y = (*OBSTACLE->getviObstacle(i))->getPt().y - 18 - collider->getSize().y;
@@ -165,3 +171,11 @@ void C_object::isWall()
 {
 	
 }
+
+void C_object::setUnitImageInfo(string _name, string _Foward, string _state)
+{
+	unitImageInfo.unitName = _name;
+	unitImageInfo.unitFoward = _Foward;
+	unitImageInfo.unitState = _state;
+}
+

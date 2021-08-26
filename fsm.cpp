@@ -13,6 +13,7 @@ C_fsm::~C_fsm()
 
 void C_fsm::update()
 {
+	CurState->update();
 }
 
 void C_fsm::AddState(C_state* _pState)

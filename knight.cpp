@@ -9,9 +9,9 @@ C_knight::C_knight()
 C_knight::C_knight(vector2 _pt)
 {
 	pt = _pt;
-	unitName = "knight";
-	unitFoward = "Right";
-	unitState = "Idle";
+	unitImageInfo.unitName = "knight";
+	unitImageInfo.unitFoward = "Right";
+	unitImageInfo.unitState = "Idle";
 	type = UNIT_TYPE::KNIGHT;
 	collider = new C_collider(pt, { 20,20 });
 

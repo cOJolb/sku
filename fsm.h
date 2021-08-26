@@ -22,7 +22,7 @@ public:
 	void ChangeState(STATE_TYPE _eType);
 	void SetState(STATE_TYPE _eType);
 	C_state* getState() { return CurState; }
-	C_object* GetMon() { return object; }
+	C_object* getObject() { return object; }
 
 
 };

@@ -11,6 +11,12 @@ namespace UTIL
 		float y = endY - startY;
 		return sqrtf(x * x + y * y);
 	}
+	float getDistance(vector2 _startPt, vector2 _finishPt)
+	{
+		float x = _finishPt.x - _startPt.x;
+		float y = _finishPt.y - _startPt.y;
+		return sqrtf(x * x + y * y);
+	}
 	float getAngle(float x1, float y1, float x2, float y2)
 	{
 

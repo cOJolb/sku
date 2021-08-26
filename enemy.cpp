@@ -12,9 +12,9 @@ C_enemy::~C_enemy()
 HRESULT C_enemy::init()
 {
 	AI_init(this, type);
-	ani = ANIMATION->findAnimation(unitName + "RightIdle");
-	ANIMATION->start(unitName + "RightIdle");
-	ANIMATION->start(unitName + "LeftIdle");
+	ani = ANIMATION->findAnimation(unitImageInfo.unitName + "RightIdle");
+	ANIMATION->start(unitImageInfo.unitName + "RightIdle");
+	ANIMATION->start(unitImageInfo.unitName + "LeftIdle");
     return S_OK;
 }
 
@@ -24,12 +24,13 @@ void C_enemy::release()
 
 void C_enemy::update()
 {
+	AI_update();
 	Gravity();
 	isLand();
 	isClogged();
 	collider->setPos(pt);
 	ptUpdate();
-	ani = ANIMATION->findAnimation(unitName + unitFoward + unitState);
+	ani = ANIMATION->findAnimation(unitImageInfo.unitName + unitImageInfo.unitFoward + unitImageInfo.unitState);
 }
 
 void C_enemy::render()
@@ -38,5 +39,5 @@ void C_enemy::render()
 	Rectangle(getMemDC(), rec.left, rec.top, rec.right, rec.bottom);
 
 
-	IMAGE->findImage(unitName+unitState)->aniRender(getMemDC(), pt.x - IMAGE->findImage(unitName+unitState)->getFrameWidth() / 2, pt.y - IMAGE->findImage(unitName + unitState)->getFrameHeight() / 2, ani);
+	IMAGE->findImage(unitImageInfo.unitName+ unitImageInfo.unitState)->aniRender(getMemDC(), pt.x - IMAGE->findImage(unitImageInfo.unitName+ unitImageInfo.unitState)->getFrameWidth() / 2, pt.y - IMAGE->findImage(unitImageInfo.unitName + unitImageInfo.unitState)->getFrameHeight() / 2, ani);
 }

@@ -25,10 +25,6 @@ protected:
 
 	bool isLeft;
 
-	string unitName;
-	string unitFoward;
-	string unitState;
-
 	SKUL_TYPE type;
 private:
 
@@ -46,6 +42,7 @@ public:
 	void playerMove();
 	void playerJump();
 	void playerDash();
+	virtual void playerDashMove();
 	void playerDash_Jump();
 	void playerAtk();
 	void playerSkillA();

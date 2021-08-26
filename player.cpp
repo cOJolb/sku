@@ -53,7 +53,7 @@ void C_player::update()
 	isClogged();
 	collider->setPos(pt);
 	ptUpdate();
-	ani = ANIMATION->findAnimation(unitName + unitFoward + unitState);
+	ani = ANIMATION->findAnimation(unitImageInfo.unitName + unitImageInfo.unitFoward + unitImageInfo.unitState);
 	PLAYERDATA->savePlayerData(pt, collider);
 }
 
@@ -62,8 +62,7 @@ void C_player::render()
 	RECT rec = RectMakeCenter(pt, 20, 20);
 	Rectangle(getMemDC(), rec.left, rec.top, rec.right, rec.bottom);
 	
-	
-	IMAGE->findImage(unitName)->aniRender(getMemDC(), pt.x - IMAGE->findImage(unitName)->getFrameWidth()/2, pt.y - IMAGE->findImage(unitName)->getFrameHeight()/2, ani);
+	IMAGE->findImage(unitImageInfo.unitName)->aniRender(getMemDC(), pt.x - IMAGE->findImage(unitImageInfo.unitName)->getFrameWidth()/2, pt.y - IMAGE->findImage(unitImageInfo.unitName)->getFrameHeight()/2, ani);
 }
 
 void C_player::playerMove()
@@ -72,27 +71,27 @@ void C_player::playerMove()
 	{
 		bool goLeft = InputManager->isStayKeyDown(VK_LEFT);
 		bool goRight = InputManager->isStayKeyDown(VK_RIGHT);
-		if (InputManager->isOnceKeyDown(VK_LEFT)) ANIMATION->start(unitName + "LeftMove");
+		if (InputManager->isOnceKeyDown(VK_LEFT)) ANIMATION->start(unitImageInfo.unitName + "LeftMove");
 		
-		if (InputManager->isOnceKeyDown(VK_RIGHT)) ANIMATION->start(unitName + "RightMove");
+		if (InputManager->isOnceKeyDown(VK_RIGHT)) ANIMATION->start(unitImageInfo.unitName + "RightMove");
 		
 		if (goLeft && !goRight)
 		{
 			pt = vector2(pt.x - playerSpeed, pt.y);
 			isLeft = true;
-			unitFoward = "Left";
-			unitState = "Move";
+			unitImageInfo.unitFoward = "Left";
+			unitImageInfo.unitState = "Move";
 		}
 		if (goRight && !goLeft)
 		{
 			pt = vector2(pt.x + playerSpeed, pt.y);
 			isLeft = false;
-			unitFoward = "Right";
-			unitState = "Move";
+			unitImageInfo.unitFoward = "Right";
+			unitImageInfo.unitState = "Move";
 		}
 		if (!goLeft && !goRight && !isJump)
 		{
-			unitState = "Idle";
+			unitImageInfo.unitState = "Idle";
 		}
 	}
 }
@@ -112,13 +111,13 @@ void C_player::playerJump()
 		jumpPower = playerJumpPower;
 		playerDoubleJump = false;
 	}
-	if (jumpPower > 10) unitState = "Jump";
+	if (jumpPower > 10) unitImageInfo.unitState = "Jump";
 	if (jumpPower == 10 || playerDashInfo.DashDelay == playerDashInfo.DashTime / 2)
 	{
-		ANIMATION->start(unitName + "RightFall");
-		ANIMATION->start(unitName + "LeftFall");
+		ANIMATION->start(unitImageInfo.unitName + "RightFall");
+		ANIMATION->start(unitImageInfo.unitName + "LeftFall");
 	}
-	if ( isJump  && jumpPower <= 10 && playerDashInfo.DashDelay > playerDashInfo.DashTime / 2)  unitState = "Fall";
+	if ( isJump  && jumpPower <= 10 && playerDashInfo.DashDelay > playerDashInfo.DashTime / 2)  unitImageInfo.unitState = "Fall";
 }
 
 void C_player::playerDash()
@@ -132,6 +131,8 @@ void C_player::playerDash()
 		playerDashInfo.DashDelay = 0;
 		playerDashInfo.DashFoward = isLeft;
 		playerDashInfo.DashCount = playerDashInfo.DashTerm;
+		ANIMATION->start(unitImageInfo.unitName + "RightDash");
+		ANIMATION->start(unitImageInfo.unitName + "LeftDash");
 	}
 
 	else if (goDash && playerDashInfo.playerDoubleDash && playerDashInfo.DashDelay <= playerDashInfo.DashTime / 2)
@@ -141,23 +142,11 @@ void C_player::playerDash()
 		playerDashInfo.isDash = true;
 		playerDashInfo.DashDelay = 0;
 		playerDashInfo.DashCount = playerDashInfo.DashTerm;
+		ANIMATION->start(unitImageInfo.unitName + "RightDash");
+		ANIMATION->start(unitImageInfo.unitName + "LeftDash");
 	}
 
-	if (playerDashInfo.DashCount > 0 && !playerDashJump)
-	{
-		playerDashInfo.DashCount--;
-		if (playerDashInfo.DashFoward)
-		{
-			pt.x -= playerDashInfo.playerDashSpeed;
-			unitState = "Dash";
-		}
-
-		else if (!playerDashInfo.DashFoward)
-		{
-			pt.x += playerDashInfo.playerDashSpeed;
-			unitState = "Dash";
-		}
-	}
+	playerDashMove();
 
 	playerDashInfo.DashDelay++;
 	if (playerDashInfo.DashDelay >= playerDashInfo.DashTime)
@@ -165,6 +154,26 @@ void C_player::playerDash()
 		playerDashInfo.DashDelay = playerDashInfo.DashTime;
 		playerDashInfo.playerDoubleDash = true;
 		playerDashInfo.isDash = false;
+	}
+}
+
+void C_player::playerDashMove()
+{
+	if (playerDashInfo.DashCount > 0 && !playerDashJump)
+	{
+		playerDashInfo.DashCount--;
+		if (playerDashInfo.DashFoward)
+		{
+			pt.x -= playerDashInfo.playerDashSpeed;
+			unitImageInfo.unitState = "Dash";
+
+		}
+
+		else if (!playerDashInfo.DashFoward)
+		{
+			pt.x += playerDashInfo.playerDashSpeed;
+			unitImageInfo.unitState = "Dash";
+		}
 	}
 }
 
@@ -180,13 +189,13 @@ void C_player::playerDash_Jump()
 		if (playerDashInfo.DashFoward)
 		{
 			pt.x -= playerDashInfo.playerDashSpeed;
-			unitState = "Jump";
+			unitImageInfo.unitState = "Jump";
 		}
 
 		else if (!playerDashInfo.DashFoward)
 		{
 			pt.x += playerDashInfo.playerDashSpeed;
-			unitState = "Jump";
+			unitImageInfo.unitState = "Jump";
 		}
 
 		if (DashJumpCount >= 10)

@@ -1,6 +1,14 @@
 #pragma once
 #include"gameNode.h"
 #include"collider.h"
+
+struct S_unitImageInfo
+{
+	string unitName;
+	string unitFoward;
+	string unitState;
+};
+
 class C_fsm;
 class C_object : public gameNode
 {
@@ -13,9 +21,10 @@ protected:
 	C_fsm* ai;
 	vector<C_fsm*> vAi;
 
+	S_unitImageInfo unitImageInfo;
+
 	float jumpPower;
 	bool isJump;
-
 	float unitDamage;
 
 private:
@@ -50,5 +59,11 @@ public:
 	void isWall();
 
 	void ptUpdate() { prevPt = pt; }
+	
+	bool getIsJump() { return isJump; }
+
+	S_unitImageInfo getImageInfo() { return unitImageInfo; }
+	void setUnitImageInfo(string _name, string _Foward, string _state);
+	void setAni(animation* _ani) { ani = _ani; }
 };
 

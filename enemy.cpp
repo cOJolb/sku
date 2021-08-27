@@ -11,7 +11,7 @@ C_enemy::~C_enemy()
 
 HRESULT C_enemy::init()
 {
-	AI_init(this, type);
+	AI_init(this,type);
 	ani = ANIMATION->findAnimation(unitImageInfo.unitName + "RightIdle");
 	ANIMATION->start(unitImageInfo.unitName + "RightIdle");
 	ANIMATION->start(unitImageInfo.unitName + "LeftIdle");
@@ -37,7 +37,6 @@ void C_enemy::render()
 {
 	RECT rec = RectMakeCenter(pt, 20, 20);
 	Rectangle(getMemDC(), rec.left, rec.top, rec.right, rec.bottom);
-
 
 	IMAGE->findImage(unitImageInfo.unitName+ unitImageInfo.unitState)->aniRender(getMemDC(), pt.x - IMAGE->findImage(unitImageInfo.unitName+ unitImageInfo.unitState)->getFrameWidth() / 2, pt.y - IMAGE->findImage(unitImageInfo.unitName + unitImageInfo.unitState)->getFrameHeight() / 2, ani);
 }

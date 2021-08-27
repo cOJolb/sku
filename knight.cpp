@@ -14,7 +14,8 @@ C_knight::C_knight(vector2 _pt)
 	unitImageInfo.unitState = "Idle";
 	type = UNIT_TYPE::KNIGHT;
 	collider = new C_collider(pt, { 20,20 });
-
+	atkDelay = 50;
+	
 	C_enemy::init();
 }
 

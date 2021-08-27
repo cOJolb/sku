@@ -26,7 +26,7 @@ protected:
 	float jumpPower;
 	bool isJump;
 	float unitDamage;
-
+	int atkDelay;
 private:
 
 public:
@@ -65,5 +65,8 @@ public:
 	S_unitImageInfo getImageInfo() { return unitImageInfo; }
 	void setUnitImageInfo(string _name, string _Foward, string _state);
 	void setAni(animation* _ani) { ani = _ani; }
+	animation* getAni() { return ani; }
+
+	int getAtkDelay() { return atkDelay; }
 };
 

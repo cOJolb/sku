@@ -5,7 +5,6 @@ class C_enemy : public C_object
 protected:
 	UNIT_TYPE type;
 private:
-
 public:
 	C_enemy();
 	virtual~C_enemy();
@@ -18,4 +17,5 @@ public:
 
 public:
 	UNIT_TYPE getUnitType() { return type; }
+
 };

@@ -51,7 +51,6 @@ void C_littlebone::playerAttack(vector2 _pt, bool _isLeft )
 			ENEMY->eraserEnemy(i);
 		}
 	}
-
 }
 
 void C_littlebone::playerDashMove(vector2& _pt, int& _DashCount, bool _DashJump, bool _DashFoward, float _DashSpeed)

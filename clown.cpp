@@ -3,24 +3,23 @@
 
 C_clown::C_clown()
 {
-	unitImageInfo.unitName = "clown";
-	unitImageInfo.unitFoward = "Right";
-	unitImageInfo.unitState = "Idle";
-	type = SKUL_TYPE::CLOWN;
+	skulInfo.playerSpeed = 5;
+	skulInfo.DashTerm = 10;
+	skulInfo.playerDashSpeed = 8;
+	skulInfo.DashTime = 34;
+	skulInfo.playerJumpPower = 20;
+	skulInfo.canDoubleDash = true;
 
-	ani = ANIMATION->findAnimation(unitImageInfo.unitName + "RightIdle");
-	ANIMATION->start(unitImageInfo.unitName + "RightIdle");
-	ANIMATION->start(unitImageInfo.unitName + "LeftIdle");
+	unitName = "clown";
 }
 
 C_clown::~C_clown()
 {
 }
 
-HRESULT C_clown::init(vector2 _pt)
+HRESULT C_clown::init()
 {
-	pt = _pt;
-    return S_OK;
+	return S_OK;
 }
 
 void C_clown::release()
@@ -29,10 +28,24 @@ void C_clown::release()
 
 void C_clown::update()
 {
-	C_player::update();
 }
 
 void C_clown::render()
 {
-	C_player::render();
+}
+
+void C_clown::playerAttack()
+{
+}
+
+void C_clown::playerDashMove()
+{
+}
+
+void C_clown::skillA()
+{
+}
+
+void C_clown::skillB()
+{
 }

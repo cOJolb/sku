@@ -213,7 +213,7 @@
     <ClInclude Include="obstacleManager.h">
       <Filter>OBJECT\obstacle</Filter>
     </ClInclude>
-    <ClInclude Include="skul.h">
+    <ClInclude Include="littlebone.h">
       <Filter>OBJECT\player\skul</Filter>
     </ClInclude>
     <ClInclude Include="clown.h">
@@ -275,6 +275,9 @@
     </ClInclude>
     <ClInclude Include="enemyBullet.h">
       <Filter>OBJECT\bullet\enemyBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="skul.h">
+      <Filter>OBJECT\player\skul</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -344,7 +347,7 @@
     <ClCompile Include="obstacleManager.cpp">
       <Filter>OBJECT\obstacle</Filter>
     </ClCompile>
-    <ClCompile Include="skul.cpp">
+    <ClCompile Include="littlebone.cpp">
       <Filter>OBJECT\player\skul</Filter>
     </ClCompile>
     <ClCompile Include="clown.cpp">
@@ -403,6 +406,9 @@
     </ClCompile>
     <ClCompile Include="enemyBullet.cpp">
       <Filter>OBJECT\bullet\enemyBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="skul.cpp">
+      <Filter>OBJECT\player\skul</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

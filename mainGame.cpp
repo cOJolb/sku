@@ -4,6 +4,7 @@ mainGame::mainGame()
 {
 	mapSetting = new C_mapSetting;
 	collision = new C_collision;
+	player = new C_player;
 }
 mainGame::~mainGame()
 {
@@ -12,7 +13,7 @@ HRESULT mainGame::init()
 {
 	gameNode::init(true);
 	
-	player = new changePlayer;
+	//player = new changePlayer;
 	//for (float i = 0; i < 60; i++)
 	//{
 	//	OBSTACLE->createObstacle(OBSTACLE_TYPE::LTC_LAND, { 18*i,500 });
@@ -30,6 +31,11 @@ HRESULT mainGame::init()
 	mapSetting->tileSet(220, OBSTACLE_TYPE::LTC_LAND);
 	mapSetting->init();
 	ENEMY->respawnEnemy(UNIT_TYPE::KNIGHT, { 500,200 });
+	ENEMY->respawnEnemy(UNIT_TYPE::KNIGHT, { 550,200 });
+	ENEMY->respawnEnemy(UNIT_TYPE::KNIGHT, { 450,200 });
+	ENEMY->respawnEnemy(UNIT_TYPE::KNIGHT, { 340,200 });
+	ENEMY->respawnEnemy(UNIT_TYPE::KNIGHT, { 400,200 });
+	player->init();
 	return S_OK;
 }
 
@@ -44,10 +50,10 @@ void mainGame::update()
 
 	gameNode::update();
 	
-	if (InputManager->isOnceKeyDown(VK_SPACE))
+	/*if (InputManager->isOnceKeyDown(VK_SPACE))
 	{
 		player->changeSkul();
-	}
+	}*/
 	player->update();
 
 	ENEMY->update();

@@ -1,12 +1,12 @@
 #pragma once
 #include"gameNode.h"
-#include "changePlayer.h"
+#include "player.h"
 #include "mapSetting.h"
 #include "collision.h"
 class mainGame : public gameNode
 {
 private:
-	changePlayer* player;
+	C_player* player;
 	C_mapSetting* mapSetting;
 	C_collision* collision;
 public:

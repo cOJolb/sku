@@ -20,6 +20,14 @@ C_imageList::C_imageList()
 	ANIMATION->addAnimation("skulRightFall", "skul", 649, 653, 7, false, false);
 	ANIMATION->addAnimation("skulLeftJump", "skul", 659, 660, 7, false, true);
 	ANIMATION->addAnimation("skulLeftFall", "skul", 658, 654, 7, false, false);
+
+	ANIMATION->addAnimation("skulLeftFall", "skul", 658, 654, 7, false, false);
+	ANIMATION->addAnimation("skulLeftFall", "skul", 658, 654, 7, false, false);
+
+	ANIMATION->addAnimation("skulLeftAtkMotion1", "skul", 408, 405, 7, false, false);
+	ANIMATION->addAnimation("skulLeftAtkMotion2", "skul", 435, 432, 7, false, false);
+	ANIMATION->addAnimation("skulRightAtkMotion1", "skul", 108, 111, 7, false, false);
+	ANIMATION->addAnimation("skulRightAtkMotion2", "skul", 135, 137, 7, false, false);
 	//=========================skul:clown=================================================================================
 	//=========================skul:clown=================================================================================
 	IMAGE->addFrameImage("clown", "images/skul/skul_clown.bmp", 800, 1800, 8, 18, true, RGB(255, 0, 255));

@@ -1,36 +1,46 @@
 #include "framework.h"
 #include "player.h"
 #include"obstacle.h"
-
+#include "littlebone.h"
+#include"clown.h"
 C_player::C_player()
 {
-	
 	pt = { 200, 200 }; // 이것들 저장어떻게 하지 ..
 	prevPt = pt;
 	collider = new C_collider(pt, { 20,20 });
-	playerSpeed = 5;
 
-	playerDashInfo.playerDashSpeed = 8;
-	playerDashInfo.DashDelay = 34;
-	playerDashInfo.DashTime = 34;
-	playerDashInfo.DashCount = 0;
-	playerDashInfo.DashTerm = 10;
-
-	playerJumpPower = 20;
+	DashCount = 0;
+	isLeft = false;
+	isDash = false;
 	playerDoubleJump = false;
 	playerDashJump = false;
 	DashJumpCount = 0;
-	
-	isLeft = false;
+	DashDelay = 0;
+	isAtk = false;
+	atkCount = 0;
+
+	C_skul* CurSkul = new C_littlebone;
+	C_skul* nextSkul = new C_clown;
+	vskul.push_back(CurSkul);
+	vskul.push_back(nextSkul);
+
+	viskul = vskul.begin();
+	skulInfo = (*viskul)->getskulInfo();
+	setUnitImageInfo((*viskul)->getUnitName(), "Left", "Idle");
+	//ANIMATION->start(unitImageInfo.unitName + "LeftIdle");
+	//ANIMATION->start(unitImageInfo.unitName + unitImageInfo.unitFoward + unitImageInfo.unitState);
+	//ani = ANIMATION->findAnimation(unitImageInfo.unitName + unitImageInfo.unitFoward + unitImageInfo.unitState);
 }
 
 C_player::~C_player()
 {
 }
 
-HRESULT C_player::init(vector2 _pt)
+HRESULT C_player::init()
 {
-	pt = _pt;
+	//pt = _pt;
+	ANIMATION->start(unitImageInfo.unitName + "LeftIdle");
+	ANIMATION->start(unitImageInfo.unitName + "RightIdle");
 	return S_OK;
 }
 
@@ -40,15 +50,23 @@ void C_player::release()
 
 void C_player::update()
 {
+	if (InputManager->isOnceKeyDown(VK_SPACE))
+	{
+		if (viskul == vskul.begin()) viskul = vskul.begin() + 1;
+		else viskul = vskul.begin();
+		skulInfo = (*viskul)->getskulInfo();
+		setUnitImageInfo((*viskul)->getUnitName(), "Left", "Idle");
+		ANIMATION->start(unitImageInfo.unitName + "LeftIdle");
+		ANIMATION->start(unitImageInfo.unitName + "RightIdle");
+	}
 	playerMove();
 	playerJump();
 	playerDash();
 	playerDash_Jump();
 	//Jump();
+	playerAtk();
+	if (DashDelay >= skulInfo.DashTime / 2 ) Gravity();
 	
-	if (playerDashInfo.DashDelay >= playerDashInfo.DashTime / 2 ) Gravity();
-	
-
 	isLand();
 	isClogged();
 	collider->setPos(pt);
@@ -67,7 +85,7 @@ void C_player::render()
 
 void C_player::playerMove()
 {
-	if (playerDashInfo.DashDelay >= playerDashInfo.DashTime/2)
+	if (DashDelay >= skulInfo.DashTime/2 && !isAtk)
 	{
 		bool goLeft = InputManager->isStayKeyDown(VK_LEFT);
 		bool goRight = InputManager->isStayKeyDown(VK_RIGHT);
@@ -75,21 +93,21 @@ void C_player::playerMove()
 		
 		if (InputManager->isOnceKeyDown(VK_RIGHT)) ANIMATION->start(unitImageInfo.unitName + "RightMove");
 		
-		if (goLeft && !goRight)
+		if (goLeft && !goRight )
 		{
-			pt = vector2(pt.x - playerSpeed, pt.y);
+			pt = vector2(pt.x - skulInfo.playerSpeed, pt.y);
 			isLeft = true;
 			unitImageInfo.unitFoward = "Left";
 			unitImageInfo.unitState = "Move";
 		}
-		if (goRight && !goLeft)
+		if (goRight && !goLeft )
 		{
-			pt = vector2(pt.x + playerSpeed, pt.y);
+			pt = vector2(pt.x + skulInfo.playerSpeed, pt.y);
 			isLeft = false;
 			unitImageInfo.unitFoward = "Right";
 			unitImageInfo.unitState = "Move";
 		}
-		if (!goLeft && !goRight && !isJump)
+		if (!goLeft && !goRight && !isJump && !isAtk)
 		{
 			unitImageInfo.unitState = "Idle";
 		}
@@ -100,101 +118,104 @@ void C_player::playerJump()
 {
 	bool goJump = InputManager->isOnceKeyDown('C');
 	if (!isJump) playerDoubleJump = true;
-	if (goJump && !isJump)
+	if (goJump && !isJump && !isAtk)
 	{
 		playerDashJump = true;
-		jumpPower = playerJumpPower;
+		jumpPower = skulInfo.playerJumpPower;
 	}
-	else if (goJump && playerDoubleJump && isJump)
+	else if (goJump && playerDoubleJump && isJump && !isAtk)
 	{
 		playerDashJump = true;
-		jumpPower = playerJumpPower;
+		jumpPower = skulInfo.playerJumpPower;
 		playerDoubleJump = false;
 	}
-	if (jumpPower > 10) unitImageInfo.unitState = "Jump";
-	if (jumpPower == 10 || playerDashInfo.DashDelay == playerDashInfo.DashTime / 2)
+	if (jumpPower > 10 && !isAtk) unitImageInfo.unitState = "Jump";
+	if (jumpPower == 10 || DashDelay == skulInfo.DashTime / 2 && !isAtk)
 	{
 		ANIMATION->start(unitImageInfo.unitName + "RightFall");
 		ANIMATION->start(unitImageInfo.unitName + "LeftFall");
 	}
-	if ( isJump  && jumpPower <= 10 && playerDashInfo.DashDelay > playerDashInfo.DashTime / 2)  unitImageInfo.unitState = "Fall";
+	if ( isJump  && jumpPower <= 10 && DashDelay > skulInfo.DashTime / 2 &&!isAtk)  unitImageInfo.unitState = "Fall";
 }
 
 void C_player::playerDash()
 {
 	bool goDash = InputManager->isOnceKeyDown('Z');
-	if (goDash && playerDashInfo.DashDelay >= playerDashInfo.DashTime && !playerDashInfo.isDash)
+	if (goDash && DashDelay >= skulInfo.DashTime && !isDash && !isAtk)
 	{
 		playerDashJump = false;
 		jumpPower = 0;
-		playerDashInfo.isDash = true;
-		playerDashInfo.DashDelay = 0;
-		playerDashInfo.DashFoward = isLeft;
-		playerDashInfo.DashCount = playerDashInfo.DashTerm;
+		isDash = true;
+		DashDelay = 0;
+		DashFoward = isLeft;
+		DashCount = skulInfo.DashTerm;
 		ANIMATION->start(unitImageInfo.unitName + "RightDash");
 		ANIMATION->start(unitImageInfo.unitName + "LeftDash");
 	}
 
-	else if (goDash && playerDashInfo.playerDoubleDash && playerDashInfo.DashDelay <= playerDashInfo.DashTime / 2)
+	else if (goDash && playerDoubleDash && DashDelay <= skulInfo.DashTime / 2 &&!isAtk)
 	{
 		playerDashJump = false;
-		playerDashInfo.playerDoubleDash = false;
-		playerDashInfo.isDash = true;
-		playerDashInfo.DashDelay = 0;
-		playerDashInfo.DashCount = playerDashInfo.DashTerm;
+		playerDoubleDash = false;
+		isDash = true;
+		DashDelay = 0;
+		DashCount = skulInfo.DashTerm;
 		ANIMATION->start(unitImageInfo.unitName + "RightDash");
 		ANIMATION->start(unitImageInfo.unitName + "LeftDash");
 	}
 
-	playerDashMove();
-
-	playerDashInfo.DashDelay++;
-	if (playerDashInfo.DashDelay >= playerDashInfo.DashTime)
+	(*viskul)->playerDashMove(pt, DashCount, playerDashJump, DashFoward, skulInfo.playerDashSpeed);
+	if (DashCount > 0 && !playerDashJump && !isAtk)
 	{
-		playerDashInfo.DashDelay = playerDashInfo.DashTime;
-		playerDashInfo.playerDoubleDash = true;
-		playerDashInfo.isDash = false;
+		unitImageInfo.unitState = "Dash";
+	}
+	DashDelay++;
+	if (DashDelay >= skulInfo.DashTime)
+	{
+		DashDelay = skulInfo.DashTime;
+		playerDoubleDash = true;
+		isDash = false;
 	}
 }
-
-void C_player::playerDashMove()
-{
-	if (playerDashInfo.DashCount > 0 && !playerDashJump)
-	{
-		playerDashInfo.DashCount--;
-		if (playerDashInfo.DashFoward)
-		{
-			pt.x -= playerDashInfo.playerDashSpeed;
-			unitImageInfo.unitState = "Dash";
-
-		}
-
-		else if (!playerDashInfo.DashFoward)
-		{
-			pt.x += playerDashInfo.playerDashSpeed;
-			unitImageInfo.unitState = "Dash";
-		}
-	}
-}
+//
+//void C_player::playerDashMove()
+//{
+//	if (playerDashInfo.DashCount > 0 && !playerDashJump)
+//	{
+//		playerDashInfo.DashCount--;
+//		if (playerDashInfo.DashFoward)
+//		{
+//			pt.x -= playerDashInfo.playerDashSpeed;
+//			unitImageInfo.unitState = "Dash";
+//
+//		}
+//
+//		else if (!playerDashInfo.DashFoward)
+//		{
+//			pt.x += playerDashInfo.playerDashSpeed;
+//			unitImageInfo.unitState = "Dash";
+//		}
+//	}
+//}
 
 void C_player::playerDash_Jump()
 {
-	if (playerDashInfo.DashDelay < playerDashInfo.DashTime / 2 && playerDashJump)
+	if (DashDelay < skulInfo.DashTime / 2 && playerDashJump)
 	{
 		Gravity();
-		playerDashInfo.DashCount = 0;
+		DashCount = 0;
 		//playerDashInfo.DashDelay = 0;
 		DashJumpCount++;
 
-		if (playerDashInfo.DashFoward)
+		if (DashFoward)
 		{
-			pt.x -= playerDashInfo.playerDashSpeed;
+			pt.x -= skulInfo.playerDashSpeed;
 			unitImageInfo.unitState = "Jump";
 		}
 
-		else if (!playerDashInfo.DashFoward)
+		else if (!DashFoward)
 		{
-			pt.x += playerDashInfo.playerDashSpeed;
+			pt.x += skulInfo.playerDashSpeed;
 			unitImageInfo.unitState = "Jump";
 		}
 
@@ -202,26 +223,32 @@ void C_player::playerDash_Jump()
 		{
 			DashJumpCount = 0;
 			playerDashJump = false;
-			playerDashInfo.DashDelay = playerDashInfo.DashTime / 2;
+			DashDelay = skulInfo.DashTime / 2;
 		}
 	}
 }
 
-
-
 void C_player::playerAtk()
 {
-	bool goAtk = InputManager->isOnceKeyDown('X');
-	if (goAtk)
+	atkCount++;
+	if (InputManager->isOnceKeyDown('X') && !isDash && !isJump)
 	{
-
+		atkCount = 0;
+		ANIMATION->start(unitImageInfo.unitName + "LeftAtkMotion1");
+		ANIMATION->start(unitImageInfo.unitName + "RightAtkMotion1");
+		isAtk = true;
+		if (isLeft)
+		{
+			unitImageInfo.unitFoward = "Left";
+		}
+		else unitImageInfo.unitFoward = "Right";
+		unitImageInfo.unitState = "AtkMotion1";
+		(*viskul)->playerAttack(pt, isLeft);
+	}
+	if (atkCount >= 50)
+	{
+		atkCount = 50;
+		isAtk = false;
 	}
 }
 
-void C_player::playerSkillA()
-{
-}
-
-void C_player::playerSkillS()
-{
-}

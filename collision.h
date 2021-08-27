@@ -1,8 +1,9 @@
 #pragma once
+#include"singleton.h"
 class C_object;
 class C_obstacle;
 class C_collider;
-class C_collision
+class C_collision :public Singleton<C_collision>
 {
 public:
 	C_collision();

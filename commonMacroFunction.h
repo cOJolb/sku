@@ -206,6 +206,17 @@ enum class BULLET_TYPE
 
 };
 
+struct S_skulInfo
+{
+	float playerDashSpeed;
+	int DashTime;
+	int DashTerm;
+	float playerSpeed;
+	float playerJumpPower;
+
+	bool canDoubleDash;
+};
+
 
 const int GRAVITY = 10;
 

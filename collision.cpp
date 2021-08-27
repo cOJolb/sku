@@ -79,7 +79,7 @@ void C_collision::stageCollision()
 		bool PlayertoMonster = isCollision((*ENEMY->getviEnemy(i))->getCollider(), PLAYERDATA->getPlayerData().playerCollider);
 		if (PlayertoMonster)
 		{
-			ENEMY->eraserEnemy(i);
+			//ENEMY->eraserEnemy(i);
 		}
 	}
 }

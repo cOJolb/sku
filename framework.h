@@ -41,6 +41,8 @@
 #include"obstacleManager.h"
 #include"enemyManager.h"
 #include"playerData.h"
+#include "skul.h"
+#include"collision.h"
 //======================================
 //##			매니저들			  ##
 //======================================
@@ -56,6 +58,7 @@
 #define OBSTACLE		obstacleManager::getSingleton()
 #define ENEMY			enemyManager::getSingleton()
 #define PLAYERDATA		C_playerData::getSingleton()
+#define COLLISION		C_collision::getSingleton()
 //==========================================
 //				 매크로 설정
 //==========================================

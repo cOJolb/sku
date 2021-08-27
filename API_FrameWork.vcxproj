@@ -177,11 +177,12 @@
     <ClInclude Include="passiveItem.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playerData.h" />
+    <ClInclude Include="skul.h" />
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="singleton.h" />
-    <ClInclude Include="skul.h" />
+    <ClInclude Include="littlebone.h" />
     <ClInclude Include="skulBullet.h" />
     <ClInclude Include="skulItem.h" />
     <ClInclude Include="soundManager.h" />
@@ -228,8 +229,9 @@
     <ClCompile Include="passiveItem.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playerData.cpp" />
-    <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="skul.cpp" />
+    <ClCompile Include="sceneManager.cpp" />
+    <ClCompile Include="littlebone.cpp" />
     <ClCompile Include="skulBullet.cpp" />
     <ClCompile Include="skulItem.cpp" />
     <ClCompile Include="soundManager.cpp" />

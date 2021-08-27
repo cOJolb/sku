@@ -76,12 +76,19 @@ knight_Atk::~knight_Atk()
 void knight_Atk::enter()
 {
 	object = fsm->getObject();
-//	object->setAni(object->getImageInfo().unitName + "LeftAttack");
-	//ANIMATION->start(object->getImageInfo().unitName + "LeftAttack");
-	//ANIMATION->start(object->getImageInfo().unitName + "RightAttack");
 	foward = isLeft(PLAYERDATA->getPlayerData().playerPt);
-	if (foward) object->setUnitImageInfo(object->getImageInfo().unitName, "Left", "Attack");
-	else  object->setUnitImageInfo(object->getImageInfo().unitName, "Right", "Attack");
+	if (foward)
+	{
+		object->setUnitImageInfo(object->getImageInfo().unitName, "Left", "Attack");
+		object->setAni(ANIMATION->findAnimation(object->getImageInfo().unitName + "LeftAttack"));
+		object->getAni()->start();
+	}
+	else
+	{
+		object->setUnitImageInfo(object->getImageInfo().unitName, "Right", "Attack");
+		object->setAni(ANIMATION->findAnimation(object->getImageInfo().unitName + "RightAttack"));
+		object->getAni()->start();
+	}
 	
 	delay = 0;
 }
@@ -133,10 +140,32 @@ knight_Damage::~knight_Damage()
 
 void knight_Damage::enter()
 {
+	object = fsm->getObject();
+	foward = isLeft(PLAYERDATA->getPlayerData().playerPt);
+	if (foward)
+	{
+		object->setUnitImageInfo(object->getImageInfo().unitName, "Left", "Hit");
+		object->setAni(ANIMATION->findAnimation(object->getImageInfo().unitName + "LeftHit"));
+		object->getAni()->start();
+	}
+	else
+	{
+		object->setUnitImageInfo(object->getImageInfo().unitName, "Right", "Hit");
+		object->setAni(ANIMATION->findAnimation(object->getImageInfo().unitName + "RightHit"));
+		object->getAni()->start();
+	}
+
+	delay = 0;
 }
 
 void knight_Damage::update()
 {
+	delay++;
+
+	if (delay > object->getAtkDelay())
+	{
+		fsm->ChangeState(STATE_TYPE::IDLE);
+	}
 }
 
 void knight_Damage::exit()

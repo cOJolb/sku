@@ -23,6 +23,9 @@ protected:
 
 	S_unitImageInfo unitImageInfo;
 
+	int hp;
+	int maxHp;
+
 	float jumpPower;
 	bool isJump;
 	float unitDamage;
@@ -68,5 +71,9 @@ public:
 	animation* getAni() { return ani; }
 
 	int getAtkDelay() { return atkDelay; }
+
+	int gethp() { return hp; }
+	void sethp(int _hp) { hp = _hp; }
+	int getmaxHp() { return maxHp; }
 };
 

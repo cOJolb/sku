@@ -38,7 +38,6 @@ public:
 
 	venemy getvEnemy() { return vEnemy; }
 	vienemy getviEnemy(int number);
-
 	//void bossDie();
 };
 

@@ -27,7 +27,7 @@ void animationManager::update()
     for (iter; iter != _animation.end(); ++iter)
     {
         if (!iter->second->isPlay())continue;
-        iter->second->frameUpdate(TIME->getElapsedTime() * 1.0f);
+            iter->second->frameUpdate(TIME->getElapsedTime() * 1.0f);
     }
 }
 void animationManager::render()
@@ -70,6 +70,36 @@ void animationManager::addAnimation(string animationKeyName, char* imageKeyName,
 
     //이미지와 애니메이션을 초기화 한후  맵에 추가한다.
     _animation.insert(make_pair(animationKeyName, ani));
+}
+
+void animationManager::changeNonKeyAnimation(animation* ani, char* imageKeyName, int fps, bool reverse, bool loop)
+{
+    image* img = IMAGE->findImage(imageKeyName);
+    ani->init(img->getWidth(), img->getHeight(), img->getFrameWidth(), img->getFrameHeight());
+    ani->setDefPlayFrame(reverse, loop);
+    ani->setFPS(fps);
+
+    ani->start();
+}
+
+void animationManager::changeNonKeyAnimation(animation* ani, char* imageKeyName, int* playarr, int arrLen, int fps, bool loop)
+{
+    image* img = IMAGE->findImage(imageKeyName);
+    ani->init(img->getWidth(), img->getHeight(), img->getFrameWidth(), img->getFrameHeight());
+    ani->setPlayFrame(playarr, arrLen, loop);
+    ani->setFPS(fps);
+
+    ani->start();
+}
+
+void animationManager::changeNonKeyAnimation(animation* ani, char* imageKeyName, int start, int end, int fps, bool reverse, bool loop)
+{
+    image* img = IMAGE->findImage(imageKeyName);
+    ani->init(img->getWidth(), img->getHeight(), img->getFrameWidth(), img->getFrameHeight());
+    ani->setPlayFrame(start, end, reverse, loop);
+    ani->setFPS(fps);
+
+    ani->start();
 }
 
 void animationManager::start(string animationKeyName)

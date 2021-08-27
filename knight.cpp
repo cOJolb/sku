@@ -15,6 +15,8 @@ C_knight::C_knight(vector2 _pt)
 	type = UNIT_TYPE::KNIGHT;
 	collider = new C_collider(pt, { 20,20 });
 	atkDelay = 50;
+	maxHp = 50;
+	hp = 50;
 	
 	C_enemy::init();
 }

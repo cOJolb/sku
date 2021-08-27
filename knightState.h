@@ -59,6 +59,8 @@ public:
 class knight_Damage : public C_state
 {
 private:
+	int delay;
+	bool foward;
 public:
 	knight_Damage();
 	~knight_Damage();

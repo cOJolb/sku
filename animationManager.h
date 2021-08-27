@@ -20,13 +20,13 @@ public:
 
 	//처음부터  끝까지
 	void addDefAnimation(string animationKeyName, char* imageKeyName, int fps, bool reverse = false, bool loop = false);
-
 	void addAnimation(string animationKeyName, char* imageKeyName, int* playArr, int arrLen, int fps, bool loop = false);
-	
 	void addAnimation(string animationKeyName, char* imageKeyName,int start, int end, int fps, bool reverse = false, bool loop = false);
 
 
-
+	void changeNonKeyAnimation(animation* ani, char* imageKeyName, int fps, bool reverse = false, bool loop = false);
+	void changeNonKeyAnimation(animation* ani, char* imageKeyName, int* playarr, int arrLen, int fps, bool loop = false);
+	void changeNonKeyAnimation(animation* ani, char* imageKeyName, int start, int end, int fps, bool reverse = false, bool loop = false);
 
 	void start(string animationKeyName);
 	void stop(string animationKeyName);

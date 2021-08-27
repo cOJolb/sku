@@ -30,6 +30,8 @@ public:
 class knight_Atk : public C_state
 {
 private:
+	int delay;
+	bool foward;
 public:
 	knight_Atk();
 	~knight_Atk();
@@ -43,6 +45,7 @@ public:
 class knight_Die : public C_state
 {
 private:
+	
 public:
 	knight_Die();
 	~knight_Die();

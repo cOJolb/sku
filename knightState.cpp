@@ -75,10 +75,26 @@ knight_Atk::~knight_Atk()
 
 void knight_Atk::enter()
 {
+	object = fsm->getObject();
+	ANIMATION->start(object->getImageInfo().unitName + "LeftAttack");
+	ANIMATION->start(object->getImageInfo().unitName + "RightAttack");
+	foward = isLeft(PLAYERDATA->getPlayerData().playerPt);
+	delay = 0;
 }
 
 void knight_Atk::update()
 {
+	delay++;
+	if(foward) object->setUnitImageInfo(object->getImageInfo().unitName, "Left", "Attack");
+	else  object->setUnitImageInfo(object->getImageInfo().unitName, "Right", "Attack");
+	if (delay > 50)
+	{
+
+	}
+	if (delay > 60)
+	{
+		fsm->ChangeState(STATE_TYPE::IDLE);
+	}
 }
 
 void knight_Atk::exit()

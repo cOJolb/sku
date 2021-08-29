@@ -130,6 +130,9 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 			break;
 		}
 		break;
+	case WM_SIZE:
+		GetClientRect(hWnd, &rt);
+		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;

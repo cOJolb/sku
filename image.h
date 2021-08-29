@@ -65,7 +65,8 @@ private:
 	BLENDFUNCTION	_blendFunc;			//알파블렌드를 위한 정보
 	LPIMAGE_INFO	_blendImage;		//알파블렌드를 사용하기 위한 이미지 정보
 
-
+	//스트레치용
+	LPIMAGE_INFO	_stretchImage;		//스트레치 이미지
 
 public:
 
@@ -174,5 +175,19 @@ public:
 	//맥스프레임 가로세로크기 얻기
 	inline int getMaxFrameX()const { return _imageInfo->maxFrameX; }
 	inline int getMaxFrameY()const { return _imageInfo->maxFrameY; }
+
+
+	//HRESULT initForRotate();
+	//HRESULT initForAlphaBlend();
+	HRESULT initForStretch();
+	//HRESULT initForStretch(int x, int y);
+
+	void stretchRenderXY(HDC hdc, int destX, int destY, float ratio);
+	//void stretchRender(HDC hdc, int centerX, int centerY, float ratio);
+	void stretchRender(HDC hdc, int centerX, int centerY, int newWidth, int newHeight);
+	//void stretchFrameRender(HDC hdc, int centerX, int centerY, int currentFrameX, int currentFrameY, float ratio);
+	//void stretchFrameRender(HDC hdc, int centerX, int centerY, int currentFrameX, int currentFrameY, int newWidth, int newHeight);
+
+
 };
 

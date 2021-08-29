@@ -15,5 +15,6 @@ public:
 
 public:
 	void tileSet(int _number, OBSTACLE_TYPE _type);
+	S_tagTile getTile(int number) { return tile[number]; }
 };
 

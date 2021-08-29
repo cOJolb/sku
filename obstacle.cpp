@@ -35,7 +35,7 @@ void C_obstacle::render()
 {
 	RECT rec = RectMakeCenter(pt, 36,36);
 	//IMAGE->frameRender("tile", getMemDC(),rc.left,rc.top, frame.x, frame.y);
-	IMAGE->frameRenderCenter("tile", getMemDC(),pt, frame.x, frame.y);
+	IMAGE->frameRenderCenter("tile", getCVOSDC(),pt, frame.x, frame.y);
 }
 
 void C_obstacle::setObstacleValue()

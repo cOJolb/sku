@@ -3,12 +3,14 @@
 #include "player.h"
 #include "mapSetting.h"
 #include "collision.h"
+#include "miniMap.h"
 class mainGame : public gameNode
 {
 private:
 	C_player* player;
 	C_mapSetting* mapSetting;
 	C_collision* collision;
+	C_miniMap* miniMap;
 public:
 	mainGame();
 	~mainGame();
@@ -17,5 +19,9 @@ public:
 	virtual void release();
 	virtual void update();
 	virtual void render(/*HDC hdc*/);
+
+public:
+	RECT checkGameSize();
+
 };
 

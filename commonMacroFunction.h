@@ -224,6 +224,7 @@ const int GRAVITY = 10;
 struct S_tagTile
 {
 	OBSTACLE_TYPE type;
+	int tileNumber;
 	//RECT rcTile;
 
 	//vector2 objFrame;

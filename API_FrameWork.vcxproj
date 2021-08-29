@@ -148,6 +148,7 @@
     <ClInclude Include="API_FrameWork.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="bulletManager.h" />
+    <ClInclude Include="camera.h" />
     <ClInclude Include="changePlayer.h" />
     <ClInclude Include="collider.h" />
     <ClInclude Include="collision.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="knightState.h" />
     <ClInclude Include="mainGame.h" />
     <ClInclude Include="mapSetting.h" />
+    <ClInclude Include="miniMap.h" />
     <ClInclude Include="obstacle.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="obstacleManager.h" />
@@ -203,6 +205,7 @@
     </ClCompile>
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="bulletManager.cpp" />
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="changePlayer.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="clown.cpp" />
@@ -223,6 +226,7 @@
     <ClCompile Include="knightState.cpp" />
     <ClCompile Include="mainGame.cpp" />
     <ClCompile Include="mapSetting.cpp" />
+    <ClCompile Include="miniMap.cpp" />
     <ClCompile Include="obstacle.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="obstacleManager.cpp" />

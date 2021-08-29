@@ -117,6 +117,7 @@ void C_object::isLand()
 		{
 			pt.y = (*OBSTACLE->getviObstacle(i))->getPt().y - 18 - collider->getSize().y;
 			isJump = false;
+			jumpPower = GRAVITY;
 			break;
 		}
 		else isJump = true;

@@ -124,6 +124,9 @@
     <Filter Include="OBJECT\item\goods">
       <UniqueIdentifier>{2d39bdd4-8a11-42d8-b165-3b9e42afcd65}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CAMERA">
+      <UniqueIdentifier>{f6ea82a3-ebd9-4430-9ca1-4a697c165732}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -279,6 +282,12 @@
     <ClInclude Include="skul.h">
       <Filter>OBJECT\player\skul</Filter>
     </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>CAMERA</Filter>
+    </ClInclude>
+    <ClInclude Include="miniMap.h">
+      <Filter>MAP</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -409,6 +418,12 @@
     </ClCompile>
     <ClCompile Include="skul.cpp">
       <Filter>OBJECT\player\skul</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>CAMERA</Filter>
+    </ClCompile>
+    <ClCompile Include="miniMap.cpp">
+      <Filter>MAP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

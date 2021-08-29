@@ -78,9 +78,9 @@ void C_player::update()
 void C_player::render()
 {
 	RECT rec = RectMakeCenter(pt, 20, 20);
-	Rectangle(getMemDC(), rec.left, rec.top, rec.right, rec.bottom);
+	Rectangle(getCVOSDC(), rec.left, rec.top, rec.right, rec.bottom);
 	
-	IMAGE->findImage(unitImageInfo.unitName)->aniRender(getMemDC(), pt.x - IMAGE->findImage(unitImageInfo.unitName)->getFrameWidth()/2, pt.y - IMAGE->findImage(unitImageInfo.unitName)->getFrameHeight()/2, ani);
+	IMAGE->findImage(unitImageInfo.unitName)->aniRender(getCVOSDC(), pt.x - IMAGE->findImage(unitImageInfo.unitName)->getFrameWidth()/2, pt.y - IMAGE->findImage(unitImageInfo.unitName)->getFrameHeight()/2, ani);
 }
 
 void C_player::playerMove()

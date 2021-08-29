@@ -8,6 +8,7 @@ C_mapSetting::C_mapSetting()
 		tile[i].pt.x = (i % 30) * 36;
 		tile[i].pt.y = (i / 30) * 36;
 		tile[i].type = OBSTACLE_TYPE::NONE;
+		tile[i].tileNumber = i;
 	}
 }
 

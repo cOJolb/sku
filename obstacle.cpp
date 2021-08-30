@@ -9,7 +9,7 @@ C_obstacle::C_obstacle(vector2 _pt, OBSTACLE_TYPE _type)
 {
 	type = _type;
 	//tileSize = IMAGE->findImage("tile")->getFrameWidth() / 2;
-	pt = _pt;
+	pt = { _pt.x + IMAGE->findImage("tile")->getFrameWidth() / 2 , _pt.y + IMAGE->findImage("tile")->getFrameHeight() / 2 };
 	collider = new C_collider(pt, { IMAGE->findImage("tile")->getFrameWidth() ,IMAGE->findImage("tile")->getFrameHeight() });
 }
 

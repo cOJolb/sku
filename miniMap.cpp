@@ -51,13 +51,13 @@ void C_miniMap::render()
 			float x = (WINSIZEX - 300) + vitile->tileNumber % 30 * 10;
 			float y = (WINSIZEY - 200) + vitile->tileNumber / 30 * 10;
 			RECT rec;
-			rec = RectMakeCenter(x, y, 10, 10);
+			rec = RectMake(x, y, 10, 10);
 			Rectangle(getMemDC(), rec.left, rec.top, rec.right, rec.bottom);
 		}
 	}
 	int playerX = PLAYERDATA->getPlayerData().playerPt.x / 36;
-	int playerY = PLAYERDATA->getPlayerData().playerPt.y / 36+1;
+	int playerY = PLAYERDATA->getPlayerData().playerPt.y / 36;
 
-	miniPlayer = RectMakeCenter((WINSIZEX - 300) + playerX * 10, (WINSIZEY - 200) + playerY *10, 10, 10);
+	miniPlayer = RectMake((WINSIZEX - 300) + playerX * 10, (WINSIZEY - 200) + playerY *10, 10, 10);
 	Rectangle(getMemDC(), miniPlayer.left, miniPlayer.top, miniPlayer.right, miniPlayer.bottom);
 }

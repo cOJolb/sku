@@ -10,7 +10,6 @@ public:
 	{ }
 	C_collider(vector2 _pos, vector2 _size) : pos(_pos), size(_size)
 	{ }
-
 	const vector2& getPos() { return pos; }
 	void setPos(const vector2& _pos) { pos = _pos; }
 

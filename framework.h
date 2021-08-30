@@ -44,6 +44,7 @@
 #include "skul.h"
 #include"collision.h"
 #include "camera.h"
+#include "subWindow.h"
 //======================================
 //##			매니저들			  ##
 //======================================
@@ -61,6 +62,7 @@
 #define PLAYERDATA		C_playerData::getSingleton()
 #define COLLISION		C_collision::getSingleton()
 #define CAMERA			camera::getSingleton()
+#define SUBWINDOW		subWindow::getSingleton()
 //==========================================
 //				 매크로 설정
 //==========================================

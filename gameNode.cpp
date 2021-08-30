@@ -41,6 +41,7 @@ HRESULT gameNode::init(bool managerInit)
 		IMAGE->init();
 		TIME->init();
 		SOUND->init();
+		SUBWINDOW->init();
 	}
 
 
@@ -94,12 +95,14 @@ void gameNode::update()
 {
 	ANIMATION->update();
 	OBSTACLE->update();
+	SUBWINDOW->update();
 	//더블버퍼 이후 사용하지 않는다 true->false
 	InvalidateRect(m_hWnd, NULL, false);
 }
 void gameNode::render(/*HDC hdc*/)
 {
 	OBSTACLE->render();
+	SUBWINDOW->render();
 }
 
 LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
@@ -118,6 +121,7 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 	//	EndPaint(hWnd, &ps);
 	//	break;
 	case WM_MOUSEMOVE:
+		SUBWINDOW->SetIsActive(false);
 		m_ptMouse.x = LOWORD(lParam);
 		m_ptMouse.y = HIWORD(lParam);
 		break;

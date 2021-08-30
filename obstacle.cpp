@@ -9,7 +9,9 @@ C_obstacle::C_obstacle(vector2 _pt, OBSTACLE_TYPE _type)
 {
 	type = _type;
 	//tileSize = IMAGE->findImage("tile")->getFrameWidth() / 2;
-	pt = _pt;
+	pt = { _pt.x + IMAGE->findImage("tile")->getFrameWidth() / 2, _pt.y + IMAGE->findImage("tile")->getFrameHeight() / 2 };
+	//pt = _pt;
+
 	collider = new C_collider(pt, { IMAGE->findImage("tile")->getFrameWidth() ,IMAGE->findImage("tile")->getFrameHeight() });
 }
 
@@ -33,8 +35,9 @@ void C_obstacle::update()
 
 void C_obstacle::render()
 {
-	RECT rec = RectMakeCenter(pt, 36,36);
+	//RECT rec = RectMake(pt, 36,36);
 	//IMAGE->frameRender("tile", getMemDC(),rc.left,rc.top, frame.x, frame.y);
+	//IMAGE->frameRender("tile", getCVOSDC(),pt, frame.x, frame.y);
 	IMAGE->frameRenderCenter("tile", getCVOSDC(),pt, frame.x, frame.y);
 }
 

@@ -65,6 +65,7 @@ void C_player::update()
 	playerDash_Jump();
 	//Jump();
 	playerAtk();
+	//if (DashDelay == skulInfo.DashTime / 2) jumpPower = GRAVITY;
 	if (DashDelay >= skulInfo.DashTime / 2 ) Gravity();
 	
 	isLand();

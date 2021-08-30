@@ -1,6 +1,6 @@
 #include "framework.h"
 #include "miniMap.h"
-
+#include "enemy.h"
 C_miniMap::C_miniMap()
 {
 	miniMapRect = RectMake(WINSIZEX - 300, WINSIZEY - 200, 300, 200);
@@ -51,13 +51,21 @@ void C_miniMap::render()
 			float x = (WINSIZEX - 300) + vitile->tileNumber % 30 * 10;
 			float y = (WINSIZEY - 200) + vitile->tileNumber / 30 * 10;
 			RECT rec;
-			rec = RectMakeCenter(x, y, 10, 10);
+			rec = RectMake(x, y, 10, 10);
 			Rectangle(getMemDC(), rec.left, rec.top, rec.right, rec.bottom);
 		}
 	}
+	for (int i = 0; i < ENEMY->getvEnemy().size(); i++)
+	{
+		vector2 enemyPt = (*ENEMY->getviEnemy(i))->getPt();
+		int enemyX = enemyPt.x / 36;
+		int enemyY = enemyPt.y / 36;
+		RECT miniEnemy = RectMake((WINSIZEX - 300) + enemyX * 10, (WINSIZEY - 200) + enemyY * 10, 10, 10);
+		Rectangle(getMemDC(), miniEnemy.left, miniEnemy.top, miniEnemy.right, miniEnemy.bottom);
+	}
 	int playerX = PLAYERDATA->getPlayerData().playerPt.x / 36;
-	int playerY = PLAYERDATA->getPlayerData().playerPt.y / 36+1;
+	int playerY = PLAYERDATA->getPlayerData().playerPt.y / 36;
+	miniPlayer = RectMake((WINSIZEX - 300) + playerX * 10, (WINSIZEY - 200) + playerY *10, 10, 10);
 
-	miniPlayer = RectMakeCenter((WINSIZEX - 300) + playerX * 10, (WINSIZEY - 200) + playerY *10, 10, 10);
 	Rectangle(getMemDC(), miniPlayer.left, miniPlayer.top, miniPlayer.right, miniPlayer.bottom);
 }

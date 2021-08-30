@@ -1,5 +1,6 @@
 #include"framework.h"
 #include "mainGame.h"
+#include "subWindowSetting.h"
 mainGame::mainGame()
 {
 	mapSetting = new C_mapSetting;
@@ -44,7 +45,7 @@ HRESULT mainGame::init()
 	{
 		miniMap->init(mapSetting->getTile(i));
 	}
-	
+	SUBWINDOW->SetScene(new C_subWindowSetting);
 	return S_OK;
 }
 

@@ -4,6 +4,7 @@
 #include "mapSetting.h"
 #include "collision.h"
 #include "miniMap.h"
+class C_subWindowSetting;
 class mainGame : public gameNode
 {
 private:

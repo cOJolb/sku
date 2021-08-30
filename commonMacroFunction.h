@@ -230,5 +230,49 @@ struct S_tagTile
 	//vector2 objFrame;
 	//vector2 monsterFrame;
 	vector2 pt;
+	RECT rc;
 };
 
+const int SUBWINSIZEX = 420;
+const int SUBWINSIZEY = 520;
+
+enum class CTRL
+{
+	CTRL_DRAW,
+	CTRL_INIT,
+	CTRL_SAVE,
+	CTRL_LOAD,
+	CTRL_EXIT,
+	CTRL_EDIT,
+	CTRL_LIST,
+	CTRL_SETROOM,
+	CTRL_REMOVE,
+	CTRL_MONSTER,
+	CTRL_OBJECT,
+	CTRL_ROOM,
+	CTRL_ITEM,
+	CTRL_END
+};
+
+struct tagSampleTile
+{
+	RECT rcTile;
+	vector2 frame;
+};
+
+enum class ROOM
+{
+	ROOM_NORMAL,
+	ROOM_BOSS,
+	ROOM_SHOP,
+	ROOM_REWARD,
+	ROOM_NONE,
+	ROOM_FIRST,
+	ROOM_END
+};
+
+struct tagRoom
+{
+	S_tagTile tile[30 * 20];
+	ROOM roomType;
+};

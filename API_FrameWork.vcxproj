@@ -172,6 +172,7 @@
     <ClInclude Include="knightState.h" />
     <ClInclude Include="mainGame.h" />
     <ClInclude Include="mapSetting.h" />
+    <ClInclude Include="mapTool.h" />
     <ClInclude Include="miniMap.h" />
     <ClInclude Include="obstacle.h" />
     <ClInclude Include="object.h" />
@@ -189,6 +190,8 @@
     <ClInclude Include="skulItem.h" />
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="state.h" />
+    <ClInclude Include="subWindow.h" />
+    <ClInclude Include="subWindowSetting.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="timeManager.h" />
     <ClInclude Include="timer.h" />
@@ -226,6 +229,7 @@
     <ClCompile Include="knightState.cpp" />
     <ClCompile Include="mainGame.cpp" />
     <ClCompile Include="mapSetting.cpp" />
+    <ClCompile Include="mapTool.cpp" />
     <ClCompile Include="miniMap.cpp" />
     <ClCompile Include="obstacle.cpp" />
     <ClCompile Include="object.cpp" />
@@ -240,6 +244,8 @@
     <ClCompile Include="skulItem.cpp" />
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="state.cpp" />
+    <ClCompile Include="subWindow.cpp" />
+    <ClCompile Include="subWindowSetting.cpp" />
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="txtData.cpp" />

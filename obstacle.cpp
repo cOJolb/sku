@@ -33,7 +33,7 @@ void C_obstacle::update()
 
 void C_obstacle::render()
 {
-	RECT rec = RectMakeCenter(pt, 36,36);
+	RECT rec = RectMakeCenter(pt, tileSize, tileSize);
 	//IMAGE->frameRender("tile", getMemDC(),rc.left,rc.top, frame.x, frame.y);
 	IMAGE->frameRenderCenter("tile", getCVOSDC(),pt, frame.x, frame.y);
 }

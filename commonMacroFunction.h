@@ -72,8 +72,6 @@ inline void BeginSolidColor(HDC hdc, HBRUSH* brush, COLORREF color)
 	*brush = (HBRUSH)SelectObject(hdc,*brush);
 }
 
-
-
 inline float RectX(RECT rec)
 {
 	float x = ((rec.right - rec.left) / 2) + rec.left;
@@ -115,6 +113,16 @@ inline RECT& movetoDown(RECT& rec, int speed)
 	OffsetRect(&rec, 0, speed);
 	return rec;
 }
+
+
+const int tileSize = 36;
+const int tileX = 30;
+const int tileY = 20;
+const int GameSizeX = tileSize * tileX;
+const int GameSizeY = tileSize * tileY;
+const int MiniMapSizeX = 150;
+const int MiniMapSizeY = 100;
+
 
 enum class STATE_TYPE
 {
@@ -216,9 +224,6 @@ struct S_skulInfo
 
 	bool canDoubleDash;
 };
-
-
-const int GRAVITY = 10;
 
 
 struct S_tagTile

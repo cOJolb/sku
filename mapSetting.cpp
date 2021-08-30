@@ -5,8 +5,8 @@ C_mapSetting::C_mapSetting()
 {
 	for (int i = 0; i < 30*20; i++)
 	{
-		tile[i].pt.x = (i % 30) * 36;
-		tile[i].pt.y = (i / 30) * 36;
+		tile[i].pt.x = (i % tileX) * tileSize;
+		tile[i].pt.y = (i / tileX) * tileSize;
 		tile[i].type = OBSTACLE_TYPE::NONE;
 		tile[i].tileNumber = i;
 	}

@@ -2,6 +2,8 @@
 #include"gameNode.h"
 #include"collider.h"
 
+const int GRAVITY = 10;
+
 struct S_unitImageInfo
 {
 	string unitName;

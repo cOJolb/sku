@@ -67,8 +67,8 @@
 #define WINNAME			(LPTSTR)(TEXT("지옥으로 떠나는 여행"))
 #define WINSTARTX		100
 #define WINSTARTY		100
-#define WINSIZEX		36*30
-#define WINSIZEY		36*20
+#define WINSIZEX		GameSizeX
+#define WINSIZEY		GameSizeY
 #define	WINSTYLE		WS_CAPTION | WS_SYSMENU
 
 

@@ -127,6 +127,9 @@
     <Filter Include="CAMERA">
       <UniqueIdentifier>{f6ea82a3-ebd9-4430-9ca1-4a697c165732}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MAP\maptool">
+      <UniqueIdentifier>{dfe3fa54-75f4-42b0-b4f3-6cf6881cc269}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -288,6 +291,9 @@
     <ClInclude Include="miniMap.h">
       <Filter>MAP</Filter>
     </ClInclude>
+    <ClInclude Include="subWindow.h">
+      <Filter>MAP\maptool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -424,6 +430,9 @@
     </ClCompile>
     <ClCompile Include="miniMap.cpp">
       <Filter>MAP</Filter>
+    </ClCompile>
+    <ClCompile Include="subWindow.cpp">
+      <Filter>MAP\maptool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

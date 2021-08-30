@@ -1,6 +1,6 @@
 #include "framework.h"
 #include "miniMap.h"
-
+#include "enemy.h"
 C_miniMap::C_miniMap()
 {
 	miniMapRect = RectMake(WINSIZEX - 300, WINSIZEY - 200, 300, 200);
@@ -55,8 +55,16 @@ void C_miniMap::render()
 			Rectangle(getMemDC(), rec.left, rec.top, rec.right, rec.bottom);
 		}
 	}
-	int playerX = PLAYERDATA->getPlayerData().playerPt.x / 36;
-	int playerY = PLAYERDATA->getPlayerData().playerPt.y / 36;
+	for (int i = 0; i < ENEMY->getvEnemy().size(); i++)
+	{
+		vector2 enemyPt = (*ENEMY->getviEnemy(i))->getPt();
+		int enemyX = enemyPt.x / tileSize;
+		int enemyY = enemyPt.y / tileSize;
+		RECT miniEnemy = RectMake((WINSIZEX - 300) + enemyX * 10, (WINSIZEY - 200) + enemyY * 10, 10, 10);
+		Rectangle(getMemDC(), miniEnemy.left, miniEnemy.top, miniEnemy.right, miniEnemy.bottom);
+	}
+	int playerX = PLAYERDATA->getPlayerData().playerPt.x / tileSize;
+	int playerY = PLAYERDATA->getPlayerData().playerPt.y / tileSize;
 
 	miniPlayer = RectMake((WINSIZEX - 300) + playerX * 10, (WINSIZEY - 200) + playerY *10, 10, 10);
 	Rectangle(getMemDC(), miniPlayer.left, miniPlayer.top, miniPlayer.right, miniPlayer.bottom);

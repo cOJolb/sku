@@ -22,7 +22,7 @@ public:
 	void render();
 
 public:
-	void createObstacle(OBSTACLE_TYPE _type, vector2 _pt);
+	void createObstacle(OBSTACLE_TYPE _type, vector2 _pt, int _number);
 	vObstacle getvObstacle() { return v_obstacle; }
 	viObstacle getviObstacle(int number);
 

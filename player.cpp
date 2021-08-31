@@ -5,9 +5,19 @@
 #include"clown.h"
 C_player::C_player()
 {
+	C_skul* CurSkul = new C_littlebone;
+	C_skul* nextSkul = new C_clown;
+	vskul.push_back(CurSkul);
+	vskul.push_back(nextSkul);
+
+	viskul = vskul.begin();
+	skulInfo = (*viskul)->getskulInfo();
+	setUnitImageInfo((*viskul)->getUnitName(), "Left", "Idle");
+
+
 	pt = { 200, 200 }; // 이것들 저장어떻게 하지 ..
 	prevPt = pt;
-	collider = new C_collider(pt, { 20,20 });
+	collider = new C_collider(pt, skulInfo.playerSize);
 
 	DashCount = 0;
 	isLeft = false;
@@ -18,15 +28,7 @@ C_player::C_player()
 	DashDelay = 0;
 	isAtk = false;
 	atkCount = 0;
-
-	C_skul* CurSkul = new C_littlebone;
-	C_skul* nextSkul = new C_clown;
-	vskul.push_back(CurSkul);
-	vskul.push_back(nextSkul);
-
-	viskul = vskul.begin();
-	skulInfo = (*viskul)->getskulInfo();
-	setUnitImageInfo((*viskul)->getUnitName(), "Left", "Idle");
+	
 	//ANIMATION->start(unitImageInfo.unitName + "LeftIdle");
 	//ANIMATION->start(unitImageInfo.unitName + unitImageInfo.unitFoward + unitImageInfo.unitState);
 	//ani = ANIMATION->findAnimation(unitImageInfo.unitName + unitImageInfo.unitFoward + unitImageInfo.unitState);

@@ -122,7 +122,47 @@ const int GameSizeX = tileSize * tileX;
 const int GameSizeY = tileSize * tileY;
 const int MiniMapSizeX = 150;
 const int MiniMapSizeY = 100;
+const int ObstacleTileX = 6;
+const int ObstacleTileY = 4;
 
+
+enum class ROOM
+{
+	ROOM_NORMAL,
+	ROOM_BOSS,
+	ROOM_SHOP,
+	ROOM_REWARD,
+	ROOM_NONE,
+	ROOM_FIRST,
+	ROOM_END
+};
+
+enum class CTRL
+{
+	CTRL_DRAW,
+	CTRL_INIT,
+	CTRL_SAVE,
+	CTRL_LOAD,
+	CTRL_EXIT,
+	CTRL_EDIT,
+	CTRL_LIST,
+	CTRL_SETROOM,
+	CTRL_REMOVE,
+	CTRL_MONSTER,
+	CTRL_OBJECT,
+	CTRL_ROOM,
+	CTRL_ITEM,
+	CTRL_END
+};
+
+enum class FILE_TYPE
+{
+	NORMAL,
+	BOSS,
+	SHOP,
+	REWARD,
+	END
+};
 
 enum class STATE_TYPE
 {
@@ -153,15 +193,24 @@ enum class OBSTACLE_TYPE
 	LTC_LAND,
 	RTC_LAND,
 	RT_LAND,
+	L_FLOOR,
+	R_FLOOR,
 	L_LAND,
 	LC_LAND,
 	RC_LAND,
 	R_LAND,
+	RCA_LAND,
+	RA_LAND,
+	TL_LAND,
+	BL_LAND,
+	TR_LAND,
+	BR_LAND,
 	LB_LAND,
 	LBC_LAND,
 	RBC_LAND,
 	RB_LAND,
-	SLAND
+	LA_LAND,
+	LCA_LAND
 };
 
 enum class SKUL_TYPE
@@ -223,17 +272,33 @@ struct S_skulInfo
 	float playerJumpPower;
 
 	bool canDoubleDash;
-};
 
+	vector2 playerSize;
+};
 
 struct S_tagTile
 {
 	OBSTACLE_TYPE type;
 	int tileNumber;
-	//RECT rcTile;
+	RECT rc;
 
-	//vector2 objFrame;
+	vector2 objFrame;
 	//vector2 monsterFrame;
 	vector2 pt;
+};
+
+struct S_tagSampleTile
+{
+	RECT rc;
+	vector2 frame;
+};
+
+struct S_tagRoom
+{
+	//S_tagTile* tile = new S_tagTile[tileX * tileY];
+	S_tagTile tile[tileX * tileY];
+	ROOM roomType;
+
+	void release() { delete(tile); }
 };
 

@@ -9,7 +9,8 @@ C_clown::C_clown()
 	skulInfo.DashTime = 34;
 	skulInfo.playerJumpPower = 20;
 	skulInfo.canDoubleDash = true;
-
+	skulInfo.playerSize.x = 20;
+	skulInfo.playerSize.y = 20;
 	unitName = "clown";
 }
 

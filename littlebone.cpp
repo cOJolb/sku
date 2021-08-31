@@ -11,8 +11,10 @@ C_littlebone::C_littlebone()
 	skulInfo.DashTime = 34;
 	skulInfo.playerJumpPower = 20;
 	skulInfo.canDoubleDash = true;
-
 	unitName = "skul";
+	skulInfo.playerSize.x = 20;
+	skulInfo.playerSize.y = 20;
+
 }
 
 C_littlebone::~C_littlebone()

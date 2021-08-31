@@ -14,6 +14,7 @@ gameNode* SceneManager::_currentScene = nullptr;
 
 HRESULT SceneManager::init()
 {
+	_currentScene->init();
 	return S_OK;
 }
 

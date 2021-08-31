@@ -1,16 +1,11 @@
 #pragma once
 #include"gameNode.h"
-#include "player.h"
-#include "mapSetting.h"
-#include "collision.h"
-#include "miniMap.h"
+#include "testScene.h"
+#include "createScene.h"
 class mainGame : public gameNode
 {
 private:
-	C_player* player;
-	C_mapSetting* mapSetting;
-	C_collision* collision;
-	C_miniMap* miniMap;
+	RECT gameSize;
 public:
 	mainGame();
 	~mainGame();

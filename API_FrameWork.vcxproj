@@ -154,6 +154,7 @@
     <ClInclude Include="collision.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="clown.h" />
+    <ClInclude Include="createScene.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
     <ClInclude Include="enemy.h" />
@@ -172,6 +173,7 @@
     <ClInclude Include="knightState.h" />
     <ClInclude Include="mainGame.h" />
     <ClInclude Include="mapSetting.h" />
+    <ClInclude Include="mapTool.h" />
     <ClInclude Include="miniMap.h" />
     <ClInclude Include="obstacle.h" />
     <ClInclude Include="object.h" />
@@ -190,7 +192,9 @@
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="subWindow.h" />
+    <ClInclude Include="subWindowSetting.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="testScene.h" />
     <ClInclude Include="timeManager.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="txtData.h" />
@@ -210,6 +214,7 @@
     <ClCompile Include="changePlayer.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="clown.cpp" />
+    <ClCompile Include="createScene.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
     <ClCompile Include="enemy.cpp" />
@@ -227,6 +232,7 @@
     <ClCompile Include="knightState.cpp" />
     <ClCompile Include="mainGame.cpp" />
     <ClCompile Include="mapSetting.cpp" />
+    <ClCompile Include="mapTool.cpp" />
     <ClCompile Include="miniMap.cpp" />
     <ClCompile Include="obstacle.cpp" />
     <ClCompile Include="object.cpp" />
@@ -242,6 +248,8 @@
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="state.cpp" />
     <ClCompile Include="subWindow.cpp" />
+    <ClCompile Include="subWindowSetting.cpp" />
+    <ClCompile Include="testScene.cpp" />
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="txtData.cpp" />

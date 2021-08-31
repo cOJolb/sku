@@ -130,11 +130,12 @@ void C_object::isBump()
 
 void C_object::isClogged()
 {
+	RECT unit = RectMakeCenter(pt, collider->getSize().x, collider->getSize().y);
+	RECT prevUnit = RectMakeCenter(prevPt, collider->getSize().x, collider->getSize().y);
+	int LeftTopIndex = unit.left / tileSize + unit.top / tileSize * tileX;
 	for (int i = 0; i < OBSTACLE->getvObstacle().size(); i++)
 	{
 		RECT tile = RectMakeCenter((*OBSTACLE->getviObstacle(i))->getPt(), (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().x, (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().y);
-		RECT unit = RectMakeCenter(pt, collider->getSize().x, collider->getSize().y);
-		RECT prevUnit = RectMakeCenter(prevPt, collider->getSize().x, collider->getSize().y);
 		bool collision = isCollision((*OBSTACLE->getviObstacle(i))->getCollider(), collider);
 		bool inRangeX = prevUnit.left < tile.right && prevUnit.right > tile.left;
 		bool inRangeY = prevUnit.top < tile.bottom && prevUnit.bottom > tile.top;

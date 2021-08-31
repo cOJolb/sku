@@ -294,6 +294,18 @@
     <ClInclude Include="subWindow.h">
       <Filter>MAP\maptool</Filter>
     </ClInclude>
+    <ClInclude Include="mapTool.h">
+      <Filter>MAP\maptool</Filter>
+    </ClInclude>
+    <ClInclude Include="subWindowSetting.h">
+      <Filter>MAP\maptool</Filter>
+    </ClInclude>
+    <ClInclude Include="testScene.h">
+      <Filter>SCENE</Filter>
+    </ClInclude>
+    <ClInclude Include="createScene.h">
+      <Filter>SCENE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -433,6 +445,18 @@
     </ClCompile>
     <ClCompile Include="subWindow.cpp">
       <Filter>MAP\maptool</Filter>
+    </ClCompile>
+    <ClCompile Include="mapTool.cpp">
+      <Filter>MAP\maptool</Filter>
+    </ClCompile>
+    <ClCompile Include="subWindowSetting.cpp">
+      <Filter>MAP\maptool</Filter>
+    </ClCompile>
+    <ClCompile Include="testScene.cpp">
+      <Filter>SCENE</Filter>
+    </ClCompile>
+    <ClCompile Include="createScene.cpp">
+      <Filter>SCENE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

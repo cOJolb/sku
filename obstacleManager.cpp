@@ -36,10 +36,10 @@ void obstacleManager::render()
 	}
 }
 
-void obstacleManager::createObstacle(OBSTACLE_TYPE _type, vector2 _pt)
+void obstacleManager::createObstacle(OBSTACLE_TYPE _type, vector2 _pt, int _number)
 {
     C_obstacle* obstacle;
-    obstacle = new C_obstacle(_pt, _type);
+    obstacle = new C_obstacle(_pt, _type, _number);
     v_obstacle.push_back(obstacle);
 }
 

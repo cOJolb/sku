@@ -3,15 +3,15 @@
 class C_obstacle : public C_object
 {
 private:
+	int obstacleNumber;
 	OBSTACLE_TYPE type;
 	vector2 frame;
 
-	int tileSize;
 	bool isUnmovable;
 	bool isDownJump;
 public:
 	C_obstacle();
-	C_obstacle(vector2 _pt, OBSTACLE_TYPE _type);
+	C_obstacle(vector2 _pt, OBSTACLE_TYPE _type, int _number);
 	~C_obstacle();
 public:
 	virtual HRESULT init();
@@ -23,6 +23,6 @@ public:
 	void setValue(bool _isUnmovable, bool _isDownJump);
 	bool getMovable() { return isUnmovable; }
 	bool getDownJump() { return isDownJump; }
-
+	int getObstacleNumber() { return obstacleNumber; }
 };
 

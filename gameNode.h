@@ -25,6 +25,7 @@ public:
 	virtual void release();
 	virtual void update();
 	virtual void render(/*HDC hdc*/);
+	virtual void render(HDC hdc);
 
 
 	image* getBackBuffer()const { return _backBuffer; }

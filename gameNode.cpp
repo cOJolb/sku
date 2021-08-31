@@ -99,7 +99,11 @@ void gameNode::update()
 }
 void gameNode::render(/*HDC hdc*/)
 {
-	OBSTACLE->render();
+	//OBSTACLE->render();
+}
+
+void gameNode::render(HDC hdc)
+{
 }
 
 LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
@@ -118,6 +122,7 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 	//	EndPaint(hWnd, &ps);
 	//	break;
 	case WM_MOUSEMOVE:
+		SUBWIN->SetIsActive(false);
 		m_ptMouse.x = LOWORD(lParam);
 		m_ptMouse.y = HIWORD(lParam);
 		break;

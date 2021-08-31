@@ -27,6 +27,13 @@ HRESULT testScene::init()
 	mapSetting->init();
 	
 	ENEMY->respawnEnemy(UNIT_TYPE::KNIGHT, { 400,200 });
+	ENEMY->respawnEnemy(UNIT_TYPE::KNIGHT, { 400,200 });
+	ENEMY->respawnEnemy(UNIT_TYPE::KNIGHT, { 400,200 });
+	ENEMY->respawnEnemy(UNIT_TYPE::KNIGHT, { 400,200 });
+	ENEMY->respawnEnemy(UNIT_TYPE::KNIGHT, { 400,200 });
+	ENEMY->respawnEnemy(UNIT_TYPE::KNIGHT, { 400,200 });
+	ENEMY->respawnEnemy(UNIT_TYPE::KNIGHT, { 400,200 });
+
 	player->init();
 	CAMERA->init(player->getPt().x, player->getPt().y, 30 * 36, 20 * 36, 0, 0, 30 * 36 / 4, 20 * 36 / 4, 30 * 36 / 2, 20 * 36 / 2);
 	for (int i = 0; i < 30 * 20; i++)

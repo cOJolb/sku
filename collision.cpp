@@ -65,10 +65,6 @@ bool C_collision::isCollision(C_collider* _left, C_collider* _right)
 
 bool C_collision::tileCollision(C_obstacle* _tile, C_object* _unit)
 {
-	RECT rec;
-	if (_tile->getMovable())
-	{
-	}
 	return false;
 }
 

@@ -9,6 +9,7 @@ private:
 
 	bool isUnmovable;
 	bool isDownJump;
+	bool isLand;
 public:
 	C_obstacle();
 	C_obstacle(vector2 _pt, OBSTACLE_TYPE _type, int _number);
@@ -20,9 +21,10 @@ public:
 	virtual void render();
 public:
 	void setObstacleValue();
-	void setValue(bool _isUnmovable, bool _isDownJump);
-	bool getMovable() { return isUnmovable; }
+	void setValue(bool _isUnmovable, bool _isDownJump , bool _isLand);
+	bool getUnMovable() { return isUnmovable; }
 	bool getDownJump() { return isDownJump; }
+	bool getisLand() { return isLand; }
 	int getObstacleNumber() { return obstacleNumber; }
 };
 

@@ -10,6 +10,9 @@ C_object::C_object()
 {
 	isJump = false;
 	prevPt = pt;
+	tile = { 0,0,0,0 };
+	NONEtile = false;
+	//searchList.push_back(0);
 }
 
 C_object::~C_object()
@@ -88,12 +91,36 @@ bool C_object::isCollision(C_collider* _left, C_collider* _right)
 	return false;
 }
 
-//void C_object::Jump()
-//{
-//	if (jumpPower > 0) jumpPower = jumpPower - 0.5;
-//	else if (jumpPower <= 0) jumpPower = 0;
-//	pt.y -= jumpPower;
-//}
+bool C_object::isCollision(RECT _left, RECT _right)
+{
+	int leftSize = _left.right - _left.left;
+	int rightSize = _right.right - _right.left;
+
+	int leftPt = _left.left + leftSize / 2;
+	int rightPt = _right.left + rightSize / 2;
+
+	float fDist = abs(leftPt - rightPt);
+	float fSize = leftSize / 2.f + rightSize / 2.f;
+
+	if (fDist <= fSize)
+	{
+		leftSize = _left.bottom - _left.top;
+		rightSize = _right.bottom - _right.top;
+		leftPt = _left.top + leftSize / 2;
+		rightPt = _right.top + rightSize / 2;
+
+		fDist = abs(leftPt - rightPt);
+		fSize = leftSize / 2.f + rightSize / 2.f;
+
+		if (fDist <= fSize)
+		{
+			// y축으로 겹친다.
+			return true;
+		}
+	}
+
+	return false;
+}
 
 void C_object::Gravity()
 {
@@ -105,17 +132,17 @@ void C_object::Gravity()
 
 void C_object::isLand()
 {
-	for (int i = 0; i < OBSTACLE->getvObstacle().size(); i++)
+	for (int i = 0; i < OBSTACLE->getvLand().size(); i++)
 	{
-		bool inRangeX = (*OBSTACLE->getviObstacle(i))->getPt().x - (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().x / 2 <= pt.x
-			&& pt.x <= (*OBSTACLE->getviObstacle(i))->getPt().x + (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().x / 2;
-		bool inRangeY = (*OBSTACLE->getviObstacle(i))->getPt().y - (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().y / 2 + GRAVITY >= pt.y + collider->getSize().y
-			&& pt.y + collider->getSize().y >= (*OBSTACLE->getviObstacle(i))->getPt().y - (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().y / 2;
+		bool inRangeX = (*OBSTACLE->getviLand(i))->getPt().x - (*OBSTACLE->getviLand(i))->getCollider()->getSize().x / 2 <= pt.x
+			&& pt.x <= (*OBSTACLE->getviLand(i))->getPt().x + (*OBSTACLE->getviLand(i))->getCollider()->getSize().x / 2;
+		bool inRangeY = (*OBSTACLE->getviLand(i))->getPt().y - (*OBSTACLE->getviLand(i))->getCollider()->getSize().y / 2 + GRAVITY >= pt.y + collider->getSize().y
+			&& pt.y + collider->getSize().y >= (*OBSTACLE->getviLand(i))->getPt().y - (*OBSTACLE->getviLand(i))->getCollider()->getSize().y / 2;
 		bool isDown = prevPt.y <= pt.y;
 
 		if (inRangeX && inRangeY && isDown)
 		{
-			pt.y = (*OBSTACLE->getviObstacle(i))->getPt().y - 18 - collider->getSize().y;
+			pt.y = (*OBSTACLE->getviLand(i))->getPt().y - tileSize / 2 - collider->getSize().y;
 			isJump = false;
 			jumpPower = GRAVITY;
 			break;
@@ -130,41 +157,32 @@ void C_object::isBump()
 
 void C_object::isClogged()
 {
-	RECT unit = RectMakeCenter(pt, collider->getSize().x, collider->getSize().y);
-	RECT prevUnit = RectMakeCenter(prevPt, collider->getSize().x, collider->getSize().y);
-	int LeftTopIndex = unit.left / tileSize + unit.top / tileSize * tileX;
-	for (int i = 0; i < OBSTACLE->getvObstacle().size(); i++)
+	bool isUp = prevPt.y > pt.y;
+	bool isRight = prevPt.x < pt.x;
+	bool isLeft = prevPt.x > pt.x;
+	for (int i = 0; i < OBSTACLE->getvWall().size(); i++)
 	{
-		RECT tile = RectMakeCenter((*OBSTACLE->getviObstacle(i))->getPt(), (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().x, (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().y);
-		bool collision = isCollision((*OBSTACLE->getviObstacle(i))->getCollider(), collider);
-		bool inRangeX = prevUnit.left < tile.right && prevUnit.right > tile.left;
-		bool inRangeY = prevUnit.top < tile.bottom && prevUnit.bottom > tile.top;
-		bool test1 = prevUnit.bottom > tile.bottom;
-		bool test2 = prevUnit.top < tile.top;
-		bool test3 = prevUnit.left > tile.left;
-		bool test4 = prevUnit.right < tile.right;
-		bool isUp = prevPt.y > pt.y;
-		bool isLeft = prevPt.x > pt.x;
-		bool isDown = prevPt.y < pt.y;
-		bool isRight = prevPt.x < pt.x;
-		
-		if (collision && inRangeX  && test1 && isUp )
+		RECT tile = RectMakeCenter((*OBSTACLE->getviWall(i))->getPt(), (*OBSTACLE->getviWall(i))->getCollider()->getSize().x, (*OBSTACLE->getviWall(i))->getCollider()->getSize().y);
+		bool collision = isCollision((*OBSTACLE->getviWall(i))->getCollider(), collider);
+		bool RangeX = prevPt.x - tileSize / 2 < tile.right && prevPt.x + tileSize / 2 > tile.left;
+		bool RangeY = prevPt.y - tileSize / 2 < tile.bottom && prevPt.y + tileSize / 2 > tile.top;
+
+		bool test1 = prevPt.y + tileSize / 2 > tile.bottom;
+		bool test3 = prevPt.x - tileSize / 2 > tile.left;
+		bool test4 = prevPt.x + tileSize / 2 < tile.right;
+		if (isUp && collision && RangeX && test1)
 		{
-			unit.top = tile.bottom;
-			unit.bottom = unit.top + collider->getSize().y;
+			pt.y = (*OBSTACLE->getviWall(i))->getPt().y + tileSize / 2 + collider->getSize().y;
 			jumpPower = GRAVITY;
 		}
-		else if (collision && inRangeY  && test4  && isRight )
+		if (collision && isRight && RangeY && test4)
 		{
-			unit.right = tile.left;
-			unit.left = unit.right - collider->getSize().x;
+			pt.x = (*OBSTACLE->getviWall(i))->getPt().x - tileSize / 2 - collider->getSize().x / 2;
 		}
-		else if (collision && inRangeY  && test3 && isLeft)
+		if (collision && isLeft && RangeY && test3)
 		{
-			unit.left = tile.right;
-			unit.right = unit.left + collider->getSize().x;
+			pt.x = (*OBSTACLE->getviWall(i))->getPt().x + tileSize / 2 + collider->getSize().x / 2;
 		}
-		pt = { RectX(unit), RectY(unit) };
 	}
 }
 

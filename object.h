@@ -25,6 +25,9 @@ protected:
 
 	S_unitImageInfo unitImageInfo;
 
+	list<int> searchList;
+	list<int>::iterator searchListI;
+
 	int hp;
 	int maxHp;
 
@@ -32,8 +35,11 @@ protected:
 	bool isJump;
 	float unitDamage;
 	int atkDelay;
-private:
 
+
+private:
+	RECT tile;
+	bool NONEtile;
 public:
 	C_object();
 	virtual~C_object();
@@ -56,6 +62,7 @@ public:
 	C_collider* getCollider() { return collider; }
 
 	bool isCollision(C_collider* _left, C_collider* _right);
+	bool isCollision(RECT _left, RECT _right);
 	//void Jump();
 	void Gravity();
 	void isLand();

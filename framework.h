@@ -21,6 +21,7 @@
 #include<vector>
 #include<map>
 #include<string>
+#include<list>
 
 //==========================================
 //				 내가만든 헤더파일

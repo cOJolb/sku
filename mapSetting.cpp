@@ -18,6 +18,7 @@ C_mapSetting::C_mapSetting()
 	for (int i = 0; i < tileX * tileY; i++)
 	{
 		tile[i] = viroom->tile[i];
+		OBSTACLE->saveTileData(tile[i], i);
 	}
 }
 

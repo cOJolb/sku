@@ -18,7 +18,7 @@ public:
 	virtual void render();
 
 public:
-	virtual void playerDashMove(vector2& _pt, int& _DashCount, bool _DashJump, bool _DashFoward, float _DashSpeed);
+	virtual void playerDashMove(RECT& _rc, int& _DashCount, bool _DashJump, bool _DashFoward, float _DashSpeed);
 	virtual void playerAttack(vector2 _pt, bool _isLeft);
 	virtual void skillA();
 	virtual void skillB();

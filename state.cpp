@@ -32,26 +32,24 @@ bool C_state::isLeft(vector2 _pt)
 	else return false;
 }
 
-bool C_state::onLand(vector2 _pt)
+bool C_state::onLand(RECT _rc)
 {
-	for (int i = 0; i < OBSTACLE->getvObstacle().size(); i++)
+	//RECT rec = RectMakeCenter(_pt, object->getCollider()->getSize().x, object->getCollider()->getSize().y);
+	bool collision = RectInRegion(OBSTACLE->getTotalLand(),&_rc );
+	if (collision)
 	{
-		bool inRangeX = (*OBSTACLE->getviObstacle(i))->getPt().x - (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().x / 2 <= _pt.x
-			&& _pt.x <= (*OBSTACLE->getviObstacle(i))->getPt().x + (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().x / 2;
-		bool inRangeY = (*OBSTACLE->getviObstacle(i))->getPt().y - (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().y / 2 + GRAVITY >= _pt.y + object->getCollider()->getSize().y
-			&& _pt.y + object->getCollider()->getSize().y >= (*OBSTACLE->getviObstacle(i))->getPt().y - (*OBSTACLE->getviObstacle(i))->getCollider()->getSize().y / 2;
-		bool isLand = true;
-		if (inRangeX && inRangeY && isLand)
-		{
-			return true;
-		}
+		return true;
 	}
-	return false;
+	else return false;
+	/*	}
+	}*/
+	//return false;
 }
 
 void C_state::move()
 {
-	vector2 movePt = object->getPt();
+	_futureRc = RectMakeCenter(object->getPt(), object->getCollider()->getSize().x, object->getCollider()->getSize().y);
+	//vector2 movePt = object->getPt();
 	count++;
 	if (count > movetime)
 	{
@@ -66,25 +64,25 @@ void C_state::move()
 	}
 	if (Foward)
 	{
-		movePt.x -= 2;
+		movetoLeft(_futureRc, 2);
 		object->setUnitImageInfo(object->getImageInfo().unitName, "Left", "Walk");
 	}
 	else
 	{
-		movePt.x += 2;
+		movetoRight(_futureRc, 2);
 		object->setUnitImageInfo(object->getImageInfo().unitName, "Right", "Walk");
 	}
 
-	if(onLand(movePt)) object->setPt(movePt);
-	else Foward = !Foward;
+	//if (onLand(_futureRc)) { object->setFutureRc(_futureRc); } //object->setPt(movePt);
+	//else Foward = !Foward;
 
-	prevFoward = Foward;
+	//prevFoward = Foward;
 }
 
 void C_state::move(bool _isLeft)
 {
-	vector2 movePt = object->getPt();
-
+	//vector2 movePt = object->getPt();
+	_futureRc = RectMakeCenter(object->getPt(), object->getCollider()->getSize().x, object->getCollider()->getSize().y);
 	/*count++;
 	if (count > movetime)
 	{
@@ -100,17 +98,19 @@ void C_state::move(bool _isLeft)
 	}
 	if (Foward)
 	{
-		movePt.x -= 2;
+		movetoLeft(_futureRc, 2);
+		//movePt.x -= 2;
 		object->setUnitImageInfo(object->getImageInfo().unitName, "Left", "Walk");
 	}
 	else
 	{
-		movePt.x += 2;
+		movetoRight(_futureRc, 2);
+		//movePt.x += 2;
 		object->setUnitImageInfo(object->getImageInfo().unitName, "Right", "Walk");
 	}
 
-	if (onLand(movePt)) object->setPt(movePt);
-	else Foward = !Foward;
+	//if (onLand(_futureRc)) { object->setFutureRc(_futureRc); }//object->setPt(movePt);
+	//else Foward = !Foward;
 
-	prevFoward = Foward;
+	//prevFoward = Foward;
 }

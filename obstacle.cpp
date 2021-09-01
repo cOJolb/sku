@@ -7,12 +7,14 @@ C_obstacle::C_obstacle()
 
 C_obstacle::C_obstacle(vector2 _pt, OBSTACLE_TYPE _type, int _number)
 {
+	C_object::init();
 	type = _type;
 	//tileSize = IMAGE->findImage("tile")->getFrameWidth() / 2;
 	pt = { _pt.x + IMAGE->findImage("tile")->getFrameWidth() / 2 , _pt.y + IMAGE->findImage("tile")->getFrameHeight() / 2 };
 	collider = new C_collider(pt, { IMAGE->findImage("tile")->getFrameWidth() ,IMAGE->findImage("tile")->getFrameHeight() });
 	obstacleNumber = _number;
 	setObstacleValue();
+	rc = RectMakeCenter(collider->getPos(), collider->getSize().x, collider->getSize().y);
 }
 
 C_obstacle::~C_obstacle()
@@ -30,6 +32,7 @@ void C_obstacle::release()
 
 void C_obstacle::update()
 {
+	C_object::update();
 	//setObstacleValue();
 }
 

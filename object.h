@@ -19,14 +19,21 @@ protected:
 	vector2 pt;
 	vector2 prevPt;
 	C_collider* collider;
+	RECT rc;
+	RECT futureRc;
+	RECT futureRcL;
+	RECT futureRcT;
+	RECT futureRcR;
+	RECT futureRcB;
+
 
 	C_fsm* ai;
 	vector<C_fsm*> vAi;
 
 	S_unitImageInfo unitImageInfo;
 
-	list<int> searchList;
-	list<int>::iterator searchListI;
+	/*list<int> searchList;
+	list<int>::iterator searchListI;*/
 
 	int hp;
 	int maxHp;
@@ -36,10 +43,12 @@ protected:
 	float unitDamage;
 	int atkDelay;
 
+	bool wallCollision;
+	bool landCollision;
 
 private:
-	RECT tile;
-	bool NONEtile;
+	/*RECT tile;
+	bool NONEtile;*/
 public:
 	C_object();
 	virtual~C_object();
@@ -56,11 +65,24 @@ public:
 	void AI_update();
 	STATE_TYPE getstate();
 
+public:
 	vector2 getPt() { return pt; }
-	void setPt(vector2 _pt) { pt = _pt; }
-
 	C_collider* getCollider() { return collider; }
+	bool getIsJump() { return isJump; }
+	S_unitImageInfo getImageInfo() { return unitImageInfo; }
+	animation* getAni() { return ani; }
+	int getAtkDelay() { return atkDelay; }
+	int gethp() { return hp; }
+	int getmaxHp() { return maxHp; }
 
+public:
+	void setPt(vector2 _pt) { pt = _pt; }
+	void setUnitImageInfo(string _name, string _Foward, string _state);
+	void setAni(animation* _ani) { ani = _ani; }
+	void sethp(int _hp) { hp = _hp; }
+	void setFutureRc(RECT _rc) { futureRc = _rc; }
+
+public:
 	bool isCollision(C_collider* _left, C_collider* _right);
 	bool isCollision(RECT _left, RECT _right);
 	//void Jump();
@@ -69,20 +91,16 @@ public:
 	void isBump();
 	void isClogged();
 	void isWall();
-
 	void ptUpdate() { prevPt = pt; }
+	void futureRcLTRB();
 	
-	bool getIsJump() { return isJump; }
 
-	S_unitImageInfo getImageInfo() { return unitImageInfo; }
-	void setUnitImageInfo(string _name, string _Foward, string _state);
-	void setAni(animation* _ani) { ani = _ani; }
-	animation* getAni() { return ani; }
+	
+	
+	
 
-	int getAtkDelay() { return atkDelay; }
-
-	int gethp() { return hp; }
-	void sethp(int _hp) { hp = _hp; }
-	int getmaxHp() { return maxHp; }
+	
+	
+	
 };
 

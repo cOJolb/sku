@@ -13,7 +13,7 @@ C_littlebone::C_littlebone()
 	skulInfo.canDoubleDash = true;
 	unitName = "skul";
 	skulInfo.playerSize.x = 20;
-	skulInfo.playerSize.y = 20;
+	skulInfo.playerSize.y = 40;
 
 }
 
@@ -62,19 +62,21 @@ void C_littlebone::playerAttack(vector2 _pt, bool _isLeft )
 	SAFE_DELETE(attackRange);
 }
 
-void C_littlebone::playerDashMove(vector2& _pt, int& _DashCount, bool _DashJump, bool _DashFoward, float _DashSpeed)
+void C_littlebone::playerDashMove(RECT& _rc, int& _DashCount, bool _DashJump, bool _DashFoward, float _DashSpeed)
 {
 	if (_DashCount > 0 && !_DashJump)
 	{
 		_DashCount--;
 		if (_DashFoward)
 		{
-			_pt.x -= _DashSpeed;
+			//_pt.x -= _DashSpeed;
+			movetoLeft(_rc, _DashSpeed);
 		}
 
 		else if (!_DashFoward)
 		{
-			_pt.x += _DashSpeed;
+			//_pt.x += _DashSpeed;
+			movetoRight(_rc, _DashSpeed);
 		}
 	}
 }

@@ -57,6 +57,7 @@ void knight_Trace::update()
 		move(isLeft(PLAYERDATA->getPlayerData().playerPt));
 	}
 	else move();
+	object->setFutureRc(_futureRc);
 }
 
 void knight_Trace::exit()
@@ -91,6 +92,7 @@ void knight_Atk::enter()
 	}
 	
 	delay = 0;
+	object->setFutureRc(_futureRc);
 }
 
 void knight_Atk::update()

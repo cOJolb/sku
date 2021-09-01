@@ -14,10 +14,12 @@ C_player::C_player()
 	skulInfo = (*viskul)->getskulInfo();
 	setUnitImageInfo((*viskul)->getUnitName(), "Left", "Idle");
 
-
 	pt = { 200, 200 }; // 이것들 저장어떻게 하지 ..
 	prevPt = pt;
 	collider = new C_collider(pt, skulInfo.playerSize);
+	rc = RectMakeCenter(collider->getPos(), collider->getSize().x, collider->getSize().y);
+	futureRc = RectMakeCenter(collider->getPos(), collider->getSize().x, collider->getSize().y);
+	futureRcLTRB();
 
 	DashCount = 0;
 	isLeft = false;
@@ -67,14 +69,18 @@ void C_player::update()
 	playerDash_Jump();
 	//Jump();
 	playerAtk();
-	if (DashDelay >= skulInfo.DashTime / 2 ) Gravity();
-	
+
+	if (DashDelay >= skulInfo.DashTime / 2) Gravity();
 	isLand();
 	isClogged();
+	//if (DashDelay >= skulInfo.DashTime / 2) Gravity();
+	
 	collider->setPos(pt);
 	ptUpdate();
 	ani = ANIMATION->findAnimation(unitImageInfo.unitName + unitImageInfo.unitFoward + unitImageInfo.unitState);
 	PLAYERDATA->savePlayerData(pt, collider);
+	rc = RectMakeCenter(collider->getPos(), collider->getSize().x, collider->getSize().y);
+	
 }
 
 void C_player::render()
@@ -97,14 +103,16 @@ void C_player::playerMove()
 		
 		if (goLeft && !goRight )
 		{
-			pt = vector2(pt.x - skulInfo.playerSpeed, pt.y);
+			//pt = vector2(pt.x - skulInfo.playerSpeed, pt.y);
+			movetoLeft(futureRc, skulInfo.playerSpeed);
 			isLeft = true;
 			unitImageInfo.unitFoward = "Left";
 			unitImageInfo.unitState = "Move";
 		}
 		if (goRight && !goLeft )
 		{
-			pt = vector2(pt.x + skulInfo.playerSpeed, pt.y);
+			//pt = vector2(pt.x + skulInfo.playerSpeed, pt.y);
+			movetoRight(futureRc, skulInfo.playerSpeed);
 			isLeft = false;
 			unitImageInfo.unitFoward = "Right";
 			unitImageInfo.unitState = "Move";
@@ -166,7 +174,7 @@ void C_player::playerDash()
 		ANIMATION->start(unitImageInfo.unitName + "LeftDash");
 	}
 
-	(*viskul)->playerDashMove(pt, DashCount, playerDashJump, DashFoward, skulInfo.playerDashSpeed);
+	(*viskul)->playerDashMove(futureRc, DashCount, playerDashJump, DashFoward, skulInfo.playerDashSpeed);
 	if (DashCount > 0 && !playerDashJump && !isAtk)
 	{
 		unitImageInfo.unitState = "Dash";
@@ -211,13 +219,15 @@ void C_player::playerDash_Jump()
 
 		if (DashFoward)
 		{
-			pt.x -= skulInfo.playerDashSpeed;
+			//pt.x -= skulInfo.playerDashSpeed;
+			movetoLeft(futureRc, skulInfo.playerDashSpeed);
 			unitImageInfo.unitState = "Jump";
 		}
 
 		else if (!DashFoward)
 		{
-			pt.x += skulInfo.playerDashSpeed;
+			//pt.x += skulInfo.playerDashSpeed;
+			movetoRight(futureRc, skulInfo.playerDashSpeed);
 			unitImageInfo.unitState = "Jump";
 		}
 
@@ -253,4 +263,5 @@ void C_player::playerAtk()
 		isAtk = false;
 	}
 }
+
 

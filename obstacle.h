@@ -26,5 +26,7 @@ public:
 	bool getDownJump() { return isDownJump; }
 	bool getisLand() { return isLand; }
 	int getObstacleNumber() { return obstacleNumber; }
+
+	RECT getRc() { return rc; }
 };
 

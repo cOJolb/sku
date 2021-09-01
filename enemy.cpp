@@ -15,6 +15,8 @@ HRESULT C_enemy::init()
 	ani = ANIMATION->findAnimation(unitImageInfo.unitName + "RightIdle");
 	ANIMATION->start(unitImageInfo.unitName + "RightIdle");
 	ANIMATION->start(unitImageInfo.unitName + "LeftIdle");
+	rc = RectMakeCenter(collider->getPos(), collider->getSize().x, collider->getSize().y);
+	futureRc = RectMakeCenter(collider->getPos(), collider->getSize().x, collider->getSize().y);
     return S_OK;
 }
 
@@ -28,7 +30,9 @@ void C_enemy::update()
 	Gravity();
 	isLand();
 	isClogged();
+	
 	collider->setPos(pt);
+	rc = RectMakeCenter(collider->getPos(), collider->getSize().x, collider->getSize().y);
 	ptUpdate();
 	ani = ANIMATION->findAnimation(unitImageInfo.unitName + unitImageInfo.unitFoward + unitImageInfo.unitState);
 }

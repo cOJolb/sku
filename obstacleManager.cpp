@@ -3,6 +3,10 @@
 #include "obstacle.h"
 obstacleManager::obstacleManager()
 {
+	totalWall = CreateRectRgn(0, 0, 0, 0);
+	wallRGN = CreateRectRgn(0, 0, 0, 0);
+	totalLand = CreateRectRgn(0, 0, 0, 0);
+	landRGN = CreateRectRgn(0, 0, 0, 0);
 }
 
 obstacleManager::~obstacleManager()
@@ -44,10 +48,14 @@ void obstacleManager::createObstacle(OBSTACLE_TYPE _type, vector2 _pt, int _numb
 	if (obstacle->getisLand())
 	{
 		v_land.push_back(obstacle);
+		landRGN = CreateRectRgn(obstacle->getRc().left, obstacle->getRc().top, obstacle->getRc().right, obstacle->getRc().bottom);
+		CombineRgn(totalLand, totalLand, landRGN, RGN_XOR);
 	}
 	if (obstacle->getUnMovable())
 	{
 		v_wall.push_back(obstacle);
+		wallRGN = CreateRectRgn(obstacle->getRc().left, obstacle->getRc().top, obstacle->getRc().right, obstacle->getRc().bottom);
+		CombineRgn(totalWall, totalWall, wallRGN, RGN_XOR);
 	}
 }
 
@@ -67,4 +75,11 @@ viObstacle obstacleManager::getviWall(int number)
 {
 	vi_wall = v_wall.begin() + number;
 	return vi_wall;
+}
+
+
+
+void obstacleManager::tilePlus(S_tagTile _startTile, S_tagTile _endTile)
+{
+	//RECT rec = RectMake(_startTile.pt.x - )
 }

@@ -7,6 +7,7 @@ protected:
 	STATE_TYPE stateType;
 	C_object* object;
 protected:
+	RECT _futureRc;
 	int count;
 	int movetime;
 	bool Foward;
@@ -28,7 +29,7 @@ public:
 public:
 	bool inRange(int _range, vector2 _pt);
 	bool isLeft(vector2 _pt);
-	bool onLand(vector2 _pt);
+	bool onLand(RECT _rc);
 	void move();
 	void move(bool _isLeft);
 };

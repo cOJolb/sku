@@ -13,7 +13,7 @@ C_mapSetting::C_mapSetting()
 	for (int i = 0; i < (UINT)FILE_TYPE::END; i++) maxRoomNum[i] = 0;
 	loadFolder();
 	randomMap = RND->getFromIntTo(0, maxRoomNum[(UINT)FILE_TYPE::NORMAL] -1);
-	viroom = vroom.begin() + randomMap;
+	viroom = vroom.begin() + 0;
 	//viroom = vroom.begin() + randomMap;
 	for (int i = 0; i < tileX * tileY; i++)
 	{

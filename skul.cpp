@@ -26,7 +26,7 @@ void C_skul::render()
 {
 }
 
-void C_skul::playerDashMove(vector2& _pt, int& _DashCount, bool _DashJump, bool _DashFoward, float _DashSpeed)
+void C_skul::playerDashMove(RECT& _rc, int& _DashCount, bool _DashJump, bool _DashFoward, float _DashSpeed)
 {
 }
 

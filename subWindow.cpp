@@ -201,9 +201,9 @@ LRESULT C_subWindow::WndLogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 
 		switch (wParam)
 		{
-		case VK_ESCAPE:
+		/*case VK_ESCAPE:
 			PostQuitMessage(0);
-			break;
+			break;*/
 		}
 		break;
 	}

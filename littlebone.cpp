@@ -14,6 +14,8 @@ C_littlebone::C_littlebone()
 	unitName = "skul";
 	skulInfo.playerSize.x = 20;
 	skulInfo.playerSize.y = 40;
+	skulInfo.atkDelay = 50;
+	skulInfo.DashDelay = 50;
 
 }
 
@@ -55,6 +57,7 @@ void C_littlebone::playerAttack(vector2 _pt, bool _isLeft )
 			(*ENEMY->getviEnemy(i))->getAi()->SetState(STATE_TYPE::DAMAGE);
 			if ((*ENEMY->getviEnemy(i))->gethp() <= 0)
 			{
+				ITEM->respawnGoodsItem(GOODSITEM::GOLD, (*ENEMY->getviEnemy(i))->getPt());
 				ENEMY->eraserEnemy(i);
 			}
 		}

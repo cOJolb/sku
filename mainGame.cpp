@@ -12,8 +12,9 @@ HRESULT mainGame::init()
 	gameNode::init(true);
 	SCENE->addScene("test", new testScene);
 	SCENE->addScene("create", new createScene);
-
+	SCENE->addScene("item", new itemScene);
 	SCENE->changeScene("test");
+	SCENE->sceneInit();
 	return S_OK;
 }
 
@@ -25,7 +26,6 @@ void mainGame::release()
 
 void mainGame::update()
 {
-
 	gameNode::update();
 	SCENE->update();
 }
@@ -56,9 +56,6 @@ void mainGame::render(/*HDC hdc*/)
 	default:
 		break;
 	}
-
-	
-	
 
 }
 

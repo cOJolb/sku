@@ -306,6 +306,12 @@
     <ClInclude Include="createScene.h">
       <Filter>SCENE</Filter>
     </ClInclude>
+    <ClInclude Include="goodsItem.h">
+      <Filter>OBJECT\item\goods</Filter>
+    </ClInclude>
+    <ClInclude Include="itemScene.h">
+      <Filter>SCENE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -456,6 +462,12 @@
       <Filter>SCENE</Filter>
     </ClCompile>
     <ClCompile Include="createScene.cpp">
+      <Filter>SCENE</Filter>
+    </ClCompile>
+    <ClCompile Include="goodsItem.cpp">
+      <Filter>OBJECT\item\goods</Filter>
+    </ClCompile>
+    <ClCompile Include="itemScene.cpp">
       <Filter>SCENE</Filter>
     </ClCompile>
   </ItemGroup>

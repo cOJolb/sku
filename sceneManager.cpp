@@ -71,14 +71,20 @@ HRESULT SceneManager::changeScene(string sceneName)
 	if (find->second == _currentScene)return E_FAIL;
 
 	//여기까지 왔다면 문제가 없다 즉 씬을 초기화 하고  변경하자.
-	if (SUCCEEDED(find->second->init()))
-	{
-		//혹시 기존에 씬이 있다면 릴리즈
-		if (_currentScene)_currentScene->release();
+	//if (SUCCEEDED(find->second->init())) 
+	// init을 뺴버림 아이템창때문에.. 크흠 이게맞나 싶긴한데 뭐어쩌겠어 하하
+	
+	//혹시 기존에 씬이 있다면 릴리즈
+	if (_currentScene)_currentScene->release();
 
-		_currentScene = find->second;
-		return  S_OK;
-	}
+	_currentScene = find->second;
+	return  S_OK;
+	
 
-	return E_FAIL;
+	//return E_FAIL;
+}
+
+void SceneManager::sceneInit()
+{
+	_currentScene->init();
 }

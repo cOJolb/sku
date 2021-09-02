@@ -25,6 +25,5 @@ public:
 
 public:
 	RECT checkGameSize();
-
 };
 

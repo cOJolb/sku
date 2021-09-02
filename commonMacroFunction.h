@@ -236,13 +236,15 @@ enum class ITEM_TYPE
 {
 	SKUL,
 	PASSIVE,
-	ACTIVE
+	ACTIVE,
+	GOODS
 };
 
 enum class PASSIVEITEM
 {
 	BOOTS,
-	CRISTAL
+	CRISTAL,
+	MEDAL
 };
 
 enum class SKULITEM
@@ -256,6 +258,11 @@ enum class ACTIVEITEM
 	IM,
 	NOT,
 	OKAY
+};
+
+enum class GOODSITEM
+{
+	GOLD
 };
 
 enum class BULLET_TYPE
@@ -272,6 +279,9 @@ struct S_skulInfo
 	float playerJumpPower;
 
 	bool canDoubleDash;
+
+	int atkDelay;
+	int DashDelay;
 
 	vector2 playerSize;
 };

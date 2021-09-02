@@ -3,7 +3,8 @@
 enum class SCENE_TYPE
 {
 	CREATE,
-	PLAY
+	PLAY,
+	ITEM
 };
 class gameNode;
 class SceneManager : public Singleton<SceneManager>
@@ -24,9 +25,17 @@ public:
 	void update();
 	void render();
 
+public:
 	gameNode* addScene(string sceneName, gameNode* scene);
 	HRESULT changeScene(string sceneName);
-	void setSCENETYPE(SCENE_TYPE _type) { sceneType = _type; }
+	void sceneInit();
+
+public:
 	SCENE_TYPE getSCENETYPE() { return sceneType; }
+	sceneList getSceneList() { return _sceneList; }
+
+public:
+	void setSCENETYPE(SCENE_TYPE _type) { sceneType = _type; }
+	
 };
 

@@ -54,15 +54,8 @@ void C_player::release()
 
 void C_player::update()
 {
-	if (InputManager->isOnceKeyDown(VK_SPACE))
-	{
-		if (viskul == vskul.begin()) viskul = vskul.begin() + 1;
-		else viskul = vskul.begin();
-		skulInfo = (*viskul)->getskulInfo();
-		setUnitImageInfo((*viskul)->getUnitName(), "Left", "Idle");
-		ANIMATION->start(unitImageInfo.unitName + "LeftIdle");
-		ANIMATION->start(unitImageInfo.unitName + "RightIdle");
-	}
+	
+	changeSkul();
 	playerMove();
 	playerJump();
 	playerDash();
@@ -264,4 +257,16 @@ void C_player::playerAtk()
 	}
 }
 
-
+void C_player::changeSkul()
+{
+	if (InputManager->isOnceKeyDown(VK_SPACE))
+	{
+		if (viskul == vskul.begin()) viskul = vskul.begin() + 1;
+		else viskul = vskul.begin();
+		skulInfo = (*viskul)->getskulInfo();
+		setUnitImageInfo((*viskul)->getUnitName(), "Left", "Idle");
+		ANIMATION->start(unitImageInfo.unitName + "LeftIdle");
+		ANIMATION->start(unitImageInfo.unitName + "RightIdle");
+		ITEM->Equip(this);
+	}
+}

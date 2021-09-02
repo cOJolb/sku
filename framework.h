@@ -46,6 +46,7 @@
 #include"collision.h"
 #include "camera.h"
 #include"subWindow.h"
+#include"itemManager.h"
 
 //======================================
 //##			매니저들			  ##
@@ -65,6 +66,7 @@
 #define COLLISION		C_collision::getSingleton()
 #define CAMERA			camera::getSingleton()
 #define SUBWIN			C_subWindow::getSingleton()
+#define ITEM			itemManager::getSingleton()
 //==========================================
 //				 매크로 설정
 //==========================================

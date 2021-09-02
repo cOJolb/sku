@@ -1,9 +1,10 @@
 #include "framework.h"
 #include "collision.h"
 #include "collider.h"
-#include "object.h"
 #include "obstacle.h"
 #include "enemy.h"
+#include "item.h"
+#include "player.h"
 C_collision::C_collision()
 {
 }
@@ -68,14 +69,31 @@ bool C_collision::tileCollision(C_obstacle* _tile, C_object* _unit)
 	return false;
 }
 
-void C_collision::stageCollision()
+void C_collision::stageCollision(C_player* _player)
 {
-	for (int i = 0; i < ENEMY->getvEnemy().size(); i++)
+	for (int i = 0; i < ITEM->getvItem().size(); i++)
 	{
-		bool PlayertoMonster = isCollision((*ENEMY->getviEnemy(i))->getCollider(), PLAYERDATA->getPlayerData().playerCollider);
-		if (PlayertoMonster)
+		bool PtI = isCollision(_player->getCollider(), (*ITEM->getviItem(i))->getCollider());
+		bool pushF = InputManager->isStayKeyDown('F');
+		bool goods = (*ITEM->getviItem(i))->getItemType() == ITEM_TYPE::GOODS;
+		bool skul = (*ITEM->getviItem(i))->getItemType() == ITEM_TYPE::SKUL;
+		bool passive = (*ITEM->getviItem(i))->getItemType() == ITEM_TYPE::PASSIVE;
+		bool active = (*ITEM->getviItem(i))->getItemType() == ITEM_TYPE::PASSIVE;
+		if (PtI && goods)
 		{
-			//ENEMY->eraserEnemy(i);
+			ITEM->itemRemove(i);
+		}
+		if (PtI && passive && pushF)
+		{
+			C_item* item = (*ITEM->getviItem(i));
+			ITEM->EquipPassiveItem(item);
+			item->init(_player);
+			ITEM->itemRemove(i);
+			if (ITEM->getvEquipItem().size() >= 3)
+			{
+				SCENE->changeScene("item");
+			}
 		}
 	}
 }
+

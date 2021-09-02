@@ -64,6 +64,13 @@ public:
 	void playerDash();
 	void playerDash_Jump();
 	void playerAtk();
+	void changeSkul();
+	
+public:
+	S_skulInfo getPlayerInfo() { return skulInfo; }
+
+public:
+	void setPlayerInfo(S_skulInfo _playerInfo) { skulInfo = _playerInfo; }
 	//virtual void playerDashMove();
 	//void playerAtk();
 	//void playerSkillA();

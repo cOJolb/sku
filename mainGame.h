@@ -2,6 +2,7 @@
 #include"gameNode.h"
 #include "testScene.h"
 #include "createScene.h"
+#include "itemScene.h"
 class mainGame : public gameNode
 {
 private:

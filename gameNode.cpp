@@ -130,9 +130,9 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 
 		switch (wParam)
 		{
-		case VK_ESCAPE:
+		/*case VK_ESCAPE:
 			PostQuitMessage(0);
-			break;
+			break;*/
 		}
 		break;
 	case WM_SIZE:

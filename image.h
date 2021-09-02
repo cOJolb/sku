@@ -89,6 +89,7 @@ public:
 	//·»´õ
 	void render(HDC hdc);
 	void render(HDC hdc, const int  destX, const int destY);
+	void renderCenter(HDC hdc, vector2 _pt);
 	void render(HDC hdc, const int  destX, const int destY,const int sourX, const int sourY, const int sourWidth, const int sourheight);
 
 

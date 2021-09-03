@@ -5,6 +5,7 @@
 #include "enemy.h"
 #include "item.h"
 #include "player.h"
+
 C_collision::C_collision()
 {
 }
@@ -76,7 +77,7 @@ void C_collision::stageCollision(C_player* _player)
 		bool PtI = isCollision(_player->getCollider(), (*ITEM->getviItem(i))->getCollider());
 		bool pushF = InputManager->isStayKeyDown('F');
 		bool goods = (*ITEM->getviItem(i))->getItemType() == ITEM_TYPE::GOODS;
-		bool skul = (*ITEM->getviItem(i))->getItemType() == ITEM_TYPE::SKUL;
+		bool skultem = (*ITEM->getviItem(i))->getItemType() == ITEM_TYPE::SKUL;
 		bool passive = (*ITEM->getviItem(i))->getItemType() == ITEM_TYPE::PASSIVE;
 		bool active = (*ITEM->getviItem(i))->getItemType() == ITEM_TYPE::PASSIVE;
 		if (PtI && goods)
@@ -85,15 +86,26 @@ void C_collision::stageCollision(C_player* _player)
 		}
 		if (PtI && passive && pushF)
 		{
-			C_item* item = (*ITEM->getviItem(i));
-			ITEM->EquipPassiveItem(item);
-			item->init(_player);
-			ITEM->itemRemove(i);
-			if (ITEM->getvEquipItem().size() >= 3)
+			if (ITEM->getvEquipItem().size() >= 9)
 			{
 				SCENE->changeScene("item");
 			}
+			else
+			{
+				C_item* item = (*ITEM->getviItem(i));
+				ITEM->EquipPassiveItem(item);
+				item->init(_player);
+				ITEM->itemRemove(i);
+			}
 		}
+		//if (PtI && skultem && pushF)
+		//{
+		//	/*if (*PLAYERDATA->getPlayerData()->getviSkul(false) == nullptr)
+		//	{
+		//		PLAYERDATA->getPlayerData()->setNextSkul((*ITEM->getviItem(i))->getSkulItemType());
+		//		ITEM->itemRemove(i);
+		//	}*/
+		//}
 	}
 }
 

@@ -20,6 +20,14 @@ HRESULT C_DimLightDarkcite::init(C_player* _player)
 	return S_OK;
 }
 
+void C_DimLightDarkcite::release(C_player* _player)
+{
+	S_skulInfo changeInfo;
+	changeInfo = _player->getPlayerInfo();
+	changeInfo.playerSpeed -= 5;
+	_player->setPlayerInfo(changeInfo);
+}
+
 void C_DimLightDarkcite::render()
 {
 	IMAGE->findImage("DimLightDarkcite")->renderCenter(getCVOSDC(), pt);
@@ -42,6 +50,10 @@ C_MedalOfCarleon::C_MedalOfCarleon(vector2 _pt)
 HRESULT C_MedalOfCarleon::init(C_player* _player)
 {
 	return S_OK;
+}
+
+void C_MedalOfCarleon::release(C_player* _player)
+{
 }
 
 void C_MedalOfCarleon::update(C_player* _player)

@@ -14,6 +14,7 @@ private:
 	vector<S_choice> vChoice;
 	vector<S_choice>::iterator viChoice;
 	int selectItem;
+	int removeCount;
 public:
 	itemScene();
 	~itemScene();

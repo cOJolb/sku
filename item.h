@@ -8,7 +8,7 @@ protected:
 	GOODSITEM goodsType;
 	PASSIVEITEM passiveType;
 	ACTIVEITEM activeType;
-	SKULITEM skulItemType;
+	SKUL_TYPE skulItemType;
 private:
 
 public:
@@ -17,7 +17,7 @@ public:
 
 public:
 	virtual HRESULT init(C_player* _player);
-	virtual void release();
+	virtual void release(C_player* _player);
 	virtual void update(C_player* _player);
 	virtual void render();
 	virtual void render(vector2 _pt);
@@ -25,4 +25,5 @@ public:
 public:
 	ITEM_TYPE getItemType() { return itemType; }
 	GOODSITEM getGoodsType() { return goodsType; }
+	SKUL_TYPE getSkulItemType() { return skulItemType; }
 };

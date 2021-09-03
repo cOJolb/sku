@@ -39,7 +39,7 @@ void mainGame::render(/*HDC hdc*/)
 	SCENE->render();
 
 	//==============================================
-	TIME->render(getMemDC());
+	//TIME->render(getMemDC());
 
 
 	//백버퍼의 내용을 HDC그린다.(건드리지 말것.)
@@ -54,6 +54,8 @@ void mainGame::render(/*HDC hdc*/)
 		this->getBackBuffer()->stretchRender(getHDC(), RectX(gameSize), RectY(gameSize), RectWidth(gameSize), RectHeight(gameSize));
 		break;
 	default:
+		gameSize = RectMake(0, 0, GameSizeX, GameSizeY);
+		this->getBackBuffer()->stretchRender(getHDC(), RectX(gameSize), RectY(gameSize), RectWidth(gameSize), RectHeight(gameSize));
 		break;
 	}
 

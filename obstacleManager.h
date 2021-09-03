@@ -42,8 +42,6 @@ public:
 	viObstacle getviWall(int number);
 	HRGN getTotalWall() { return totalWall; }
 
-	void tilePlus(S_tagTile _startTile, S_tagTile _endTile );
-
 	void saveTileData(S_tagTile _tile, int number) { tile[number] = _tile; }
 	S_tagTile loadTileData(int _number) { return tile[_number]; }
 };

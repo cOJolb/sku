@@ -26,13 +26,14 @@ public:
 
 public:
 	void respawnPassiveItem(PASSIVEITEM _type, vector2 _pt);
-	void respawnSkulItem(SKULITEM _type, vector2 _pt);
+	void respawnSkulItem(SKUL_TYPE _type, vector2 _pt);
 	void respawnActiveItem(ACTIVEITEM _type, vector2 _pt);
 	void respawnGoodsItem(GOODSITEM _type, vector2 _pt);
 	void EquipPassiveItem(C_item* _passiveItem);
 
 public:
 	void itemRemove(int number);
+	void EquipRemove(int number);
 	void eraseAllItem();
 
 public:
@@ -43,6 +44,5 @@ public:
 
 public:
 	void Equip(C_player* _player);
-	
 };
 

@@ -1,23 +1,25 @@
 #include "framework.h"
 #include "playerData.h"
+#include "player.h"
 #include "collider.h"
 
 C_playerData::C_playerData()
 {
-	playerData.playerPt = { 200,200 };
 }
 
 C_playerData::~C_playerData()
 {
 }
 
-void C_playerData::savePlayerData(vector2 _pt, C_collider* _collider)
+
+void C_playerData::setPlayerData(C_player* _player)
 {
-	playerData.playerPt = _pt;
-	playerData.playerCollider = _collider;
+	player = _player;
 }
 
-S_playerData C_playerData::getPlayerData()
+C_player* C_playerData::getPlayerData()
 {
-	return playerData;
+	return player;
 }
+
+

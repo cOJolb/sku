@@ -191,7 +191,7 @@ void C_object::isBump()
 
 void C_object::isClogged()
 {
-	RECT testRc = RectMake(RectX(futureRc) - RectWidth(futureRc) / 4, futureRc.top - 5, RectWidth(futureRc) / 2, 5);
+	RECT testRc = RectMake(RectX(futureRc),futureRc.top, 1, 1);
 	bool isRight = pt.x < RectX(futureRc);
 	bool isLeft = pt.x > RectX(futureRc);
 	bool isUp = pt.y > RectY(futureRc);

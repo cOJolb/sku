@@ -49,6 +49,7 @@ void obstacleManager::createObstacle(OBSTACLE_TYPE _type, vector2 _pt, int _numb
 	{
 		v_land.push_back(obstacle);
 		landRGN = CreateRectRgn(obstacle->getRc().left, obstacle->getRc().top, obstacle->getRc().right, obstacle->getRc().bottom);
+		//OffsetRgn(landRGN, 0, 10);
 		CombineRgn(totalLand, totalLand, landRGN, RGN_XOR);
 	}
 	if (obstacle->getUnMovable())
@@ -78,8 +79,3 @@ viObstacle obstacleManager::getviWall(int number)
 }
 
 
-
-void obstacleManager::tilePlus(S_tagTile _startTile, S_tagTile _endTile)
-{
-	//RECT rec = RectMake(_startTile.pt.x - )
-}

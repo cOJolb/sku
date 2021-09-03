@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "knightState.h"
 #include "object.h"
+#include "player.h"
 
 knight_Idle::knight_Idle()
 {
@@ -20,7 +21,7 @@ void knight_Idle::enter()
 
 void knight_Idle::update()
 {
-	if (inRange(200, PLAYERDATA->getPlayerData().playerPt))
+	if (inRange(200, PLAYERDATA->getPlayerData()->getPt()))
 	{
 		fsm->ChangeState(STATE_TYPE::TRACE);
 	}
@@ -48,13 +49,13 @@ void knight_Trace::enter()
 
 void knight_Trace::update()
 {
-	if (inRange(50, PLAYERDATA->getPlayerData().playerPt))
+	if (inRange(50, PLAYERDATA->getPlayerData()->getPt()))
 	{
 		fsm->ChangeState(STATE_TYPE::ATTACK);
 	}
-	else if (inRange(200, PLAYERDATA->getPlayerData().playerPt))
+	else if (inRange(200, PLAYERDATA->getPlayerData()->getPt()))
 	{
-		move(isLeft(PLAYERDATA->getPlayerData().playerPt));
+		move(isLeft(PLAYERDATA->getPlayerData()->getPt()));
 	}
 	else move();
 	object->setFutureRc(_futureRc);
@@ -77,7 +78,7 @@ knight_Atk::~knight_Atk()
 void knight_Atk::enter()
 {
 	object = fsm->getObject();
-	foward = isLeft(PLAYERDATA->getPlayerData().playerPt);
+	foward = isLeft(PLAYERDATA->getPlayerData()->getPt());
 	if (foward)
 	{
 		object->setUnitImageInfo(object->getImageInfo().unitName, "Left", "Attack");
@@ -143,7 +144,7 @@ knight_Damage::~knight_Damage()
 void knight_Damage::enter()
 {
 	object = fsm->getObject();
-	foward = isLeft(PLAYERDATA->getPlayerData().playerPt);
+	foward = isLeft(PLAYERDATA->getPlayerData()->getPt());
 	if (foward)
 	{
 		object->setUnitImageInfo(object->getImageInfo().unitName, "Left", "Hit");

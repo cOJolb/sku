@@ -25,16 +25,17 @@ HRESULT testScene::init()
 //OBSTACLE->createObstacle(OBSTACLE_TYPE::LTC_LAND, { 400,364 });
 //OBSTACLE->createObstacle(OBSTACLE_TYPE::LTC_LAND, { 400,264 });
 	mapSetting->init();
-	for (int i = 0; i < 30; i++)
+	for (int i = 0; i < 1; i++)
 	{
 		ENEMY->respawnEnemy(UNIT_TYPE::KNIGHT, { 400,200 });
 	}
-	ITEM->respawnGoodsItem(GOODSITEM::GOLD, { 300,300 });
+	/*ITEM->respawnGoodsItem(GOODSITEM::GOLD, { 300,300 });
 	ITEM->respawnPassiveItem(PASSIVEITEM::CRISTAL, { 300,400 });
 	ITEM->respawnPassiveItem(PASSIVEITEM::CRISTAL, { 350,400 });
 	ITEM->respawnPassiveItem(PASSIVEITEM::CRISTAL, { 400,400 });
-	ITEM->respawnPassiveItem(PASSIVEITEM::MEDAL, { 400,300 });
-
+	ITEM->respawnPassiveItem(PASSIVEITEM::MEDAL, { 400,450 });
+	ITEM->respawnSkulItem(SKUL_TYPE::SKUL, { 300, 450 });
+	ITEM->respawnSkulItem(SKUL_TYPE::CLOWN, { 350, 450 });*/
 	player->init();
 	CAMERA->init(player->getPt().x, player->getPt().y, 30 * 36, 20 * 36, 0, 0, 30 * 36 / 4, 20 * 36 / 4, 30 * 36 / 2, 20 * 36 / 2);
 	for (int i = 0; i < 30 * 20; i++)
@@ -57,6 +58,14 @@ void testScene::update()
 {
 	player->changeSkul();
 }*/
+	if (InputManager->isOnceKeyDown('U'))
+	{
+		ITEM->respawnPassiveItem(PASSIVEITEM::MEDAL, { 400,450 });
+	}
+	if (InputManager->isOnceKeyDown('O'))
+	{
+		ITEM->respawnPassiveItem(PASSIVEITEM::CRISTAL, { 400,450 });
+	}
 	if (InputManager->isOnceKeyDown(VK_TAB))
 	{
 		SCENE->changeScene("item");
@@ -66,7 +75,7 @@ void testScene::update()
 	CAMERA->update();
 	ENEMY->update();
 	collision->stageCollision(player);
-	SUBWIN->update();
+	//SUBWIN->update();
 	//SCENE->setRenderRect(checkGameSize());
 	//SCENE->update();
 	//ANIMATION->update();
@@ -86,7 +95,7 @@ void testScene::render()
 	miniMap->render();
 	//SCENE->render();
 	//EFFECT->render();
-	SUBWIN->render();
+	//SUBWIN->render();
 
 }
 

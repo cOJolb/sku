@@ -1,33 +1,25 @@
 #pragma once
 #include "item.h"
-class C_skulItem : public C_item
+
+
+class C_crownskul : public C_item
 {
-protected:
-	SKULITEM skulItemType;
-private:
-
 public:
-	C_skulItem();
-	virtual~C_skulItem();
-
+	//C_crownskul();
+	C_crownskul(vector2 _pt);
+	//virtual~C_crownskul();
 public:
-	HRESULT init();
-	void release();
-	void update();
-	void render();
-
-public:
-	SKULITEM getskulType() { return skulItemType; }
+	virtual void render();
+	virtual void render(vector2 _pt);
 };
 
-class C_crownskul : public C_skulItem
+class C_littleBoneskul : public C_item
 {
 public:
-	C_crownskul();
-	C_crownskul(vector2 _pt);
-	virtual~C_crownskul();
-
+	//C_littleBoneskul();
+	C_littleBoneskul(vector2 _pt);
+	//virtual~C_littleBoneskul();
 public:
-	void render();
-
+	virtual void render();
+	virtual void render(vector2 _pt);
 };

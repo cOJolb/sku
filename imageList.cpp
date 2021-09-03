@@ -3,7 +3,7 @@
 
 C_imageList::C_imageList()
 {
-
+	IMAGE->addImage("inventory", "images/item/Inventory.bmp", 1067, 600, true, RGB(255, 0, 255));
 	//=========================item::goods=================================================================================
 	//=========================item::goods=================================================================================
 	IMAGE->addImage("gold", "images/item/goldBar.bmp", 20, 20, true, RGB(255, 0, 255));
@@ -15,7 +15,12 @@ C_imageList::C_imageList()
 
 
 	//=========================skul:skul=================================================================================
-	//=========================skul:skul=================================================================================
+	//=========================skul:skul================================================================================
+	IMAGE->addImage("skulHead", "images/skul/skulImage/LittleBoneHead.bmp", 15, 13, true, RGB(255, 0, 255));
+	IMAGE->addImage("skulNow", "images/skul/skulImage/LittleBone3.bmp", 45, 45, true, RGB(255, 0, 255));
+	IMAGE->addImage("skulItem", "images/skul/skulImage/LittleBone2.bmp", 30, 30, true, RGB(255, 0, 255));
+	IMAGE->addImage("skulSecond", "images/skul/skulImage/LittleBone1.bmp", 45, 45, true, RGB(255, 0, 255));
+
 	IMAGE->addFrameImage("skul", "images/skul/skul_little_bone.bmp", 3780, 2500, 27, 25, true, RGB(255, 0, 255));
 	ANIMATION->addAnimation("skulRightIdle", "skul", 0, 3, 7, false, true);
 	ANIMATION->addAnimation("skulRightMove", "skul", 27, 34, 7, false, true);
@@ -41,6 +46,10 @@ C_imageList::C_imageList()
 	ANIMATION->addAnimation("skulRightAtkMotion2", "skul", 135, 137, 7, false, false);
 	//=========================skul:clown=================================================================================
 	//=========================skul:clown=================================================================================
+	IMAGE->addImage("clownHead", "images/skul/skulImage/ClownHead.bmp", 37, 26, true, RGB(255, 0, 255));
+	IMAGE->addImage("clownNow", "images/skul/skulImage/Clown3.bmp", 78, 75, true, RGB(255, 0, 255));
+	IMAGE->addImage("clownItem", "images/skul/skulImage/Clown2.bmp", 30, 30, true, RGB(255, 0, 255));
+	IMAGE->addImage("clownSecond", "images/skul/skulImage/Clown1.bmp", 45, 45, true, RGB(255, 0, 255));
 	IMAGE->addFrameImage("clown", "images/skul/skul_clown.bmp", 800, 1800, 8, 18, true, RGB(255, 0, 255));
 	ANIMATION->addAnimation("clownRightIdle", "clown", 0, 7, 7, false, true);
 	ANIMATION->addAnimation("clownRightMove", "clown", 16, 23, 7, false, true);

@@ -22,7 +22,7 @@
 //	float playerJumpPower;
 //};
 
-class C_player : public C_object ,C_skul
+class C_player : public C_object 
 {
 protected:
 	bool DashFoward;
@@ -45,7 +45,9 @@ protected:
 
 	SKUL_TYPE cur_skul;
 	SKUL_TYPE next_skul;
-	
+
+	C_skul* curSkul;
+	C_skul* nextSkul;
 private:
 
 public:
@@ -68,9 +70,11 @@ public:
 	
 public:
 	S_skulInfo getPlayerInfo() { return skulInfo; }
-
+	vector<C_skul*> getvSkul() { return vskul; }
+	vector<C_skul*>::iterator getviSkul(bool _CurentSkul);
 public:
 	void setPlayerInfo(S_skulInfo _playerInfo) { skulInfo = _playerInfo; }
+	void setNextSkul(SKUL_TYPE _type);
 	//virtual void playerDashMove();
 	//void playerAtk();
 	//void playerSkillA();

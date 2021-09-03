@@ -60,27 +60,21 @@ void C_player::update()
 	playerJump();
 	playerDash();
 	playerDash_Jump();
-	//Jump();
 	playerAtk();
 
 	if (DashDelay >= skulInfo.DashTime / 2) Gravity();
 	isLand();
 	isClogged();
-	//if (DashDelay >= skulInfo.DashTime / 2) Gravity();
 	
 	collider->setPos(pt);
-	ptUpdate();
+	//ptUpdate();
 	ani = ANIMATION->findAnimation(unitImageInfo.unitName + unitImageInfo.unitFoward + unitImageInfo.unitState);
-	PLAYERDATA->savePlayerData(pt, collider);
+	PLAYERDATA->setPlayerData(this);
 	rc = RectMakeCenter(collider->getPos(), collider->getSize().x, collider->getSize().y);
-	
 }
 
 void C_player::render()
 {
-	RECT rec = RectMakeCenter(pt, 20, 20);
-	Rectangle(getCVOSDC(), rec.left, rec.top, rec.right, rec.bottom);
-	
 	IMAGE->findImage(unitImageInfo.unitName)->aniRender(getCVOSDC(), pt.x - IMAGE->findImage(unitImageInfo.unitName)->getFrameWidth()/2, pt.y - IMAGE->findImage(unitImageInfo.unitName)->getFrameHeight()/2, ani);
 }
 
@@ -261,12 +255,32 @@ void C_player::changeSkul()
 {
 	if (InputManager->isOnceKeyDown(VK_SPACE))
 	{
-		if (viskul == vskul.begin()) viskul = vskul.begin() + 1;
+		if (viskul == vskul.begin() && vskul.size()>1) viskul = vskul.begin() + 1;
 		else viskul = vskul.begin();
 		skulInfo = (*viskul)->getskulInfo();
 		setUnitImageInfo((*viskul)->getUnitName(), "Left", "Idle");
 		ANIMATION->start(unitImageInfo.unitName + "LeftIdle");
 		ANIMATION->start(unitImageInfo.unitName + "RightIdle");
 		ITEM->Equip(this);
+	}
+}
+
+vector<C_skul*>::iterator C_player::getviSkul(bool _CurentSkul)
+{
+	if (_CurentSkul) viskul = vskul.begin();
+	else if (_CurentSkul == false && vskul.size() > 1) viskul = vskul.begin() + 1;
+	return viskul;
+}
+
+void C_player::setNextSkul(SKUL_TYPE _type)
+{
+	switch (_type)
+	{
+	case SKUL_TYPE::SKUL:
+		break;
+	case SKUL_TYPE::CLOWN:
+		break;
+	default:
+		break;
 	}
 }

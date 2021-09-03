@@ -40,14 +40,15 @@ protected:
 
 	S_skulInfo skulInfo;
 
-	vector<C_skul*> vskul;
-	vector<C_skul*>::iterator viskul;
+	//vector<C_skul*> vskul;
+	//vector<C_skul*>::iterator viskul;
 
 	SKUL_TYPE cur_skul;
 	SKUL_TYPE next_skul;
 
 	C_skul* curSkul;
 	C_skul* nextSkul;
+	C_skul* tempSkul;
 private:
 
 public:
@@ -70,10 +71,13 @@ public:
 	
 public:
 	S_skulInfo getPlayerInfo() { return skulInfo; }
-	vector<C_skul*> getvSkul() { return vskul; }
-	vector<C_skul*>::iterator getviSkul(bool _CurentSkul);
+	//vector<C_skul*> getvSkul() { return vskul; }
+	//vector<C_skul*>::iterator getviSkul(bool _CurentSkul);
+	C_skul* getCurSkul() { return curSkul; }
+	C_skul* getNextSkul() { return nextSkul; }
 public:
 	void setPlayerInfo(S_skulInfo _playerInfo) { skulInfo = _playerInfo; }
+	void setCurSkul(SKUL_TYPE _type);
 	void setNextSkul(SKUL_TYPE _type);
 	//virtual void playerDashMove();
 	//void playerAtk();

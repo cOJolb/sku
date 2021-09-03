@@ -14,7 +14,7 @@ HRESULT mainGame::init()
 	SCENE->addScene("create", new createScene);
 	SCENE->addScene("item", new itemScene);
 	SCENE->changeScene("test");
-	SCENE->sceneInit();
+	SCENE->init();
 	return S_OK;
 }
 
@@ -39,7 +39,7 @@ void mainGame::render(/*HDC hdc*/)
 	SCENE->render();
 
 	//==============================================
-	//TIME->render(getMemDC());
+	TIME->render(getMemDC());
 
 
 	//백버퍼의 내용을 HDC그린다.(건드리지 말것.)

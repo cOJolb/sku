@@ -16,7 +16,7 @@ C_littlebone::C_littlebone()
 	skulInfo.playerSize.y = 40;
 	skulInfo.atkDelay = 50;
 	skulInfo.DashDelay = 50;
-
+	type = SKUL_TYPE::SKUL;
 }
 
 C_littlebone::~C_littlebone()

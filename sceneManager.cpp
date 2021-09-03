@@ -84,7 +84,4 @@ HRESULT SceneManager::changeScene(string sceneName)
 	//return E_FAIL;
 }
 
-void SceneManager::sceneInit()
-{
-	_currentScene->init();
-}
+

@@ -28,7 +28,6 @@ public:
 public:
 	gameNode* addScene(string sceneName, gameNode* scene);
 	HRESULT changeScene(string sceneName);
-	void sceneInit();
 
 public:
 	SCENE_TYPE getSCENETYPE() { return sceneType; }

@@ -12,6 +12,7 @@ C_clown::C_clown()
 	skulInfo.playerSize.x = 20;
 	skulInfo.playerSize.y = 20;
 	unitName = "clown";
+	type = SKUL_TYPE::CLOWN;
 }
 
 C_clown::~C_clown()

@@ -98,14 +98,20 @@ void C_collision::stageCollision(C_player* _player)
 				ITEM->itemRemove(i);
 			}
 		}
-		//if (PtI && skultem && pushF)
-		//{
-		//	/*if (*PLAYERDATA->getPlayerData()->getviSkul(false) == nullptr)
-		//	{
-		//		PLAYERDATA->getPlayerData()->setNextSkul((*ITEM->getviItem(i))->getSkulItemType());
-		//		ITEM->itemRemove(i);
-		//	}*/
-		//}
+		if (PtI && skultem && pushF)
+		{
+			if (PLAYERDATA->getPlayerData()->getNextSkul() == nullptr)
+			{
+				PLAYERDATA->getPlayerData()->setNextSkul((*ITEM->getviItem(i))->getSkulItemType());
+				ITEM->itemRemove(i);
+			}
+			else
+			{
+				ITEM->respawnSkulItem(PLAYERDATA->getPlayerData()->getCurSkul()->getSkulType(), PLAYERDATA->getPlayerData()->getPt());
+				PLAYERDATA->getPlayerData()->setCurSkul((*ITEM->getviItem(i))->getSkulItemType());
+				ITEM->itemRemove(i);
+			}
+		}
 	}
 }
 

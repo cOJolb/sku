@@ -7,6 +7,7 @@ protected:
 	S_skulInfo skulInfo;
 	string unitName;
 	C_collider* attackRange;
+	SKUL_TYPE type;
 public:
 	C_skul();
 	~C_skul();
@@ -26,5 +27,6 @@ public:
 public:
 	S_skulInfo getskulInfo() { return skulInfo; }
 	string getUnitName() { return unitName; }
+	SKUL_TYPE getSkulType() { return type; }
 };
 

@@ -5,14 +5,18 @@
 #include"clown.h"
 C_player::C_player()
 {
-	C_skul* CurSkul = new C_littlebone;
-	C_skul* nextSkul = new C_clown;
-	vskul.push_back(CurSkul);
-	vskul.push_back(nextSkul);
+	curSkul = new C_littlebone;
+	//nextSkul = new C_clown;
+	nextSkul = nullptr;
+	tempSkul = nullptr;
+	//vskul.push_back(curSkul);
+	//vskul.push_back(nextSkul);
 
-	viskul = vskul.begin();
-	skulInfo = (*viskul)->getskulInfo();
-	setUnitImageInfo((*viskul)->getUnitName(), "Left", "Idle");
+	//viskul = vskul.begin();
+	//skulInfo = (*viskul)->getskulInfo();
+	skulInfo = curSkul->getskulInfo();
+	//setUnitImageInfo((*viskul)->getUnitName(), "Left", "Idle");
+	setUnitImageInfo(curSkul->getUnitName(), "Left", "Idle");
 
 	pt = { 200, 200 }; // 이것들 저장어떻게 하지 ..
 	prevPt = pt;
@@ -161,7 +165,8 @@ void C_player::playerDash()
 		ANIMATION->start(unitImageInfo.unitName + "LeftDash");
 	}
 
-	(*viskul)->playerDashMove(futureRc, DashCount, playerDashJump, DashFoward, skulInfo.playerDashSpeed);
+	//(*viskul)->playerDashMove(futureRc, DashCount, playerDashJump, DashFoward, skulInfo.playerDashSpeed);
+	curSkul->playerDashMove(futureRc, DashCount, playerDashJump, DashFoward, skulInfo.playerDashSpeed);
 	if (DashCount > 0 && !playerDashJump && !isAtk)
 	{
 		unitImageInfo.unitState = "Dash";
@@ -242,7 +247,8 @@ void C_player::playerAtk()
 		}
 		else unitImageInfo.unitFoward = "Right";
 		unitImageInfo.unitState = "AtkMotion1";
-		(*viskul)->playerAttack(pt, isLeft);
+		//(*viskul)->playerAttack(pt, isLeft);
+		curSkul->playerAttack(pt, isLeft);
 	}
 	if (atkCount >= 50)
 	{
@@ -255,21 +261,46 @@ void C_player::changeSkul()
 {
 	if (InputManager->isOnceKeyDown(VK_SPACE))
 	{
-		if (viskul == vskul.begin() && vskul.size()>1) viskul = vskul.begin() + 1;
+		/*if (viskul == vskul.begin() && vskul.size()>1) viskul = vskul.begin() + 1;
 		else viskul = vskul.begin();
 		skulInfo = (*viskul)->getskulInfo();
-		setUnitImageInfo((*viskul)->getUnitName(), "Left", "Idle");
+		setUnitImageInfo((*viskul)->getUnitName(), "Left", "Idle");*/
+		if (nextSkul != nullptr)
+		{
+			tempSkul = curSkul;
+			curSkul = nextSkul;
+			nextSkul = tempSkul;
+			skulInfo = curSkul->getskulInfo();
+			setUnitImageInfo(curSkul->getUnitName(), "Left", "Idle");
+		}
 		ANIMATION->start(unitImageInfo.unitName + "LeftIdle");
 		ANIMATION->start(unitImageInfo.unitName + "RightIdle");
 		ITEM->Equip(this);
 	}
 }
 
-vector<C_skul*>::iterator C_player::getviSkul(bool _CurentSkul)
+//vector<C_skul*>::iterator C_player::getviSkul(bool _CurentSkul)
+//{
+//	if (_CurentSkul) viskul = vskul.begin();
+//	else if (_CurentSkul == false && vskul.size() > 1) viskul = vskul.begin() + 1;
+//	return viskul;
+//}
+
+void C_player::setCurSkul(SKUL_TYPE _type)
 {
-	if (_CurentSkul) viskul = vskul.begin();
-	else if (_CurentSkul == false && vskul.size() > 1) viskul = vskul.begin() + 1;
-	return viskul;
+	switch (_type)
+	{
+	case SKUL_TYPE::SKUL:
+		curSkul = new C_littlebone;
+		break;
+	case SKUL_TYPE::CLOWN:
+		curSkul = new C_clown;
+		break;
+	default:
+		break;
+	}
+	skulInfo = curSkul->getskulInfo();
+	setUnitImageInfo(curSkul->getUnitName(), "Left", "Idle");
 }
 
 void C_player::setNextSkul(SKUL_TYPE _type)
@@ -277,8 +308,10 @@ void C_player::setNextSkul(SKUL_TYPE _type)
 	switch (_type)
 	{
 	case SKUL_TYPE::SKUL:
+		nextSkul = new C_littlebone;
 		break;
 	case SKUL_TYPE::CLOWN:
+		nextSkul = new C_clown;
 		break;
 	default:
 		break;

@@ -58,20 +58,20 @@ void itemManager::respawnPassiveItem(PASSIVEITEM _type, vector2 _pt)
 
 void itemManager::respawnSkulItem(SKUL_TYPE _type, vector2 _pt)
 {
-    //C_item* item;
-    //switch (_type)
-    //{
-    //case SKUL_TYPE::SKUL:
-    //    item = new C_littleBoneskul(_pt);
-    //    break;
-    //case SKUL_TYPE::CLOWN:
-    //    item = new C_crownskul(_pt);
-    //    break;
-    //default:
-    //    return;
-    //    break;
-    //}
-    //vItem.push_back(item);
+    C_item* item;
+    switch (_type)
+    {
+    case SKUL_TYPE::SKUL:
+        item = new C_littleBoneskul(_pt);
+        break;
+    case SKUL_TYPE::CLOWN:
+        item = new C_crownskul(_pt);
+        break;
+    default:
+        return;
+        break;
+    }
+    vItem.push_back(item);
 }
 
 void itemManager::respawnActiveItem(ACTIVEITEM _type, vector2 _pt)

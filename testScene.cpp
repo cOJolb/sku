@@ -32,12 +32,12 @@ HRESULT testScene::init()
 	/*ITEM->respawnGoodsItem(GOODSITEM::GOLD, { 300,300 });
 	ITEM->respawnPassiveItem(PASSIVEITEM::CRISTAL, { 300,400 });
 	ITEM->respawnPassiveItem(PASSIVEITEM::CRISTAL, { 350,400 });
-	ITEM->respawnPassiveItem(PASSIVEITEM::CRISTAL, { 400,400 });
+	ITEM->respawnPassiveItem(PASSIVEITEM::CRISTAL, { 400,400 });*/
 	ITEM->respawnPassiveItem(PASSIVEITEM::MEDAL, { 400,450 });
 	ITEM->respawnSkulItem(SKUL_TYPE::SKUL, { 300, 450 });
-	ITEM->respawnSkulItem(SKUL_TYPE::CLOWN, { 350, 450 });*/
+	ITEM->respawnSkulItem(SKUL_TYPE::CLOWN, { 350, 450 });
 	player->init();
-	CAMERA->init(player->getPt().x, player->getPt().y, 30 * 36, 20 * 36, 0, 0, 30 * 36 / 4, 20 * 36 / 4, 30 * 36 / 2, 20 * 36 / 2);
+	CAMERA->init(player->getPt().x, player->getPt().y, tileX * tileSize, tileY * tileSize, 0, 0, tileX * tileSize / 4, tileY * tileSize / 4, tileX * tileSize / 2, tileY * tileSize / 2);
 	for (int i = 0; i < 30 * 20; i++)
 	{
 		miniMap->init(mapSetting->getTile(i));
@@ -54,10 +54,6 @@ void testScene::release()
 
 void testScene::update()
 {
-	/*if (InputManager->isOnceKeyDown(VK_SPACE))
-{
-	player->changeSkul();
-}*/
 	if (InputManager->isOnceKeyDown('U'))
 	{
 		ITEM->respawnPassiveItem(PASSIVEITEM::MEDAL, { 400,450 });
@@ -75,11 +71,6 @@ void testScene::update()
 	CAMERA->update();
 	ENEMY->update();
 	collision->stageCollision(player);
-	//SUBWIN->update();
-	//SCENE->setRenderRect(checkGameSize());
-	//SCENE->update();
-	//ANIMATION->update();
-	//EFFECT->update();
 }
 
 void testScene::render()
@@ -93,10 +84,6 @@ void testScene::render()
 		RectWidth(CAMERA->getRect()), RectHeight(CAMERA->getRect()));
 	IMAGE->findImage("CVOSDC")->stretchRenderXY(getMemDC(), 0, 0, 2);
 	miniMap->render();
-	//SCENE->render();
-	//EFFECT->render();
-	//SUBWIN->render();
-
 }
 
 RECT testScene::checkGameSize()
@@ -104,8 +91,8 @@ RECT testScene::checkGameSize()
 	RECT rc = this->getClRect();
 	float wid = rc.right;
 	float hei = rc.bottom;
-	float widOverHei = (float)(30 * 36) / (20 * 36);
-	float heiOverWid = (float)(20 * 36) / (30 * 36);
+	float widOverHei = (float)(tileX * tileSize) / (tileY * tileSize);
+	float heiOverWid = (float)(tileY * tileSize) / (tileX * tileSize);
 
 	float w, h;
 	//현재 가로에 맞춘 세로가 현재 창의 세로보다 크다면, 현재 세로에 맞춘다.

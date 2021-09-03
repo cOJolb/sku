@@ -143,9 +143,9 @@ void itemScene::render()
 	//}
 	//else
 	//{
-	IMAGE->findImage((*PLAYERDATA->getPlayerData()->getviSkul(true))->getUnitName() + "Item")->renderCenter(getMemDC(), { 310,238 });
-	if (PLAYERDATA->getPlayerData()->getvSkul().size()>1) 
-		IMAGE->findImage((*PLAYERDATA->getPlayerData()->getviSkul(false))->getUnitName() + "Item")->renderCenter(getMemDC(), { 382,238 });
+	IMAGE->findImage(PLAYERDATA->getPlayerData()->getCurSkul()->getUnitName() + "Item")->renderCenter(getMemDC(), { 310,238 });
+	if (PLAYERDATA->getPlayerData()->getNextSkul() != nullptr)
+		IMAGE->findImage(PLAYERDATA->getPlayerData()->getNextSkul()->getUnitName() + "Item")->renderCenter(getMemDC(), { 382,238 });
 	for (int i = 0; i < ITEM->getvEquipItem().size(); i++)
 	{
 		vector2 pt;

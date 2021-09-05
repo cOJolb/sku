@@ -113,5 +113,16 @@ void C_collision::stageCollision(C_player* _player)
 			}
 		}
 	}
+	for (int i = 0; i < OBSTACLE->getvDoor().size(); i++)
+	{
+		bool enemyNothing = ENEMY->getvEnemy().size() <= 0;
+		bool inputF = InputManager->isOnceKeyDown('F');
+		bool isDoor = isCollision(_player->getCollider(), (*OBSTACLE->getviDoor(i))->getCollider());
+		if (enemyNothing && inputF && isDoor)
+		{
+			_player->setNextLevel(true);
+		}
+		else { _player->setNextLevel(false); }
+	}
 }
 

@@ -20,6 +20,9 @@ private:
 	HRGN totalWall;
 	HRGN wallRGN;
 
+	vObstacle v_door;
+	viObstacle vi_door;
+
 	S_tagTile tile[tileX * tileY];
 public:
 	obstacleManager();
@@ -32,7 +35,7 @@ public:
 	void render();
 
 public:
-	void createObstacle(OBSTACLE_TYPE _type, vector2 _pt, int _number);
+	void createObstacle(OBSTACLE_TYPE _type, vector2 _pt);
 	vObstacle getvObstacle() { return v_obstacle; }
 	viObstacle getviObstacle(int number);
 	vObstacle getvLand() { return v_land; }
@@ -41,7 +44,8 @@ public:
 	vObstacle getvWall() { return v_wall; }
 	viObstacle getviWall(int number);
 	HRGN getTotalWall() { return totalWall; }
-
+	vObstacle getvDoor() { return v_door; }
+	viObstacle getviDoor(int number);
 	void saveTileData(S_tagTile _tile, int number) { tile[number] = _tile; }
 	S_tagTile loadTileData(int _number) { return tile[_number]; }
 };

@@ -3,6 +3,7 @@
 #include"imageList.h"
 static image* _backBuffer = IMAGE->addImage("backBuffer", WINSIZEX, WINSIZEY);
 static image* _CVOSBuffer = IMAGE->addImage("CVOSBuffer", WINSIZEX * 3, WINSIZEY * 3);
+static image* _backGroundBuffer = IMAGE->addImage("BackGroundBuffer", WINSIZEX * 3, WINSIZEY * 3);
 class gameNode
 {
 
@@ -33,6 +34,7 @@ public:
 	HDC getHDC()const { return _hdc; }
 	HDC getMemDC()const { return _backBuffer->getMemDC(); }
 	HDC getCVOSDC()const { return _CVOSBuffer->getMemDC(); }
+	HDC getBG()const { return _backGroundBuffer->getMemDC(); }
 	LRESULT MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
 
 	RECT getClRect() { return rt; }

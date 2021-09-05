@@ -10,9 +10,11 @@ private:
 	bool isUnmovable;
 	bool isDownJump;
 	bool isLand;
+	bool isDoor;
+	string doorType;
 public:
 	C_obstacle();
-	C_obstacle(vector2 _pt, OBSTACLE_TYPE _type, int _number);
+	C_obstacle(vector2 _pt, OBSTACLE_TYPE _type);
 	~C_obstacle();
 public:
 	virtual HRESULT init();
@@ -25,6 +27,7 @@ public:
 	bool getUnMovable() { return isUnmovable; }
 	bool getDownJump() { return isDownJump; }
 	bool getisLand() { return isLand; }
+	bool getisDoor() { return isDoor; }
 	int getObstacleNumber() { return obstacleNumber; }
 
 	RECT getRc() { return rc; }

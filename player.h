@@ -49,6 +49,8 @@ protected:
 	C_skul* curSkul;
 	C_skul* nextSkul;
 	C_skul* tempSkul;
+
+	bool NextLevel;
 private:
 
 public:
@@ -75,10 +77,12 @@ public:
 	//vector<C_skul*>::iterator getviSkul(bool _CurentSkul);
 	C_skul* getCurSkul() { return curSkul; }
 	C_skul* getNextSkul() { return nextSkul; }
+	bool getNextLevel() { return NextLevel; }
 public:
 	void setPlayerInfo(S_skulInfo _playerInfo) { skulInfo = _playerInfo; }
 	void setCurSkul(SKUL_TYPE _type);
 	void setNextSkul(SKUL_TYPE _type);
+	void setNextLevel(bool _istrue) { NextLevel = _istrue; }
 	//virtual void playerDashMove();
 	//void playerAtk();
 	//void playerSkillA();

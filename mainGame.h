@@ -1,12 +1,15 @@
 #pragma once
 #include"gameNode.h"
+#include "player.h"
 #include "testScene.h"
 #include "createScene.h"
 #include "itemScene.h"
+#include "stageScene.h"
 class mainGame : public gameNode
 {
 private:
 	RECT gameSize;
+	C_player* player;
 public:
 	mainGame();
 	~mainGame();

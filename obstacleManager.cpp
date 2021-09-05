@@ -40,10 +40,10 @@ void obstacleManager::render()
 	}
 }
 
-void obstacleManager::createObstacle(OBSTACLE_TYPE _type, vector2 _pt, int _number)
+void obstacleManager::createObstacle(OBSTACLE_TYPE _type, vector2 _pt)
 {
     C_obstacle* obstacle;
-    obstacle = new C_obstacle(_pt, _type, _number);
+    obstacle = new C_obstacle(_pt, _type);
     v_obstacle.push_back(obstacle);
 	if (obstacle->getisLand())
 	{
@@ -57,6 +57,10 @@ void obstacleManager::createObstacle(OBSTACLE_TYPE _type, vector2 _pt, int _numb
 		v_wall.push_back(obstacle);
 		wallRGN = CreateRectRgn(obstacle->getRc().left, obstacle->getRc().top, obstacle->getRc().right, obstacle->getRc().bottom);
 		CombineRgn(totalWall, totalWall, wallRGN, RGN_XOR);
+	}
+	if (obstacle->getisDoor())
+	{
+		v_door.push_back(obstacle);
 	}
 }
 
@@ -76,6 +80,12 @@ viObstacle obstacleManager::getviWall(int number)
 {
 	vi_wall = v_wall.begin() + number;
 	return vi_wall;
+}
+
+viObstacle obstacleManager::getviDoor(int number)
+{
+	vi_door = v_door.begin() + number;
+	return vi_door;
 }
 
 

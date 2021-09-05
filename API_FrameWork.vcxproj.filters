@@ -130,6 +130,12 @@
     <Filter Include="MAP\maptool">
       <UniqueIdentifier>{dfe3fa54-75f4-42b0-b4f3-6cf6881cc269}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SCENE\stage">
+      <UniqueIdentifier>{d712ea64-ebbc-4c87-bfc6-bf6490500095}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SCENE\stage\1stage">
+      <UniqueIdentifier>{e53f8e50-71b7-454c-9500-dbbe1970f5dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -312,6 +318,15 @@
     <ClInclude Include="itemScene.h">
       <Filter>SCENE</Filter>
     </ClInclude>
+    <ClInclude Include="stage.h">
+      <Filter>SCENE\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="stage1_1.h">
+      <Filter>SCENE\stage\1stage</Filter>
+    </ClInclude>
+    <ClInclude Include="stageScene.h">
+      <Filter>SCENE\stage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_FrameWork.cpp">
@@ -469,6 +484,15 @@
     </ClCompile>
     <ClCompile Include="itemScene.cpp">
       <Filter>SCENE</Filter>
+    </ClCompile>
+    <ClCompile Include="stage.cpp">
+      <Filter>SCENE\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="stage1_1.cpp">
+      <Filter>SCENE\stage\1stage</Filter>
+    </ClCompile>
+    <ClCompile Include="stageScene.cpp">
+      <Filter>SCENE\stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

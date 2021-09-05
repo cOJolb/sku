@@ -13,7 +13,7 @@ C_mapSetting::C_mapSetting()
 	for (int i = 0; i < (UINT)FILE_TYPE::END; i++) maxRoomNum[i] = 0;
 	loadFolder();
 	randomMap = RND->getFromIntTo(0, maxRoomNum[(UINT)FILE_TYPE::NORMAL] -1);
-	viroom = vroom.begin() + 1;
+	viroom = vroom.begin() + 2;
 	//viroom = vroom.begin() + randomMap;
 	for (int i = 0; i < tileX * tileY; i++)
 	{
@@ -28,9 +28,10 @@ C_mapSetting::~C_mapSetting()
 
 HRESULT C_mapSetting::init()
 {
+
 	for (int i = 0; i < 30 * 20; i++)
 	{
-		if (tile[i].type != OBSTACLE_TYPE::NONE) OBSTACLE->createObstacle(tile[i].type, tile[i].pt, tile[i].tileNumber);
+		if (tile[i].type != OBSTACLE_TYPE::NONE) OBSTACLE->createObstacle(tile[i].type, tile[i].pt/*, tile[i].tileNumber*/);
 	}
 	return S_OK;
 }

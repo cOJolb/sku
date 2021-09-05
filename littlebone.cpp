@@ -5,11 +5,11 @@
 #include"fsm.h"
 C_littlebone::C_littlebone()
 {
-	skulInfo.playerSpeed = 5;
+	skulInfo.playerSpeed = 3;
 	skulInfo.DashTerm = 10;
-	skulInfo.playerDashSpeed = 8;
+	skulInfo.playerDashSpeed = 6;
 	skulInfo.DashTime = 34;
-	skulInfo.playerJumpPower = 20;
+	skulInfo.playerJumpPower = 18;
 	skulInfo.canDoubleDash = true;
 	unitName = "skul";
 	skulInfo.playerSize.x = 20;

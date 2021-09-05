@@ -753,7 +753,18 @@ void image::aniRender(HDC hdc, const int destX, const int destY, animation* ani)
 {
 	render(hdc, destX, destY, ani->getFramePos().x, ani->getFramePos().y, ani->getFrameWidth(), ani->getFrameHeight());
 }
+void image::aniRenderCenter(HDC hdc, const int destX, const int destY, animation* ani)
+{
+	render(hdc, destX - _imageInfo->frameWidth/2, destY- _imageInfo->frameHeight / 2, ani->getFramePos().x, ani->getFramePos().y, ani->getFrameWidth(), ani->getFrameHeight());
+}
+void image::aniRenderMe(HDC hdc, const int destX, const int destY, animation* ani)
+{
+	vector2 pt;
+	pt.x = destX;
+	pt.y = destY;
+	frameRenderCenter(hdc, pt, ani->getFramePos().x, ani->getFramePos().y);
 
+}
 HRESULT image::initForStretch()
 {
 	HDC hdc = GetDC(m_hWnd);

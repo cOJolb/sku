@@ -3,6 +3,7 @@
 mainGame::mainGame()
 {
 	//IMAGE->addImage("CVOSDC", WINSIZEX*3, WINSIZEY*3);
+	player = new C_player;
 }
 mainGame::~mainGame()
 {
@@ -10,15 +11,18 @@ mainGame::~mainGame()
 HRESULT mainGame::init()
 {
 	gameNode::init(true);
-	SCENE->addScene("test", new testScene);
+	PLAYERDATA->setPlayerData(player);
+
+	//SCENE->addScene("test", new testScene);
+	SCENE->addScene("stage", new stageScene);
 	SCENE->addScene("create", new createScene);
 	SCENE->addScene("item", new itemScene);
-	SCENE->changeScene("test");
+	SCENE->changeScene("stage");
 	SCENE->init();
 	return S_OK;
 }
 
-void mainGame::release()	
+void mainGame::release()
 {
 	gameNode::release();
 	SCENE->release();
@@ -40,7 +44,6 @@ void mainGame::render(/*HDC hdc*/)
 
 	//==============================================
 	TIME->render(getMemDC());
-
 
 	//백버퍼의 내용을 HDC그린다.(건드리지 말것.)
 	switch (SCENE->getSCENETYPE())

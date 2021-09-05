@@ -111,7 +111,8 @@ public:
 
 
 	void aniRender(HDC hdc, const int destX, const int destY, animation* ani);
-
+	void aniRenderCenter(HDC hdc, const int destX, const int destY, animation* ani);
+	void aniRenderMe(HDC hdc, const int destX, const int destY, animation* ani);
 
 	//DC를 가져와라
 	inline HDC getMemDC()const { return _imageInfo->hMemDC; }

@@ -3,6 +3,12 @@
 
 C_imageList::C_imageList()
 {
+	IMAGE->addImage("BackGround", "images/map/bg.bmp", GameSizeX, GameSizeY, true, RGB(255, 0, 255));
+	IMAGE->addImage("BackGround2", "images/map/bg2.bmp", GameSizeX, GameSizeY, true, RGB(255, 0, 255));
+	IMAGE->addImage("BackGround3", "images/map/bg3.bmp", GameSizeX, GameSizeY, true, RGB(255, 0, 255));
+	IMAGE->addImage("BackGround4", "images/map/bg4.bmp", GameSizeX, GameSizeY, true, RGB(255, 0, 255));
+	IMAGE->addImage("BackGround5", "images/map/bg5.bmp", GameSizeX, GameSizeY, true, RGB(255, 0, 255));
+	//
 	IMAGE->addImage("inventory", "images/item/Inventory.bmp", 1067, 600, true, RGB(255, 0, 255));
 	//=========================item::goods=================================================================================
 	//=========================item::goods=================================================================================
@@ -78,8 +84,18 @@ C_imageList::C_imageList()
 	ANIMATION->addAnimation("knightLeftHit", "knightHit", 0, 1, 7, false, false);
 	ANIMATION->addAnimation("knightRightHit", "knightHit", 2, 3, 7, false, false);
 	
-
+	//================================map=================================================
+	//================================map=================================================
 	IMAGE->addFrameImage("tile", "images/tile/tile.bmp", 216, 144, 6, 4, true, RGB(255, 0, 255));
+	IMAGE->addFrameImage("itemDoor", "images/map/itemStage.bmp", 1000, 200, 5, 1, true, RGB(255, 0, 255));
+	IMAGE->addFrameImage("skulDoor", "images/map/skulStage.bmp", 1000, 200, 5, 1, true, RGB(255, 0, 255));
+	IMAGE->addFrameImage("normalDoor", "images/map/normalStage.bmp", 1000, 200, 5, 1, true, RGB(255, 0, 255));
+	ANIMATION->addAnimation("itemDoorAni", "itemDoor", 0, 4, 6, false, true);
+	ANIMATION->addAnimation("skulDoorAni", "skulDoor", 0, 4, 6, false, true);
+	ANIMATION->addAnimation("normalDoorAni", "normalDoor", 0, 4, 6, false, true);
+	ANIMATION->start("itemDoorAni");
+	ANIMATION->start("skulDoorAni");
+	ANIMATION->start("normalDoorAni");
 }
 
 C_imageList::~C_imageList()

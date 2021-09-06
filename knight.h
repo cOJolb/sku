@@ -4,7 +4,7 @@ class C_knight : public C_enemy
 {
 protected:
 private:
-
+	int count;
 public:
 	C_knight();
 	C_knight(vector2 _pt);

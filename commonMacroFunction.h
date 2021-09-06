@@ -113,8 +113,53 @@ inline RECT& movetoDown(RECT& rec, int speed)
 	OffsetRect(&rec, 0, speed);
 	return rec;
 }
+inline int countUp(int& _start, int _end, int& _count , int _delay = 1)
+{
+	
+	_count++;
+	if (_count % _delay == 0) { _start++; }
 
+	if (_start >= _end)
+	{
+		_start = _end;
+	}
+	return _start;
+}
+inline int countDown(int& _start, int _end, int& _count, int _delay = 1)
+{
+	_count++;
+	if (_count % _delay == 0) { _start--; }
 
+	if (_start <= _end)
+	{
+		_start = _end;
+	}
+	return _start;
+}
+
+inline int countUpLoop(int& _number, int _start, int _end,  int& _count, int _delay = 1)
+{
+	
+	_count++;
+	if (_count % _delay == 0) { _number++; }
+	if (_number >= _end)
+	{
+		_number = _start;
+	}
+	return _number;
+}
+inline int countDownLoop(int& _number, int _start, int _end, int& _count , int _delay = 1)
+{
+
+	_count++;
+	if (_count % _delay == 0) { _number--; }
+	
+	if (_number <= _end)
+	{
+		_number = _start;
+	}
+	return _number;
+}
 const int tileSize = 36;
 const int tileX = 30;
 const int tileY = 20;

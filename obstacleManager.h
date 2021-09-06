@@ -35,7 +35,6 @@ public:
 	void render();
 
 public:
-	void createObstacle(OBSTACLE_TYPE _type, vector2 _pt);
 	vObstacle getvObstacle() { return v_obstacle; }
 	viObstacle getviObstacle(int number);
 	vObstacle getvLand() { return v_land; }
@@ -46,7 +45,12 @@ public:
 	HRGN getTotalWall() { return totalWall; }
 	vObstacle getvDoor() { return v_door; }
 	viObstacle getviDoor(int number);
+	
+public:
+	void createObstacle(OBSTACLE_TYPE _type, vector2 _pt);
+	void eraserAllObstacle();
 	void saveTileData(S_tagTile _tile, int number) { tile[number] = _tile; }
 	S_tagTile loadTileData(int _number) { return tile[_number]; }
+
 };
 

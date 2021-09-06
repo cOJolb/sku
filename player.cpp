@@ -22,7 +22,7 @@ C_player::C_player()
 	prevPt = pt;
 	collider = new C_collider(pt, skulInfo.playerSize);
 	rc = RectMakeCenter(collider->getPos(), collider->getSize().x, collider->getSize().y);
-	futureRc = RectMakeCenter(collider->getPos(), collider->getSize().x, collider->getSize().y);
+	futureRc = RectMakeCenter(pt, collider->getSize().x, collider->getSize().y);
 	futureRcLTRB();
 
 	DashCount = 0;
@@ -58,7 +58,7 @@ void C_player::release()
 
 void C_player::update()
 {
-	
+	futureRc = RectMakeCenter(pt, collider->getSize().x, collider->getSize().y);
 	changeSkul();
 	playerMove();
 	playerJump();
@@ -73,7 +73,7 @@ void C_player::update()
 	collider->setPos(pt);
 	//ptUpdate();
 	ani = ANIMATION->findAnimation(unitImageInfo.unitName + unitImageInfo.unitFoward + unitImageInfo.unitState);
-	PLAYERDATA->setPlayerData(this);
+	//PLAYERDATA->setPlayerData(this);
 	rc = RectMakeCenter(collider->getPos(), collider->getSize().x, collider->getSize().y);
 }
 

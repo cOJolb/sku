@@ -19,8 +19,7 @@ LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 void setWindowSize(int x, int y, int width, int height);
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
-	LPSTR lpszCmdParam, int nCmdShow)
-{
+	LPSTR lpszCmdParam, int nCmdShow){
 	m_hInstance = hInstance;
 
 	WNDCLASS wndClass;

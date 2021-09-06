@@ -12,6 +12,10 @@ C_object::C_object()
 	prevPt = pt;
 	landCollision = false;
 	wallCollision = false;
+	ani = new animation;
+	objectImage = new image;
+	frameX = 0;
+	frameY = 0;
 	/*tile = { 0,0,0,0 };
 	NONEtile = false;*/
 	//searchList.push_back(0);
@@ -136,14 +140,21 @@ void C_object::Gravity()
 
 void C_object::isLand()
 {
+	RECT bottomRc = RectMake(RectX(futureRc), futureRc.bottom, 1, 1);
+	RECT testRc = RectMakeCenter(pt.x, pt.y + collider->getSize().y/2 -1, collider->getSize().x, 1);
+	RECT testRc2 = RectMakeCenter(pt.x, pt.y-10, collider->getSize().x,1);
+	//RECT testRc3 = RectMakeCenter(RectX(futureRc), RectY(futureRc) + 10, RectWidth(futureRc), 1);
 	bool isDown = pt.y < RectY(futureRc);
 	//bool isRight = prevPt.x < pt.x;
 	//bool isLeft = prevPt.x > pt.x;
 	//bool isDown = prevPt.y <= pt.y;
 	//bool isUp = prevPt.y > pt.y;
 	landCollision = RectInRegion(OBSTACLE->getTotalLand(), &futureRc);
+	//bool NotBump = RectInRegion(OBSTACLE->getTotalLand(), &futureRc);
 	bool dontDown = RectInRegion(OBSTACLE->getTotalLand(), &futureRcB);
-	if (landCollision && isDown )
+	bool testBool = RectInRegion(OBSTACLE->getTotalLand(), &testRc2);
+	//bool testBool2 = RectInRegion(OBSTACLE->getTotalLand(), &testRc3);
+	if (landCollision && isDown &&dontDown && !testBool  )
 	{
 		isJump = false;
 		jumpPower = GRAVITY;
@@ -191,19 +202,21 @@ void C_object::isBump()
 
 void C_object::isClogged()
 {
-	RECT testRc = RectMake(RectX(futureRc),futureRc.top, 1, 1);
+	
 	bool isRight = pt.x < RectX(futureRc);
 	bool isLeft = pt.x > RectX(futureRc);
 	bool isUp = pt.y > RectY(futureRc);
-	bool dontLeft = RectInRegion(OBSTACLE->getTotalLand(), &futureRcL);
-	bool dontRight = RectInRegion(OBSTACLE->getTotalLand(), &futureRcL);
-	bool dontUp = RectInRegion(OBSTACLE->getTotalLand(), &futureRcL);
+	bool dontLeft = RectInRegion(OBSTACLE->getTotalWall(), &futureRcL);
+	bool dontRight = RectInRegion(OBSTACLE->getTotalWall(), &futureRcR);
+	bool dontUp = RectInRegion(OBSTACLE->getTotalWall(), &futureRcT);
+	bool LeftBump = RectInRegion(OBSTACLE->getTotalWall(), &futureRL);
+	bool RightBump = RectInRegion(OBSTACLE->getTotalWall(), &futureRR);
+	bool UpBump = RectInRegion(OBSTACLE->getTotalWall(), &futureRT);
 	wallCollision = RectInRegion(OBSTACLE->getTotalWall(), &futureRc);
-	bool testCollision = RectInRegion(OBSTACLE->getTotalWall(), &testRc);
 
 
 	//if (isUp && isLeft && )
-	if (wallCollision && isUp && !dontUp && testCollision )
+	if (wallCollision && isUp && dontUp )
 	{
 		//movetoDown(futureRc, 10);
 		jumpPower = GRAVITY;
@@ -213,7 +226,7 @@ void C_object::isClogged()
 			wallCollision = RectInRegion(OBSTACLE->getTotalWall(), &futureRc);
 		} while (wallCollision);
 	}
-	if (isLeft && wallCollision && !dontLeft)
+	if (isLeft && wallCollision && dontLeft)
 	{
 		
 		//movetoRight(futureRc, 10);
@@ -226,7 +239,7 @@ void C_object::isClogged()
 		
 	}
 	
-	if (isRight && wallCollision &&!dontRight)
+	if (isRight && wallCollision && dontRight)
 	{
 		
 		//movetoLeft(futureRc, 10);
@@ -299,10 +312,14 @@ void C_object::isWall()
 
 void C_object::futureRcLTRB()
 {
-	futureRcL = RectMakeCenter(RectX(futureRc) - 1, RectY(futureRc), RectWidth(futureRc), RectHeight(futureRc));
-	futureRcT = RectMakeCenter(RectX(futureRc), RectY(futureRc) - 1, RectWidth(futureRc), RectHeight(futureRc));
-	futureRcR = RectMakeCenter(RectX(futureRc) + 1, RectY(futureRc), RectWidth(futureRc), RectHeight(futureRc));
-	futureRcB = RectMakeCenter(RectX(futureRc), RectY(futureRc) + 1, RectWidth(futureRc), RectHeight(futureRc));
+	futureRcL = RectMakeCenter(futureRc.left-1, RectY(futureRc), 1, RectHeight(futureRc));
+	futureRcT = RectMakeCenter(RectX(futureRc), futureRc.top-1, RectWidth(futureRc), 1);
+	futureRcR = RectMakeCenter(futureRc.right+1, RectY(futureRc), 1, RectHeight(futureRc));
+	futureRcB = RectMakeCenter(RectX(futureRc), futureRc.bottom+1, RectWidth(futureRc), 1);
+	futureRL = RectMakeCenter(RectX(futureRc) - 1, RectY(futureRc), RectWidth(futureRc), RectHeight(futureRc));
+	futureRT = RectMakeCenter(RectX(futureRc), RectY(futureRc) - 1, RectWidth(futureRc), RectHeight(futureRc));
+	futureRR = RectMakeCenter(RectX(futureRc) + 1, RectY(futureRc), RectWidth(futureRc), RectHeight(futureRc));
+	futureRB = RectMakeCenter(RectX(futureRc), RectY(futureRc) + 1, RectWidth(futureRc), RectHeight(futureRc));
 
 }
 

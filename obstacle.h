@@ -31,5 +31,8 @@ public:
 	int getObstacleNumber() { return obstacleNumber; }
 
 	RECT getRc() { return rc; }
+
+public:
+
 };
 

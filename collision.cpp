@@ -121,6 +121,7 @@ void C_collision::stageCollision(C_player* _player)
 		if (enemyNothing && inputF && isDoor)
 		{
 			_player->setNextLevel(true);
+			break;
 		}
 		else { _player->setNextLevel(false); }
 	}

@@ -54,7 +54,7 @@ void itemScene::update()
 {
 	if (InputManager->isOnceKeyDown(VK_ESCAPE) || InputManager->isOnceKeyDown(VK_TAB))
 	{
-		SCENE->changeScene("stage1_1");
+		SCENE->changeScene("stage");
 	}
 	
 	switch (selectItem)
@@ -126,7 +126,7 @@ void itemScene::update()
 
 void itemScene::render()
 {
-	SCENE->getSceneList().find("stage1_1")->second->render();
+	SCENE->getSceneList().find("stage")->second->render();
 	IMAGE->findImage("inventory")->renderCenter(getMemDC(), { GameSizeX / 2,GameSizeY / 2 });
 	viChoice = vChoice.begin() + selectItem;
 	RECT setterBox = viChoice->rc;

@@ -91,11 +91,11 @@ void C_state::move(bool _isLeft)
 		Foward = _isLeft;
 	}*/
 	Foward = _isLeft;
-	if (prevFoward != Foward)
-	{
-		ANIMATION->start(object->getImageInfo().unitName + "LeftWalk");
-		ANIMATION->start(object->getImageInfo().unitName + "RightWalk");
-	}
+	//if (prevFoward != Foward)
+	//{
+	//	ANIMATION->start(object->getImageInfo().unitName + "LeftWalk");
+	//	ANIMATION->start(object->getImageInfo().unitName + "RightWalk");
+	//}
 	if (Foward)
 	{
 		movetoLeft(_futureRc, 2);

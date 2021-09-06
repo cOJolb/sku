@@ -4,6 +4,8 @@ mainGame::mainGame()
 {
 	//IMAGE->addImage("CVOSDC", WINSIZEX*3, WINSIZEY*3);
 	player = new C_player;
+	//PLAYERDATA->setPlayerData(player);
+
 }
 mainGame::~mainGame()
 {
@@ -15,8 +17,10 @@ HRESULT mainGame::init()
 
 	//SCENE->addScene("test", new testScene);
 	SCENE->addScene("stage", new stageScene);
+	SCENE->addScene("test", new testScene);
 	SCENE->addScene("create", new createScene);
 	SCENE->addScene("item", new itemScene);
+	SCENE->addScene("stagetest", new C_stage);
 	SCENE->changeScene("stage");
 	SCENE->init();
 	return S_OK;
@@ -32,6 +36,7 @@ void mainGame::update()
 {
 	gameNode::update();
 	SCENE->update();
+	//player->update();
 }
 
 void mainGame::render(/*HDC hdc*/)
@@ -41,7 +46,7 @@ void mainGame::render(/*HDC hdc*/)
 
 	//==============================================
 	SCENE->render();
-
+	//player->render();
 	//==============================================
 	TIME->render(getMemDC());
 

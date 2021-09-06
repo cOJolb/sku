@@ -79,6 +79,10 @@ C_imageList::C_imageList()
 	ANIMATION->addAnimation("knightRightIdle", "knightIdle", 6, 11, 7, false, true);
 	ANIMATION->addAnimation("knightLeftWalk", "knightWalk", 0, 7, 7, false, true);
 	ANIMATION->addAnimation("knightRightWalk", "knightWalk", 8, 15, 7, false, true);
+	
+	ANIMATION->start("knightLeftWalk");
+	ANIMATION->start("knightRightWalk");
+	
 	ANIMATION->addAnimation("knightLeftAttack", "knightAttack", 0, 3, 7, false, false);
 	ANIMATION->addAnimation("knightRightAttack", "knightAttack", 4, 7, 7, false, false);
 	ANIMATION->addAnimation("knightLeftHit", "knightHit", 0, 1, 7, false, false);

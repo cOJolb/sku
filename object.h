@@ -16,22 +16,30 @@ class C_object : public gameNode
 {
 protected:
 	animation* ani;
+	image* objectImage;
+
 	vector2 pt;
 	vector2 prevPt;
 	C_collider* collider;
+
+
 	RECT rc;
 	RECT futureRc;
 	RECT futureRcL;
 	RECT futureRcT;
 	RECT futureRcR;
 	RECT futureRcB;
+	RECT futureRL;
+	RECT futureRT;
+	RECT futureRR;
+	RECT futureRB;
 
 
 	C_fsm* ai;
 	vector<C_fsm*> vAi;
 
 	S_unitImageInfo unitImageInfo;
-
+	//string prevState;
 	/*list<int> searchList;
 	list<int>::iterator searchListI;*/
 
@@ -46,6 +54,9 @@ protected:
 	bool wallCollision;
 	bool landCollision;
 
+	int frameX;
+	int frameY;
+	bool isStart;
 private:
 	/*RECT tile;
 	bool NONEtile;*/
@@ -81,6 +92,7 @@ public:
 	void setAni(animation* _ani) { ani = _ani; }
 	void sethp(int _hp) { hp = _hp; }
 	void setFutureRc(RECT _rc) { futureRc = _rc; }
+	void setStart(bool _isStart) { isStart = _isStart; }
 
 public:
 	bool isCollision(C_collider* _left, C_collider* _right);

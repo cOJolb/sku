@@ -3,16 +3,16 @@
 
 C_stage::C_stage()
 {
-	mapSetting = new C_mapSetting;
-	collision = new C_collision;
-	miniMap = new C_miniMap;
-	player = nullptr;
+	//mapSetting = new C_mapSetting;
+	//collision = new C_collision;
+	//miniMap = new C_miniMap;
+	//player = nullptr;
 	//BackSecond = new camera;
 	IMAGE->addImage("CVOSDC", WINSIZEX * 3, WINSIZEY * 3);
 	IMAGE->addImage("backGroundDC", WINSIZEX * 3, WINSIZEY * 3);
 	Door = new image;
 	DoorAni = new animation;
-	
+
 }
 
 C_stage::~C_stage()
@@ -27,6 +27,11 @@ HRESULT C_stage::init()
 	//DoorAni->init(1000, 200, 5, 1);
 	//DoorAni->start();
 
+	mapSetting = new C_mapSetting;
+	collision = new C_collision;
+	miniMap = new C_miniMap;
+	//player = nullptr;
+
 	Door->init("images/map/normalStage.bmp", 1000, 200, 5, 1, true, RGB(255, 0, 255));
 	DoorAni->init(1000, 200, 200, 200);
 	DoorAni->setDefPlayFrame(false, true);
@@ -36,7 +41,9 @@ HRESULT C_stage::init()
 	mapSetting->init();
 	player = PLAYERDATA->getPlayerData();
 	player->init();
-	CAMERA->init(player->getPt().x, player->getPt().y, tileX * tileSize, tileY * tileSize, 0, 0, tileX * tileSize / 4, tileY * tileSize / 4, tileX * tileSize / 2, tileY * tileSize / 2);
+	//PLAYERDATA->getPlayerData()->init();
+	//CAMERA->init(player->getPt().x, player->getPt().y, tileX * tileSize, tileY * tileSize, 0, 0, tileX * tileSize / 4, tileY * tileSize / 4, tileX * tileSize / 2, tileY * tileSize / 2);
+	CAMERA->init(0, 0, tileX * tileSize, tileY * tileSize, 0, 0, tileX * tileSize / 4, tileY * tileSize / 4, tileX * tileSize / 2, tileY * tileSize / 2);
 	//BackSecond->init(player->getPt().x, player->getPt().y, GameSizeX, GameSizeY, 0, 0, GameSizeX, GameSizeY, GameSizeX, GameSizeY);
 	for (int i = 0; i < tileX * tileY; i++)
 	{
@@ -45,15 +52,21 @@ HRESULT C_stage::init()
 	SCENE->setSCENETYPE(SCENE_TYPE::PLAY);
 
 	OBSTACLE->createObstacle(OBSTACLE_TYPE::ITEMDOOR, { 300, 635 });
-	//ITEM->respawnPassiveItem(PASSIVEITEM::MEDAL, { 300,500 });
+	ITEM->respawnPassiveItem(PASSIVEITEM::MEDAL, { 200,635 });
+	//ENEMY->respawnEnemy(UNIT_TYPE::KNIGHT, { 300,300 });
+	ENEMY->respawnEnemy(UNIT_TYPE::KNIGHT, { 400,300 });
+	ENEMY->respawnEnemy(UNIT_TYPE::KNIGHT, { 500,300 });
+	//ENEMY->respawnEnemy(UNIT_TYPE::KNIGHT, { 500,300 });
+
 	return S_OK;
 }
 
 void C_stage::release()
 {
-	SAFE_DELETE(collision);
-	SAFE_DELETE(miniMap);
-	SAFE_DELETE(mapSetting);
+	//OBSTACLE->eraserAllObstacle();
+	//SAFE_DELETE(collision);
+	//SAFE_DELETE(miniMap);
+	//SAFE_DELETE(mapSetting);
 }
 
 void C_stage::update()
@@ -62,32 +75,38 @@ void C_stage::update()
 	{
 		SCENE->changeScene("item");
 	}
+	
 	player->update();
-	CAMERA->movePivot(player->getPt().x, player->getPt().y);
+	PLAYERDATA->setPlayerData(player);
+	//PLAYERDATA->getPlayerData()->update();
+	//CAMERA->movePivot(player->getPt().x, player->getPt().y);
+	CAMERA->movePivot(PLAYERDATA->getPlayerData()->getPt().x, PLAYERDATA->getPlayerData()->getPt().y);
 	CAMERA->update();
 	/*BackSecond->movePivot(player->getPt().x, player->getPt().y);
 	BackSecond->update();*/
 	ENEMY->update();
+	//collision->stageCollision(player);
 	collision->stageCollision(player);
 	//DoorAni->frameUpdate(100);
 	DoorAni->frameUpdate(TIME->getElapsedTime() * 1.0f);
-	PLAYERDATA->setPlayerData(player);
+	//PLAYERDATA->setPlayerData(player);
 }
 
 void C_stage::render()
 {
 	IMAGE->findImage("BackGround")->render(getCVOSDC());
 
-	/*IMAGE->findImage("BackGround2")->render(getBG());
-	_backGroundBuffer->render(IMAGE->findImage("backGroundDC")->getMemDC(), 0, 0, BackSecond->getRect().left, BackSecond->getRect().top,
-		RectWidth(BackSecond->getRect()), RectHeight(BackSecond->getRect()));
-	IMAGE->findImage("backGroundDC")->stretchRenderXY(getCVOSDC(), 0, 0, 1);*/
+	//IMAGE->findImage("BackGround2")->render(getBG());
+	//_backGroundBuffer->render(IMAGE->findImage("backGroundDC")->getMemDC(), 0, 0, BackSecond->getRect().left, BackSecond->getRect().top,
+	//	RectWidth(BackSecond->getRect()), RectHeight(BackSecond->getRect()));
+	//IMAGE->findImage("backGroundDC")->stretchRenderXY(getCVOSDC(), 0, 0, 1);
 
 	Door->aniRender(getCVOSDC(), 400, 500, DoorAni);
 	OBSTACLE->render();
 	//Door->aniRenderMe(getCVOSDC(), 400, 600, DoorAni);
 	//Door->render(getCVOSDC(), 400, 500);
 	player->render();
+	//PLAYERDATA->getPlayerData()->render();
 	//OBSTACLE->render();
 	ENEMY->render();
 	ITEM->render();
@@ -126,6 +145,14 @@ RECT C_stage::checkGameSize()
 	}
 	//MoveWindow(gethwnd(), left, top, right, bottom, TRUE);    // listboxÀÇ size¸¦ change
 	return { left, top, right, bottom };
+}
+
+void C_stage::curRelease()
+{
+	OBSTACLE->eraserAllObstacle();
+	SAFE_DELETE(collision);
+	SAFE_DELETE(miniMap);
+	SAFE_DELETE(mapSetting);
 }
 
 bool C_stage::isNextStage()

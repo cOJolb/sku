@@ -3,10 +3,15 @@
 class stageScene : public C_stage
 {
 private:
-	map<string, C_stage*> stageMap;
+	//map<string, C_stage*> stageMap;
+	vector<C_stage*> vstage;
+	vector<C_stage*>::iterator vistage;
 	//C_stage* firstStage;
 	C_stage* curStage;
-	C_stage* NextStage;
+	//C_stage* NextStage;
+	int stageNumber;
+
+	//bool nexttest;
 public:
 	stageScene();
 	~stageScene();

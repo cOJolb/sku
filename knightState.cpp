@@ -59,6 +59,7 @@ void knight_Trace::update()
 	}
 	else move();
 	object->setFutureRc(_futureRc);
+
 }
 
 void knight_Trace::exit()
@@ -84,12 +85,14 @@ void knight_Atk::enter()
 		object->setUnitImageInfo(object->getImageInfo().unitName, "Left", "Attack");
 		object->setAni(ANIMATION->findAnimation(object->getImageInfo().unitName + "LeftAttack"));
 		object->getAni()->start();
+		object->setStart(true);
 	}
 	else
 	{
 		object->setUnitImageInfo(object->getImageInfo().unitName, "Right", "Attack");
 		object->setAni(ANIMATION->findAnimation(object->getImageInfo().unitName + "RightAttack"));
 		object->getAni()->start();
+		object->setStart(true);
 	}
 	
 	delay = 0;

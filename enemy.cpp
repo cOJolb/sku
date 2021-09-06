@@ -35,12 +35,14 @@ void C_enemy::update()
 	rc = RectMakeCenter(collider->getPos(), collider->getSize().x, collider->getSize().y);
 	ptUpdate();
 	ani = ANIMATION->findAnimation(unitImageInfo.unitName + unitImageInfo.unitFoward + unitImageInfo.unitState);
+	if (unitImageInfo.unitFoward == "Left"){frameY = 0;}
+	else { frameY = 1; }
 }
 
 void C_enemy::render()
 {
 	RECT rec = RectMakeCenter(pt, 20, 20);
 	Rectangle(getMemDC(), rec.left, rec.top, rec.right, rec.bottom);
-
-	IMAGE->findImage(unitImageInfo.unitName+ unitImageInfo.unitState)->aniRender(getCVOSDC(), pt.x - IMAGE->findImage(unitImageInfo.unitName+ unitImageInfo.unitState)->getFrameWidth() / 2, pt.y - IMAGE->findImage(unitImageInfo.unitName + unitImageInfo.unitState)->getFrameHeight() / 2, ani);
+	IMAGE->findImage(unitImageInfo.unitName + unitImageInfo.unitState)->frameRenderCenter(getCVOSDC(), pt, frameX, frameY);
+	//IMAGE->findImage(unitImageInfo.unitName+ unitImageInfo.unitState)->aniRender(getCVOSDC(), pt.x - IMAGE->findImage(unitImageInfo.unitName+ unitImageInfo.unitState)->getFrameWidth() / 2, pt.y - IMAGE->findImage(unitImageInfo.unitName + unitImageInfo.unitState)->getFrameHeight() / 2, ani);
 }

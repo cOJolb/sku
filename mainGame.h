@@ -5,6 +5,7 @@
 #include "createScene.h"
 #include "itemScene.h"
 #include "stageScene.h"
+#include "stage.h"
 class mainGame : public gameNode
 {
 private:

@@ -169,3 +169,4 @@ void C_obstacle::setValue(bool _isUnmovable, bool _isDownJump, bool _isLand)
 	isDownJump = _isDownJump;
 	isLand = _isLand;
 }
+

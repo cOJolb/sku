@@ -88,4 +88,29 @@ viObstacle obstacleManager::getviDoor(int number)
 	return vi_door;
 }
 
+void obstacleManager::eraserAllObstacle()
+{
+	totalWall = CreateRectRgn(0, 0, 0, 0);
+	totalLand = CreateRectRgn(0, 0, 0, 0);
+	v_obstacle.erase(v_obstacle.begin(), v_obstacle.end());
+
+	//for (int i = 0; i < v_obstacle.size(); i++)
+	//{
+	//	v_obstacle.erase(v_obstacle.begin() + i);
+	//}
+	//for (int i = 0; i < v_land.size(); i++ )
+	//{
+	//	v_land.erase(v_land.begin() + i);
+	//}
+	//for (int i = 0; i < v_wall.size(); i++ )
+	//{
+	//	v_wall.erase(v_wall.begin() + i);
+	//}
+	//for (int i = 0; i < v_door.size(); i++ )
+	//{
+	//	v_door.erase(v_door.begin() + i);
+	//}
+	
+}
+
 

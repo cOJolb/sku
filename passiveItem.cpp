@@ -51,7 +51,8 @@ C_MedalOfCarleon::C_MedalOfCarleon(vector2 _pt)
 
 HRESULT C_MedalOfCarleon::init(C_player* _player)
 {
-	_player->sethp(_player->gethp() + 20);
+	_player->setMaxHp(_player->getmaxHp() + 30);
+	_player->sethp(_player->gethp() + 10);
 	if(_player->gethp() >= _player->getmaxHp()) { _player->sethp(_player->getmaxHp()); }
 	return S_OK;
 }

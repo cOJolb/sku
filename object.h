@@ -107,6 +107,7 @@ public:
 	void setPt(vector2 _pt) { pt = _pt; }
 	void setUnitImageInfo(string _name, string _Foward, string _state);
 	void setAni(animation* _ani) { ani = _ani; }
+	void setMaxHp(int _maxHp) { maxHp = _maxHp; }
 	void sethp(int _hp) { hp = _hp; }
 	void setFutureRc(RECT _rc) { futureRc = _rc; }
 	void setStart(bool _isStart) { isStart = _isStart; }

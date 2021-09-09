@@ -4,7 +4,7 @@
 stageScene::stageScene()
 {
 	curStage = new C_stage;
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		C_stage* tempStage = new C_stage;
 		vstage.push_back(tempStage);
@@ -58,12 +58,13 @@ void stageScene::render()
 void stageScene::nextStage()
 {
 	//if(curStage->isNextStage())
-	if (PLAYERDATA->getPlayerData()->getNextLevel())
+	if (PLAYERDATA->getPlayerData()->getNextLevel() && stageNumber<4)
 	{
 		stageNumber++;
-		vistage = vstage.begin() + stageNumber;
+		if (stageNumber >= 4) { stageNumber = 4; }
+		//vistage = vstage.begin() + stageNumber;
 		curStage->curRelease();
-		curStage = (*vistage);
+		//curStage = (*vistage);
 		curStage = vstage[stageNumber];
 		curStage->init(stageNumber);
 

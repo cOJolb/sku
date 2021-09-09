@@ -59,6 +59,8 @@ HRESULT C_MedalOfCarleon::init(C_player* _player)
 
 void C_MedalOfCarleon::release(C_player* _player)
 {
+	_player->setMaxHp(_player->getmaxHp() - 30);
+	if (_player->gethp() >= _player->getmaxHp()) { _player->sethp(_player->getmaxHp()); }
 }
 
 void C_MedalOfCarleon::update(C_player* _player)

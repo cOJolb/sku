@@ -422,6 +422,30 @@ void image::render(HDC hdc, const int destX, const int destY, const int sourX, c
 			_imageInfo->hMemDC, sourX, sourY, SRCCOPY);
 	}
 }
+void image::renderCenter(HDC hdc,vector2 _pt, const int sourX, const int sourY, const int sourWidth, const int sourheight)
+{
+	if (_isTrans)
+	{
+		//비트맵을 불러올때 특정 색상을 제외하고 복사해주는 함수
+		GdiTransparentBlt(
+			hdc,						//복삳될 장소의 DC
+			_pt.x - this->getWidth() / 2,						//복사될 좌표의 시작점X
+			_pt.y - this->getHeight() / 2,							//복사될 좌표의 시작점Y
+			sourWidth,			//복사될 이미지 가로크기
+			sourheight,			//복사될 이미지 세로크기
+			_imageInfo->hMemDC,			//복사될 대상DC
+			sourX,							//복사시작 지점 X
+			sourY,							//복사시작 지점 Y
+			sourWidth,			//복사영역 가로크기
+			sourheight,			//복사영역 세로크기
+			_transColor);
+	}
+	else {
+		//BitBlt : DC영역끼리 고속복사
+		BitBlt(hdc, _pt.x - this->getWidth() / 2, _pt.y - this->getHeight() / 2, _imageInfo->width, _imageInfo->height,
+			_imageInfo->hMemDC, 0, 0, SRCCOPY);
+	}
+}
 
 void image::frameRender(HDC hdc, const int destX, const int destY)
 {
@@ -540,6 +564,10 @@ void image::frameRenderCenter(HDC hdc, vector2 _pt, const int currentFrameX, con
 			_imageInfo->currentFrameX * _imageInfo->frameWidth,
 			_imageInfo->currentFrameY * _imageInfo->frameHeight, SRCCOPY);
 	}
+}
+
+void image::RotateframeRenderCenter(HDC hdc, vector2 _pt, const int currentFrameX, const int currentFrameY, float angle)
+{
 }
 
 void image::loopRender(HDC hdc, const LPRECT drawArea, int offsetX, int offsetY)
@@ -749,6 +777,68 @@ void image::alphaRender(HDC hdc, const int destX, const int destY, const int sou
 	}
 }
 
+void image::alphaFrameRenderCenter(HDC hdc, vector2 _pt, const int currentFrameX, const int currentFrameY, BYTE alpha)
+{
+	//알파값 초기화
+	_blendFunc.SourceConstantAlpha = alpha;
+	_imageInfo->currentFrameX = currentFrameX;
+	_imageInfo->currentFrameY = currentFrameY;
+	if (_isTrans)
+	{
+		BitBlt(
+			_blendImage->hMemDC,
+			0,
+			0,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight,
+			hdc, 
+			_pt.x - this->getFrameWidth() / 2,
+			_pt.y - this->getFrameHeight() / 2,
+			SRCCOPY);
+
+		GdiTransparentBlt(
+			_blendImage->hMemDC,
+			0,
+			0,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight,
+			_imageInfo->hMemDC, 
+			_imageInfo->currentFrameX * _imageInfo->frameWidth,
+			_imageInfo->currentFrameY * _imageInfo->frameHeight,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight,
+			_transColor);
+
+		AlphaBlend(
+			hdc, 
+			_pt.x - this->getFrameWidth()/2, 
+			_pt.y - this->getFrameHeight()/2, 
+			_imageInfo->frameWidth, 
+			_imageInfo->frameHeight, 
+			_blendImage->hMemDC, 
+			0, 
+			0,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight,
+			_blendFunc);
+	}
+	else
+	{
+		AlphaBlend(
+			hdc, 
+			_pt.x - this->getFrameWidth() / 2,
+			_pt.y - this->getFrameHeight() / 2,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight,
+			_imageInfo->hMemDC, 
+			_imageInfo->currentFrameX * _imageInfo->frameWidth,
+			_imageInfo->currentFrameY * _imageInfo->frameHeight,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight,
+			_blendFunc);
+	}
+}
+
 void image::aniRender(HDC hdc, const int destX, const int destY, animation* ani)
 {
 	render(hdc, destX, destY, ani->getFramePos().x, ani->getFramePos().y, ani->getFrameWidth(), ani->getFrameHeight());
@@ -756,6 +846,10 @@ void image::aniRender(HDC hdc, const int destX, const int destY, animation* ani)
 void image::aniRenderCenter(HDC hdc, const int destX, const int destY, animation* ani)
 {
 	render(hdc, destX - _imageInfo->frameWidth/2, destY- _imageInfo->frameHeight / 2, ani->getFramePos().x, ani->getFramePos().y, ani->getFrameWidth(), ani->getFrameHeight());
+}
+void image::aniRenderCenterAlpha(HDC hdc, const int destX, const int destY, animation* ani, BYTE alpha)
+{
+	alphaRender(hdc, destX - _imageInfo->frameWidth / 2, destY - _imageInfo->frameHeight / 2, ani->getFramePos().x, ani->getFramePos().y, ani->getFrameWidth(), ani->getFrameHeight(), alpha);
 }
 void image::aniRenderMe(HDC hdc, const int destX, const int destY, animation* ani)
 {

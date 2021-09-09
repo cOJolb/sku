@@ -56,7 +56,7 @@ void C_mapTool::render()
         /*if (isDebug)
             Rectangle(getMemDC(), room.tile[i].rcTile.left, room.tile[i].rcTile.top, room.tile[i].rcTile.right, room.tile[i].rcTile.bottom);*/
         if(room.tile[i].type != OBSTACLE_TYPE::NONE) IMAGE->frameRenderCenter("tile", getMemDC(), room.tile[i].pt, room.tile[i].objFrame.x, room.tile[i].objFrame.y);
-        //IMAGE->frameRender("monsterTile", getMemDC(), room.tile[i].rcTile.left, room.tile[i].rcTile.top, room.tile[i].monsterFrame.x, room.tile[i].monsterFrame.y);
+        if(room.tile[i].monstertype != UNIT_TYPE::PLAYER) IMAGE->frameRender("monsterTile", getMemDC(), room.tile[i].rc.left, room.tile[i].rc.top, room.tile[i].monsterFrame.x, room.tile[i].monsterFrame.y);
     }
 }
 
@@ -136,6 +136,15 @@ void C_mapTool::setMap()
             InvalidateRect(m_hWnd, NULL, false);
         }
     }
+    for (int i = 0; i < tileX * tileY; i++)
+    {
+        if (PtInRect(&room.tile[i].rc, m_ptMouse))
+        {
+            room.tile[i].monstertype = monsterSelect(SUBWIN->GetMonsterFrame().x, SUBWIN->GetMonsterFrame().y);
+            room.tile[i].monsterFrame = { static_cast<float>(SUBWIN->GetMonsterFrame().x), static_cast<float>(SUBWIN->GetMonsterFrame().y) };
+            InvalidateRect(m_hWnd, NULL, false);
+        }
+    }
 }
 
 OBSTACLE_TYPE C_mapTool::objSelect(int frameX, int frameY)
@@ -163,6 +172,9 @@ OBSTACLE_TYPE C_mapTool::objSelect(int frameX, int frameY)
         case 5:
             return OBSTACLE_TYPE::R_FLOOR;
             break;
+        case 6:
+            return OBSTACLE_TYPE::NORMALDOOR;
+            break;
         }
         break;
     case 1:
@@ -186,6 +198,12 @@ OBSTACLE_TYPE C_mapTool::objSelect(int frameX, int frameY)
         case 5:
             return OBSTACLE_TYPE::RA_LAND;
             break;
+        case 6:
+            return OBSTACLE_TYPE::START;
+            break;
+        default:
+            return OBSTACLE_TYPE::NONE;
+            break;
         }
         break;
     case 2:
@@ -207,6 +225,9 @@ OBSTACLE_TYPE C_mapTool::objSelect(int frameX, int frameY)
             return OBSTACLE_TYPE::NONE;
             break;
         case 5:
+            return OBSTACLE_TYPE::NONE;
+            break;
+        default:
             return OBSTACLE_TYPE::NONE;
             break;
         }
@@ -232,7 +253,38 @@ OBSTACLE_TYPE C_mapTool::objSelect(int frameX, int frameY)
         case 5:
             return OBSTACLE_TYPE::LCA_LAND;
             break;
+        default:
+            return OBSTACLE_TYPE::NONE;
+            break;
         }
+        break;
+    default:
+        return OBSTACLE_TYPE::NONE;
+        break;
+    }
+}
+
+UNIT_TYPE C_mapTool::monsterSelect(int frameX, int frameY)
+{
+    switch (frameY)
+    {
+    case 0:
+        switch (frameX)
+        {
+        case 0:
+            break;
+        case 1:
+            return UNIT_TYPE::KNIGHT;
+            break;
+        case 2:
+            return UNIT_TYPE::BIGKNIGHT;
+            break;
+        case 3:
+            return UNIT_TYPE::BIGENT;
+            break;
+        }
+        break;
+    default:
         break;
     }
 }

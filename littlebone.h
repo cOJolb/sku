@@ -9,15 +9,19 @@ public:
 	~C_littlebone();
 
 public:
-	virtual HRESULT init();
-	virtual void release();
-	virtual void update();
-	virtual void render();
+	//virtual HRESULT init();
+	//virtual void release();
+	//virtual void update();
+	//virtual void render();
+public:
+	virtual void playerChange(vector2 _pt, RECT& _rc, bool _isLeft, S_skulInfo _sInfo);
+	virtual void playerDashMove(RECT& _rc, bool _isLeft, S_skulInfo _sInfo);
+	virtual void playerAttack(vector2& _pt, RECT& _rc, bool _isLeft, S_skulInfo _sInfo, int number);
+	virtual void playerJumpAtk(vector2 _pt, RECT& _rc, bool _isLeft, S_skulInfo _sInfo);
+	virtual void skillA(vector2& _pt, RECT& _rc, bool _isLeft, S_skulInfo _sInfo);
+	virtual void skillB(vector2& _pt, RECT& _rc, bool _isLeft, S_skulInfo _sInfo);
 
 public:
-	virtual void playerAttack(vector2 _pt, bool _isLeft);
-	virtual void playerDashMove(RECT& _rc, int& _DashCount, bool _DashJump, bool _DashFoward, float _DashSpeed);
-	virtual void skillA();
-	virtual void skillB();
+	virtual bool PlayJumpAtk();
 };
 

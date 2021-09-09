@@ -23,6 +23,28 @@ bool C_state::inRange(int _range, vector2 _pt)
 	else return false;
 }
 
+bool C_state::crossRange(int _range, vector2 _pt)
+{
+	bool horizontality = _pt.y >= object->getPt().y + object->getCollider()->getSize().y/2 - _range && _pt.y <= object->getPt().y + object->getCollider()->getSize().y / 2 + _range;
+	bool Perpendicular = _pt.x >= object->getPt().x - _range && _pt.x <= object->getPt().x + _range;
+	if (horizontality || Perpendicular)
+	{
+		return true;
+	}
+	else return false;
+}
+
+bool C_state::crossRangeX(int _range, vector2 _pt)
+{
+
+	bool Perpendicular = _pt.x >= object->getPt().x - _range && _pt.x <= object->getPt().x + _range;
+	if (Perpendicular)
+	{
+		return true;
+	}
+	else return false;
+}
+
 bool C_state::isLeft(vector2 _pt)
 {
 	if (object->getPt().x - _pt.x >= 0)
@@ -57,11 +79,11 @@ void C_state::move()
 		movetime = RND->getFromIntTo(60, 200);
 		Foward = RND->getFromIntTo(0, 1);
 	}
-	if (prevFoward != Foward)
+	/*if (prevFoward != Foward)
 	{
 		ANIMATION->start(object->getImageInfo().unitName + "LeftWalk");
 		ANIMATION->start(object->getImageInfo().unitName + "RightWalk");
-	}
+	}*/
 	if (Foward)
 	{
 		movetoLeft(_futureRc, 2);
@@ -81,36 +103,24 @@ void C_state::move()
 
 void C_state::move(bool _isLeft)
 {
-	//vector2 movePt = object->getPt();
 	_futureRc = RectMakeCenter(object->getPt(), object->getCollider()->getSize().x, object->getCollider()->getSize().y);
-	/*count++;
+	count++;
 	if (count > movetime)
 	{
 		count = 0;
-		movetime = RND->getFromIntTo(60, 200);
+		movetime = 50;
 		Foward = _isLeft;
-	}*/
-	Foward = _isLeft;
-	//if (prevFoward != Foward)
-	//{
-	//	ANIMATION->start(object->getImageInfo().unitName + "LeftWalk");
-	//	ANIMATION->start(object->getImageInfo().unitName + "RightWalk");
-	//}
+	}
+
 	if (Foward)
 	{
 		movetoLeft(_futureRc, 2);
-		//movePt.x -= 2;
 		object->setUnitImageInfo(object->getImageInfo().unitName, "Left", "Walk");
 	}
 	else
 	{
 		movetoRight(_futureRc, 2);
-		//movePt.x += 2;
 		object->setUnitImageInfo(object->getImageInfo().unitName, "Right", "Walk");
 	}
 
-	//if (onLand(_futureRc)) { object->setFutureRc(_futureRc); }//object->setPt(movePt);
-	//else Foward = !Foward;
-
-	//prevFoward = Foward;
 }

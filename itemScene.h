@@ -1,6 +1,6 @@
 #pragma once
 #include "gameNode.h"
-#include "testScene.h"
+#include "stageScene.h"
 struct S_choice
 {
 	vector2 pt;

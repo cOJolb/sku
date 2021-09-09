@@ -28,6 +28,8 @@ public:
 
 public:
 	bool inRange(int _range, vector2 _pt);
+	bool crossRange(int _range, vector2 _pt);
+	bool crossRangeX(int _range, vector2 _pt);
 	bool isLeft(vector2 _pt);
 	bool onLand(RECT _rc);
 	void move();

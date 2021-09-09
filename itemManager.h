@@ -29,6 +29,7 @@ public:
 	void respawnSkulItem(SKUL_TYPE _type, vector2 _pt);
 	void respawnActiveItem(ACTIVEITEM _type, vector2 _pt);
 	void respawnGoodsItem(GOODSITEM _type, vector2 _pt);
+	void respawnRandom(vector2 _pt);
 	void EquipPassiveItem(C_item* _passiveItem);
 
 public:

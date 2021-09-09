@@ -7,17 +7,19 @@ protected:
 public:
 	C_clown();
 	~C_clown();
-
 public:
-	virtual HRESULT init();
-	virtual void release();
-	virtual void update();
-	virtual void render();
-
+	//virtual HRESULT init();
+	//virtual void release();
+	//virtual void update();
+	//virtual void render();
 public:
-	virtual void playerAttack();
-	virtual void playerDashMove();
-	virtual void skillA();
-	virtual void skillB();
+	virtual void playerChange(vector2 _pt, RECT& _rc, bool _isLeft, S_skulInfo _sInfo);
+	virtual void playerDashMove(RECT& _rc, bool _isLeft, S_skulInfo _sInfo);
+	virtual void playerAttack(vector2& _pt, RECT& _rc, bool _isLeft, S_skulInfo _sInfo, int number);
+	virtual void playerJumpAtk(vector2 _pt, RECT& _rc, bool _isLeft, S_skulInfo _sInfo);
+	virtual void skillA(vector2& _pt, RECT& _rc, bool _isLeft, S_skulInfo _sInfo);
+	virtual void skillB(vector2& _pt, RECT& _rc, bool _isLeft, S_skulInfo _sInfo);
+public:
+	virtual bool PlayJumpAtk();
 };
 

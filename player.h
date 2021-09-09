@@ -25,18 +25,31 @@
 class C_player : public C_object 
 {
 protected:
+	bool isLeft;
 	bool DashFoward;
-	int DashCount;
+
+	bool isSkulChange;
+	bool atkReady;
+	bool isAtk;
+	bool isAtk2;
+	bool isJumpAtk;
+	bool skillA;
+	bool skillB;
+
 	bool isDash;
 	bool playerDoubleDash;
 	bool playerDoubleJump;
 	bool playerDashJump;
-	int DashJumpCount;
-	bool isLeft;
-	int DashDelay;
-	bool isAtk;
-	int atkCount;
+	bool DontMove;
 
+	int DashDelay;
+	int DashCount;
+	int DashJumpCount;
+	int atkCount;
+	int jumpAtkCount;
+	int skill1Count;
+	int skill2Count;
+	int changeCount;
 
 	S_skulInfo skulInfo;
 
@@ -69,24 +82,28 @@ public:
 	void playerDash();
 	void playerDash_Jump();
 	void playerAtk();
+	void playerJumpAtk();
+	void playerSkill1();
+	void playerSkill2();
+
 	void changeSkul();
 	
 public:
 	S_skulInfo getPlayerInfo() { return skulInfo; }
-	//vector<C_skul*> getvSkul() { return vskul; }
-	//vector<C_skul*>::iterator getviSkul(bool _CurentSkul);
+
 	C_skul* getCurSkul() { return curSkul; }
 	C_skul* getNextSkul() { return nextSkul; }
 	bool getNextLevel() { return NextLevel; }
+	bool getHaveTwoSkill() { return skulInfo.haveTwoSkill; }
+	bool getisLeft() { return isLeft; }
+	float getSkillACoolTime();
+	float getSkillBCoolTime();
+	float getChangeCoolTime();
 public:
 	void setPlayerInfo(S_skulInfo _playerInfo) { skulInfo = _playerInfo; }
 	void setCurSkul(SKUL_TYPE _type);
 	void setNextSkul(SKUL_TYPE _type);
 	void setNextLevel(bool _istrue) { NextLevel = _istrue; }
-	//virtual void playerDashMove();
-	//void playerAtk();
-	//void playerSkillA();
-	//void playerSkillS();
-	//SKUL_TYPE getSkulType(){return type;}
+
 };
 

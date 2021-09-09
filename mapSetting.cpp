@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "mapSetting.h"
 
-C_mapSetting::C_mapSetting()
+C_mapSetting::C_mapSetting(int number)
 {
 	/*for (int i = 0; i < tileX*tileY; i++)
 	{
@@ -12,11 +12,23 @@ C_mapSetting::C_mapSetting()
 	}*/
 	for (int i = 0; i < (UINT)FILE_TYPE::END; i++) maxRoomNum[i] = 0;
 	loadFolder();
-	randomMap = RND->getFromIntTo(0, maxRoomNum[(UINT)FILE_TYPE::NORMAL] -1);
-	//viroom = vroom.begin() + 2;
+	switch (number)
+	{
+	case 0:
+		randomMap = 3;
+		break;
+	case 4:
+		randomMap = 4;
+		break;
+	default:
+		randomMap = number - 1;
+		break;
+	}
+	//randomMap = RND->getFromIntTo(0, maxRoomNum[(UINT)FILE_TYPE::NORMAL] -1);
+	//viroom = vroom.begin() + 6;
 	viroom = vroom.begin() + randomMap;
 	for (int i = 0; i < tileX * tileY; i++)
-	{
+	{  
 		tile[i] = viroom->tile[i];
 		OBSTACLE->saveTileData(tile[i], i);
 	}
@@ -32,7 +44,9 @@ HRESULT C_mapSetting::init()
 	for (int i = 0; i < tileX * tileY; i++)
 	{
 		if (tile[i].type != OBSTACLE_TYPE::NONE) OBSTACLE->createObstacle(tile[i].type, tile[i].pt/*, tile[i].tileNumber*/);
+		if (tile[i].monstertype != UNIT_TYPE::PLAYER) ENEMY->respawnEnemy(tile[i].monstertype, tile[i].pt);
 	}
+	
 	return S_OK;
 }
 

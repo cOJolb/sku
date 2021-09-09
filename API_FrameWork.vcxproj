@@ -146,10 +146,13 @@
     <ClInclude Include="animation.h" />
     <ClInclude Include="animationManager.h" />
     <ClInclude Include="API_FrameWork.h" />
+    <ClInclude Include="BigEnt.h" />
+    <ClInclude Include="BigEntState.h" />
+    <ClInclude Include="Bigknight.h" />
+    <ClInclude Include="BigknightState.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="bulletManager.h" />
     <ClInclude Include="camera.h" />
-    <ClInclude Include="changePlayer.h" />
     <ClInclude Include="collider.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="commonMacroFunction.h" />
@@ -157,6 +160,7 @@
     <ClInclude Include="createScene.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
+    <ClInclude Include="endScene.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="enemyBullet.h" />
     <ClInclude Include="enemyManager.h" />
@@ -183,6 +187,7 @@
     <ClInclude Include="passiveItem.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playerData.h" />
+    <ClInclude Include="playerUI.h" />
     <ClInclude Include="skul.h" />
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Resource.h" />
@@ -192,19 +197,19 @@
     <ClInclude Include="skulBullet.h" />
     <ClInclude Include="skulItem.h" />
     <ClInclude Include="soundManager.h" />
-    <ClInclude Include="stage1_1.h" />
     <ClInclude Include="stage.h" />
     <ClInclude Include="stageScene.h" />
+    <ClInclude Include="startScene.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="subWindow.h" />
     <ClInclude Include="subWindowSetting.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="testScene.h" />
     <ClInclude Include="timeManager.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="txtData.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="vector2.h" />
+    <ClInclude Include="warrior.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="activeItem.cpp" />
@@ -213,15 +218,19 @@
     <ClCompile Include="API_FrameWork.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="BigEnt.cpp" />
+    <ClCompile Include="BigEntState.cpp" />
+    <ClCompile Include="Bigknight.cpp" />
+    <ClCompile Include="BigknightState.cpp" />
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="bulletManager.cpp" />
     <ClCompile Include="camera.cpp" />
-    <ClCompile Include="changePlayer.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="clown.cpp" />
     <ClCompile Include="createScene.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
+    <ClCompile Include="endScene.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="enemyBullet.cpp" />
     <ClCompile Include="enemyManager.cpp" />
@@ -247,23 +256,24 @@
     <ClCompile Include="passiveItem.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playerData.cpp" />
+    <ClCompile Include="playerUI.cpp" />
     <ClCompile Include="skul.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="littlebone.cpp" />
     <ClCompile Include="skulBullet.cpp" />
     <ClCompile Include="skulItem.cpp" />
     <ClCompile Include="soundManager.cpp" />
-    <ClCompile Include="stage1_1.cpp" />
     <ClCompile Include="stage.cpp" />
     <ClCompile Include="stageScene.cpp" />
+    <ClCompile Include="startScene.cpp" />
     <ClCompile Include="state.cpp" />
     <ClCompile Include="subWindow.cpp" />
     <ClCompile Include="subWindowSetting.cpp" />
-    <ClCompile Include="testScene.cpp" />
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="txtData.cpp" />
     <ClCompile Include="utils.cpp" />
+    <ClCompile Include="warrior.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="API_FrameWork.rc" />

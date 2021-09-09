@@ -20,6 +20,11 @@ private:
 	HRGN totalWall;
 	HRGN wallRGN;
 
+	vObstacle v_floor;
+	viObstacle vi_floor;
+	HRGN totalFloor;
+	HRGN floorRGN;
+
 	vObstacle v_door;
 	viObstacle vi_door;
 
@@ -43,6 +48,7 @@ public:
 	vObstacle getvWall() { return v_wall; }
 	viObstacle getviWall(int number);
 	HRGN getTotalWall() { return totalWall; }
+	HRGN getTotalFloor() { return totalFloor; }
 	vObstacle getvDoor() { return v_door; }
 	viObstacle getviDoor(int number);
 	

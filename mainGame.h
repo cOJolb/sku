@@ -1,11 +1,13 @@
 #pragma once
 #include"gameNode.h"
 #include "player.h"
-#include "testScene.h"
+//#include "testScene.h"
 #include "createScene.h"
 #include "itemScene.h"
 #include "stageScene.h"
-#include "stage.h"
+#include "startScene.h"
+#include "endScene.h"
+//#include "stage.h"
 class mainGame : public gameNode
 {
 private:

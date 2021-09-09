@@ -13,6 +13,9 @@ C_obstacle::C_obstacle(vector2 _pt, OBSTACLE_TYPE _type)
 	pt = { _pt.x + IMAGE->findImage("tile")->getFrameWidth() / 2 , _pt.y + IMAGE->findImage("tile")->getFrameHeight() / 2 };
 	collider = new C_collider(pt, { IMAGE->findImage("tile")->getFrameWidth() ,IMAGE->findImage("tile")->getFrameHeight() });
 	//obstacleNumber = _number;
+	isStart = false;
+	isDoor = false;
+	setValue(false, false, false);
 	setObstacleValue();
 	rc = RectMakeCenter(collider->getPos(), collider->getSize().x, collider->getSize().y);
 }
@@ -38,13 +41,16 @@ void C_obstacle::update()
 
 void C_obstacle::render()
 {
-	//RECT rec = RectMakeCenter(pt, tileSize, tileSize);
-	//IMAGE->frameRender("tile", getMemDC(),rc.left,rc.top, frame.x, frame.y);
 	if (isDoor)
 	{
-		collider->setSize({ 90,90 });
-		IMAGE->findImage(doorType + "Door")->aniRenderCenter(getCVOSDC(), pt.x-15, pt.y-60, ANIMATION->findAnimation(doorType + "DoorAni")); 
+		if (ENEMY->getvEnemy().size() <= 0)
+		{
+			collider->setSize({ 90,180 });
+			IMAGE->findImage(doorType + "Door")->aniRenderCenter(getCVOSDC(), pt.x, pt.y - 37, ANIMATION->findAnimation(doorType + "DoorAni"));
+		}
+		else { IMAGE->findImage(doorType + "Door")->frameRenderCenter(getCVOSDC(), { pt.x, pt.y - 37 },5,0); }
 	}
+	else if(isStart){}
 	else{IMAGE->frameRenderCenter("tile", getCVOSDC(), pt, frame.x, frame.y);}
 	
 }
@@ -71,11 +77,11 @@ void C_obstacle::setObstacleValue()
 		break;
 	case OBSTACLE_TYPE::L_FLOOR:
 		frame = { 4,0 };
-		setValue(false, false, true);
+		setValue(true, false, true);
 		break;
 	case OBSTACLE_TYPE::R_FLOOR:
 		frame = { 5,0 };
-		setValue(false, false, true);
+		setValue(true, false, true);
 		break;
 	case OBSTACLE_TYPE::L_LAND:
 		frame = { 0,1 };
@@ -159,6 +165,10 @@ void C_obstacle::setObstacleValue()
 		setValue(false, false, false);
 		isDoor = true;
 		doorType = "skul";
+		break;
+	case OBSTACLE_TYPE::START:
+		setValue(false, false, false);
+		isStart = true;
 		break;
 	}
 }

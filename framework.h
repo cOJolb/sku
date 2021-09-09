@@ -47,6 +47,8 @@
 #include "camera.h"
 #include"subWindow.h"
 #include"itemManager.h"
+#include"bulletManager.h"
+#include "playerUI.h"
 
 //======================================
 //##			매니저들			  ##
@@ -67,6 +69,8 @@
 #define CAMERA			camera::getSingleton()
 #define SUBWIN			C_subWindow::getSingleton()
 #define ITEM			itemManager::getSingleton()
+#define BULLET			bulletManager::getSingleton()
+#define PLAYERUI		playerUI::getSingleton()
 //==========================================
 //				 매크로 설정
 //==========================================

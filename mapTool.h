@@ -27,7 +27,7 @@ public:
 
 	OBSTACLE_TYPE objSelect(int frameX, int frameY);
 
-	//MONSTER_TYPE monsterSelect(int frameX, int frameY);
+	UNIT_TYPE monsterSelect(int frameX, int frameY);
 
 	S_tagTile* getTile() { return room.tile; }
 

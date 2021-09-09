@@ -1,6 +1,7 @@
 #pragma once
 #include "gameNode.h"
 #include "player.h"
+#include "obstacle.h"
 #include "mapSetting.h"
 #include "collision.h"
 #include "miniMap.h"
@@ -17,13 +18,14 @@ private:
 
 	image* Door;
 	animation* DoorAni;
-	//camera* BackSecond;
+	bool isFinish;
+	bool test;
 public:
 	C_stage();
 	~C_stage();
 
 public:
-	HRESULT init();
+	HRESULT init(int number);
 	void release();
 	void update();
 	void render();

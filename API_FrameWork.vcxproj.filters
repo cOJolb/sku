@@ -133,8 +133,14 @@
     <Filter Include="SCENE\stage">
       <UniqueIdentifier>{d712ea64-ebbc-4c87-bfc6-bf6490500095}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SCENE\stage\1stage">
-      <UniqueIdentifier>{e53f8e50-71b7-454c-9500-dbbe1970f5dd}</UniqueIdentifier>
+    <Filter Include="OBJECT\enemy\type\Bigknight">
+      <UniqueIdentifier>{0484c93c-1be9-4ea8-b0cc-43342984943f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OBJECT\enemy\type\BigEnt">
+      <UniqueIdentifier>{176250ae-820d-46aa-9423-09e839af946d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{964d957d-acf6-499c-80b1-f04231b67da4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -243,9 +249,6 @@
     <ClInclude Include="player.h">
       <Filter>OBJECT\player\base</Filter>
     </ClInclude>
-    <ClInclude Include="changePlayer.h">
-      <Filter>OBJECT\player\base</Filter>
-    </ClInclude>
     <ClInclude Include="object.h">
       <Filter>OBJECT\base</Filter>
     </ClInclude>
@@ -306,9 +309,6 @@
     <ClInclude Include="subWindowSetting.h">
       <Filter>MAP\maptool</Filter>
     </ClInclude>
-    <ClInclude Include="testScene.h">
-      <Filter>SCENE</Filter>
-    </ClInclude>
     <ClInclude Include="createScene.h">
       <Filter>SCENE</Filter>
     </ClInclude>
@@ -321,11 +321,32 @@
     <ClInclude Include="stage.h">
       <Filter>SCENE\stage</Filter>
     </ClInclude>
-    <ClInclude Include="stage1_1.h">
-      <Filter>SCENE\stage\1stage</Filter>
-    </ClInclude>
     <ClInclude Include="stageScene.h">
       <Filter>SCENE\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Bigknight.h">
+      <Filter>OBJECT\enemy\type\Bigknight</Filter>
+    </ClInclude>
+    <ClInclude Include="BigknightState.h">
+      <Filter>OBJECT\enemy\type\Bigknight</Filter>
+    </ClInclude>
+    <ClInclude Include="BigEnt.h">
+      <Filter>OBJECT\enemy\type\BigEnt</Filter>
+    </ClInclude>
+    <ClInclude Include="BigEntState.h">
+      <Filter>OBJECT\enemy\type\BigEnt</Filter>
+    </ClInclude>
+    <ClInclude Include="warrior.h">
+      <Filter>OBJECT\player\skul</Filter>
+    </ClInclude>
+    <ClInclude Include="playerUI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="startScene.h">
+      <Filter>SCENE</Filter>
+    </ClInclude>
+    <ClInclude Include="endScene.h">
+      <Filter>SCENE</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -413,9 +434,6 @@
     <ClCompile Include="player.cpp">
       <Filter>OBJECT\player\base</Filter>
     </ClCompile>
-    <ClCompile Include="changePlayer.cpp">
-      <Filter>OBJECT\player\base</Filter>
-    </ClCompile>
     <ClCompile Include="object.cpp">
       <Filter>OBJECT\base</Filter>
     </ClCompile>
@@ -473,9 +491,6 @@
     <ClCompile Include="subWindowSetting.cpp">
       <Filter>MAP\maptool</Filter>
     </ClCompile>
-    <ClCompile Include="testScene.cpp">
-      <Filter>SCENE</Filter>
-    </ClCompile>
     <ClCompile Include="createScene.cpp">
       <Filter>SCENE</Filter>
     </ClCompile>
@@ -488,11 +503,32 @@
     <ClCompile Include="stage.cpp">
       <Filter>SCENE\stage</Filter>
     </ClCompile>
-    <ClCompile Include="stage1_1.cpp">
-      <Filter>SCENE\stage\1stage</Filter>
-    </ClCompile>
     <ClCompile Include="stageScene.cpp">
       <Filter>SCENE\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Bigknight.cpp">
+      <Filter>OBJECT\enemy\type\Bigknight</Filter>
+    </ClCompile>
+    <ClCompile Include="BigknightState.cpp">
+      <Filter>OBJECT\enemy\type\Bigknight</Filter>
+    </ClCompile>
+    <ClCompile Include="BigEnt.cpp">
+      <Filter>OBJECT\enemy\type\BigEnt</Filter>
+    </ClCompile>
+    <ClCompile Include="BigEntState.cpp">
+      <Filter>OBJECT\enemy\type\BigEnt</Filter>
+    </ClCompile>
+    <ClCompile Include="warrior.cpp">
+      <Filter>OBJECT\player\skul</Filter>
+    </ClCompile>
+    <ClCompile Include="playerUI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="startScene.cpp">
+      <Filter>SCENE</Filter>
+    </ClCompile>
+    <ClCompile Include="endScene.cpp">
+      <Filter>SCENE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

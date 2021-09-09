@@ -6,6 +6,8 @@ class C_collider;
 class C_player;
 class C_collision :public Singleton<C_collision>
 {
+private:
+	int skulDelay;
 public:
 	C_collision();
 	~C_collision();

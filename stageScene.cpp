@@ -21,7 +21,7 @@ stageScene::~stageScene()
 
 HRESULT stageScene::init()
 {
-	curStage->init();
+	curStage->init(stageNumber);
 	//NextStage->init();
 	return S_OK;
 }
@@ -33,14 +33,25 @@ void stageScene::release()
 
 void stageScene::update()
 {
+	if (stageNumber == 4 && !testOnce)
+	{
+		testOnce = true;
+		SCENE->changeScene("end");
+	}
 	nextStage();
-	
 	curStage->update();
 }
 
 void stageScene::render()
 {
-	
+	IMAGE->findImage("BackGround")->render(getCVOSDC());
+	if (stageNumber == 0)
+	{
+		IMAGE->findImage("zxc")->renderCenter(getCVOSDC(), { 152, GameSizeY / 2 });
+		IMAGE->findImage("bottom")->renderCenter(getCVOSDC(), { 200, GameSizeY / 2 });
+		IMAGE->findImage("left")->renderCenter(getCVOSDC(), { 225, GameSizeY / 2 });
+		IMAGE->findImage("right")->renderCenter(getCVOSDC(), { 250, GameSizeY / 2 });
+	}
 	curStage->render();
 }
 
@@ -54,7 +65,7 @@ void stageScene::nextStage()
 		curStage->curRelease();
 		curStage = (*vistage);
 		curStage = vstage[stageNumber];
-		curStage->init();
+		curStage->init(stageNumber);
 
 		//NextStage->init();
 		//nexttest = true;

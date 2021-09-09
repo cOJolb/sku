@@ -3,6 +3,7 @@
 #include "collision.h"
 #include"enemy.h"
 #include"fsm.h"
+#include "item.h"
 C_littlebone::C_littlebone()
 {
 	skulInfo.playerSpeed = 3;
@@ -13,9 +14,21 @@ C_littlebone::C_littlebone()
 	skulInfo.canDoubleDash = true;
 	unitName = "skul";
 	skulInfo.playerSize.x = 20;
-	skulInfo.playerSize.y = 40;
-	skulInfo.atkDelay = 50;
+	skulInfo.playerSize.y = 35;
 	skulInfo.DashDelay = 50;
+	skulInfo.haveTwoSkill = true;
+	skulInfo.playerDamage = 10;
+
+	skulInfo.atkDelay = 20;
+	skulInfo.jumpAtkDelay = 30;
+	skulInfo.skill1Delay = 5;
+	skulInfo.skill2Delay = 10;
+	skulInfo.changeDelay = 100;
+
+	skulInfo.changeCoolTime = 200;
+	skulInfo.atkCoolTime = 30;
+	skulInfo.skill1CoolTime = 50;
+	skulInfo.skill2CoolTime = 50;
 	type = SKUL_TYPE::SKUL;
 }
 
@@ -23,71 +36,92 @@ C_littlebone::~C_littlebone()
 {
 }
 
-HRESULT C_littlebone::init()
-{
-	return S_OK;
-}
 
-void C_littlebone::release()
-{
-}
 
-void C_littlebone::update()
+void C_littlebone::playerChange(vector2 _pt, RECT& _rc, bool _isLeft, S_skulInfo _sInfo)
 {
-}
-
-void C_littlebone::render()
-{
-}
-
-void C_littlebone::playerAttack(vector2 _pt, bool _isLeft )
-{
-	attackRange = new C_collider;
-	attackRange->setSize({ 60, 60 });
-	if (_isLeft)
+	count++;
+	if (_isLeft){movetoLeft(_rc, _sInfo.playerSpeed * 2 / 3);}
+	else { movetoRight(_rc, _sInfo.playerSpeed * 2 / 3); }
+	if (count % 5 == 0)
 	{
-		attackRange->setPos({ _pt.x - 30, _pt.y });
+		BULLET->fire(_pt, { 60,60 }, _sInfo.playerDamage, 0, 0, 100, 1, "NONE", true, false, _isLeft);
 	}
-	else attackRange->setPos({ _pt.x + 30, _pt.y });
-	for (int i = 0; i < ENEMY->getvEnemy().size(); i++)
-	{
-		if (COLLISION->isCollision(attackRange, (*ENEMY->getviEnemy(i))->getCollider()))
-		{
-			(*ENEMY->getviEnemy(i))->sethp((*ENEMY->getviEnemy(i))->gethp() - 3);
-			(*ENEMY->getviEnemy(i))->getAi()->SetState(STATE_TYPE::DAMAGE);
-			if ((*ENEMY->getviEnemy(i))->gethp() <= 0)
-			{
-				ITEM->respawnGoodsItem(GOODSITEM::GOLD, (*ENEMY->getviEnemy(i))->getPt());
-				ENEMY->eraserEnemy(i);
-			}
-		}
-	}
-	SAFE_DELETE(attackRange);
+	if (count >= _sInfo.changeDelay) { isChange = false; }
 }
 
-void C_littlebone::playerDashMove(RECT& _rc, int& _DashCount, bool _DashJump, bool _DashFoward, float _DashSpeed)
+void C_littlebone::playerDashMove(RECT& _rc, bool _isLeft, S_skulInfo _sInfo)
 {
-	if (_DashCount > 0 && !_DashJump)
-	{
-		_DashCount--;
-		if (_DashFoward)
-		{
-			//_pt.x -= _DashSpeed;
-			movetoLeft(_rc, _DashSpeed);
-		}
+	if (_isLeft) { movetoLeft(_rc, _sInfo.playerDashSpeed); }
+	else { movetoRight(_rc, _sInfo.playerDashSpeed); }
+}
 
-		else if (!_DashFoward)
+void C_littlebone::playerAttack(vector2& _pt, RECT& _rc, bool _isLeft, S_skulInfo _sInfo, int number)
+{
+	switch (number)
+	{
+	case 0:
+		if (_isLeft) 
 		{
-			//_pt.x += _DashSpeed;
-			movetoRight(_rc, _DashSpeed);
+			movetoLeft(_rc, 10);
+			BULLET->fire({ _pt.x - 30, _pt.y  }, { 40,50 }, _sInfo.playerDamage, 0, 0, 100, 1, "NONE", true, false, _isLeft); 
 		}
+		else 
+		{ 
+			movetoRight(_rc, 10);
+			BULLET->fire({ _pt.x + 30, _pt.y  }, { 40,50 }, _sInfo.playerDamage, 0, 0, 100, 1, "NONE", true, false, _isLeft); 
+		}
+		isPlayAtkA = false;
+		break;
+	case 1:
+		if (_isLeft) 
+		{
+			movetoLeft(_rc, 10);
+			BULLET->fire({ _pt.x - 30, _pt.y }, { 40,50 }, _sInfo.playerDamage, 0, 0, 100, 1, "NONE", true, false, _isLeft);
+		}
+		else 
+		{ 
+			movetoRight(_rc, 10);
+			BULLET->fire({ _pt.x + 30, _pt.y }, { 40,50 }, _sInfo.playerDamage, 0, 0, 100, 1, "NONE", true, false, _isLeft);
+		}
+		isPlayAtkB = false;
+		break;
+	default:
+		break;
 	}
 }
 
-void C_littlebone::skillA()
+void C_littlebone::playerJumpAtk(vector2 _pt, RECT& _rc, bool _isLeft, S_skulInfo _sInfo)
 {
+	if (_isLeft) { BULLET->fire({ _pt.x - 30, _pt.y +30 }, { 40,50 }, _sInfo.playerDamage, 0, 0, 100, 1, "NONE", true, false, _isLeft); }
+	else { BULLET->fire({ _pt.x + 30, _pt.y+30 }, { 40,50 }, _sInfo.playerDamage, 0, 0, 100, 1, "NONE", true, false, _isLeft); }
+	isPlayJumpAtk = false;
 }
 
-void C_littlebone::skillB()
+void C_littlebone::skillA(vector2& _pt, RECT& _rc, bool _isLeft, S_skulInfo _sInfo)
 {
+	ITEM->respawnActiveItem(ACTIVEITEM::LITTLEBONEHEAD, _pt);
+	isPlaySkillA = false;
+}
+
+void C_littlebone::skillB(vector2& _pt, RECT& _rc, bool _isLeft, S_skulInfo _sInfo)
+{
+	for (int i = 0; i < ITEM->getvItem().size(); i++)
+	{
+		bool headOk = (*ITEM->getviItem(i))->getActiveType() == ACTIVEITEM::LITTLEBONEHEAD;
+		if (headOk)
+		{
+			_rc = RectMakeCenter((*ITEM->getviItem(i))->getPt(),_sInfo.playerSize.x,_sInfo.playerSize.y);
+			ITEM->itemRemove(i);
+			break;
+		}
+	}
+	isPlaySkillB = false;
+}
+
+bool C_littlebone::PlayJumpAtk()
+{
+	count = 0;
+	isPlayJumpAtk = true;
+	return false;
 }

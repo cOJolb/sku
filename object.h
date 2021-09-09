@@ -17,11 +17,19 @@ class C_object : public gameNode
 protected:
 	animation* ani;
 	image* objectImage;
+	BYTE ap;
 
 	vector2 pt;
 	vector2 prevPt;
 	C_collider* collider;
 
+	HRGN Bump;
+	HRGN hrgnRc;
+	bool getOut;
+	LPRECT lpRect;
+
+	LPRECT testLP;
+	RECT testRc;
 
 	RECT rc;
 	RECT futureRc;
@@ -45,6 +53,7 @@ protected:
 
 	int hp;
 	int maxHp;
+	int damage;
 
 	float jumpPower;
 	bool isJump;
@@ -53,10 +62,16 @@ protected:
 
 	bool wallCollision;
 	bool landCollision;
+	bool floorCollision;
 
 	int frameX;
+	int startFrameX;
+	int maxFrameX;
 	int frameY;
+	int delay;
 	bool isStart;
+
+	FRAME_TYPE frameType;
 private:
 	/*RECT tile;
 	bool NONEtile;*/
@@ -85,6 +100,8 @@ public:
 	int getAtkDelay() { return atkDelay; }
 	int gethp() { return hp; }
 	int getmaxHp() { return maxHp; }
+	int getMaxFrameX() { return IMAGE->findImage(unitImageInfo.unitName + unitImageInfo.unitState)->getMaxFrameX(); }
+	int getDamage() { return damage; }
 
 public:
 	void setPt(vector2 _pt) { pt = _pt; }
@@ -94,6 +111,12 @@ public:
 	void setFutureRc(RECT _rc) { futureRc = _rc; }
 	void setStart(bool _isStart) { isStart = _isStart; }
 
+	void setFrameX(int _frameX) { frameX = _frameX; }
+	void setFrameRender(FRAME_TYPE _type) { frameType = _type; }
+	void setFrameMaxMin(int _min, int _max);
+	void setAlpha(BYTE _alpha) { ap = _alpha; }
+
+	void setState(STATE_TYPE _type);
 public:
 	bool isCollision(C_collider* _left, C_collider* _right);
 	bool isCollision(RECT _left, RECT _right);

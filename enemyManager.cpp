@@ -2,6 +2,8 @@
 #include "enemyManager.h"
 #include "enemy.h"
 #include "knight.h"
+#include "BigEnt.h"
+#include "Bigknight.h"
 
 enemyManager::enemyManager()
 {
@@ -46,7 +48,12 @@ void enemyManager::respawnEnemy(UNIT_TYPE _type, vector2 _pt)
 	case UNIT_TYPE::KNIGHT:
 		monster = new C_knight(_pt);
 		break;
-
+	case UNIT_TYPE::BIGENT:
+		monster = new C_BigEnt(_pt);
+		break;
+	case UNIT_TYPE::BIGKNIGHT:
+		monster = new C_Bigknight(_pt);
+		break;
 	default:
 		return;
 		break;

@@ -7,6 +7,8 @@ obstacleManager::obstacleManager()
 	wallRGN = CreateRectRgn(0, 0, 0, 0);
 	totalLand = CreateRectRgn(0, 0, 0, 0);
 	landRGN = CreateRectRgn(0, 0, 0, 0);
+	totalFloor = CreateRectRgn(0, 0, 0, 0);
+	floorRGN = CreateRectRgn(0, 0, 0, 0);
 }
 
 obstacleManager::~obstacleManager()
@@ -47,20 +49,23 @@ void obstacleManager::createObstacle(OBSTACLE_TYPE _type, vector2 _pt)
     v_obstacle.push_back(obstacle);
 	if (obstacle->getisLand())
 	{
-		v_land.push_back(obstacle);
 		landRGN = CreateRectRgn(obstacle->getRc().left, obstacle->getRc().top, obstacle->getRc().right, obstacle->getRc().bottom);
 		//OffsetRgn(landRGN, 0, 10);
 		CombineRgn(totalLand, totalLand, landRGN, RGN_XOR);
 	}
 	if (obstacle->getUnMovable())
 	{
-		v_wall.push_back(obstacle);
 		wallRGN = CreateRectRgn(obstacle->getRc().left, obstacle->getRc().top, obstacle->getRc().right, obstacle->getRc().bottom);
 		CombineRgn(totalWall, totalWall, wallRGN, RGN_XOR);
 	}
 	if (obstacle->getisDoor())
 	{
 		v_door.push_back(obstacle);
+	}
+	if (obstacle->getType() == OBSTACLE_TYPE::L_FLOOR || obstacle->getType() == OBSTACLE_TYPE::R_FLOOR)
+	{
+		floorRGN = CreateRectRgn(obstacle->getRc().left, obstacle->getRc().top, obstacle->getRc().right, obstacle->getRc().bottom);
+		CombineRgn(totalFloor, totalFloor, floorRGN, RGN_XOR);
 	}
 }
 
@@ -92,7 +97,9 @@ void obstacleManager::eraserAllObstacle()
 {
 	totalWall = CreateRectRgn(0, 0, 0, 0);
 	totalLand = CreateRectRgn(0, 0, 0, 0);
+	totalFloor = CreateRectRgn(0, 0, 0, 0);
 	v_obstacle.erase(v_obstacle.begin(), v_obstacle.end());
+	v_door.clear();
 
 	//for (int i = 0; i < v_obstacle.size(); i++)
 	//{

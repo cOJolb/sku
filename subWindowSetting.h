@@ -4,7 +4,7 @@ class C_subWindowSetting : public gameNode
 {
 private:
 	S_tagSampleTile objTile[ObstacleTileX * ObstacleTileY];
-	//S_tagSampleTile monsterTile[MONSTERTILEX * MONSTERTILEY];
+	S_tagSampleTile monsterTile[MonsterTileX * MonsterTileY];
 	//S_tagSampleTile roomTile[ROOMTILEX * ROOMTILEY];
 	int currentIdx;
 

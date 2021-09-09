@@ -4,7 +4,8 @@ class C_enemy : public C_object
 {
 protected:
 	UNIT_TYPE type;
-
+	int count;
+	bool superArmor;
 private:
 public:
 	C_enemy();
@@ -18,5 +19,5 @@ public:
 
 public:
 	UNIT_TYPE getUnitType() { return type; }
-
+	bool isSuperArmor() { return superArmor; }
 };

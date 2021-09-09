@@ -46,6 +46,21 @@ bool Input::isOnceKeyDown(int key)
 	return false;
 }
 
+bool Input::KeyDown()
+{
+	for (int i = 0; i < KEYMAX; i++)
+	{
+		if (GetAsyncKeyState(i) & 0x8000)
+		{
+			if (!_keyDown[i])
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 bool Input::isOnceKeyUp(int key)
 {
 	if (GetAsyncKeyState(key) & 0x8000)

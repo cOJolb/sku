@@ -11,6 +11,7 @@ private:
 	bool isDownJump;
 	bool isLand;
 	bool isDoor;
+	bool isStart;
 	string doorType;
 public:
 	C_obstacle();
@@ -28,8 +29,10 @@ public:
 	bool getDownJump() { return isDownJump; }
 	bool getisLand() { return isLand; }
 	bool getisDoor() { return isDoor; }
+	bool getStart() { return isStart; }
 	int getObstacleNumber() { return obstacleNumber; }
 
+	OBSTACLE_TYPE getType() { return type; }
 	RECT getRc() { return rc; }
 
 public:

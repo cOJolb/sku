@@ -91,13 +91,14 @@ public:
 	void render(HDC hdc, const int  destX, const int destY);
 	void renderCenter(HDC hdc, vector2 _pt);
 	void render(HDC hdc, const int  destX, const int destY,const int sourX, const int sourY, const int sourWidth, const int sourheight);
-
+	void renderCenter(HDC hdc, vector2 _pt, const int sourX, const int sourY, const int sourWidth, const int sourheight);
 
 	//프레임 렌더
 	void frameRender(HDC hdc, const int destX, const int destY);
 	void frameRender(HDC hdc, const int destX, const int destY, const int currentFrameX, const int currentFrameY);
 	void frameRender(HDC hdc, vector2 _pt, const int currentFrameX, const int currentFrameY);
 	void frameRenderCenter(HDC hdc, vector2 _pt, const int currentFrameX, const int currentFrameY);
+	void RotateframeRenderCenter(HDC hdc, vector2 _pt, const int currentFrameX, const int currentFrameY, float angle);
 
 
 	//루프렌더
@@ -108,10 +109,12 @@ public:
 	void alphaRender(HDC hdc, BYTE alpha);
 	void alphaRender(HDC hdc,const int destX, const int destY, BYTE alpha);
 	void alphaRender(HDC hdc,const int destX, const int destY,const int sourX, const int sourY, const int sourWidth, const int sourHeight, BYTE alpha);
+	void alphaFrameRenderCenter(HDC hdc,vector2 _pt, const int currentFrameX, const int currentFrameY, BYTE alpha);
 
 
 	void aniRender(HDC hdc, const int destX, const int destY, animation* ani);
 	void aniRenderCenter(HDC hdc, const int destX, const int destY, animation* ani);
+	void aniRenderCenterAlpha(HDC hdc, const int destX, const int destY, animation* ani, BYTE alpha);
 	void aniRenderMe(HDC hdc, const int destX, const int destY, animation* ani);
 
 	//DC를 가져와라
@@ -167,6 +170,7 @@ public:
 			_imageInfo->currentFrameY = _imageInfo->maxFrameY;
 		}
 	}
+
 
 	//1프레임 가로세크로기 얻기
 	inline float getFrameWidth()const { return _imageInfo->frameWidth; }

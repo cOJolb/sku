@@ -43,17 +43,17 @@ void C_subWindowSetting::render(HDC hdc)
     switch (SUBWIN->GetFrameIndex())
     {
     case 0:
-        /*for (int i = 0; i < MONSTERTILEY; i++)
+        for (int i = 0; i < MonsterTileY; i++)
         {
-            for (int j = 0; j < MONSTERTILEX; j++)
+            for (int j = 0; j < MonsterTileX; j++)
             {
-                Rectangle(hdc, monsterTile[i * OBJECTTILEX + j].rcTile.left,
-                    monsterTile[i * OBJECTTILEX + j].rcTile.top,
-                    monsterTile[i * OBJECTTILEX + j].rcTile.right,
-                    monsterTile[i * OBJECTTILEX + j].rcTile.bottom);
+                Rectangle(hdc, monsterTile[i * MonsterTileX + j].rc.left,
+                    monsterTile[i * MonsterTileX + j].rc.top,
+                    monsterTile[i * MonsterTileX + j].rc.right,
+                    monsterTile[i * MonsterTileX + j].rc.bottom);
             }
         }
-        IMAGE->render("monsterTile", hdc, 0, 300);*/
+        IMAGE->render("monsterTile", hdc, 0, 300);
         break;
     case 1:
         for (int i = 0; i < ObstacleTileY; i++)
@@ -89,25 +89,25 @@ void C_subWindowSetting::render(HDC hdc)
 void C_subWindowSetting::mapToolSetup()
 {
     memset(objTile, 0, sizeof(objTile));
-    //memset(monsterTile, 0, sizeof(monsterTile));
+    memset(monsterTile, 0, sizeof(monsterTile));
     //memset(roomTile, 0, sizeof(roomTile));
 
     switch (currentIdx)
     {
     case 0:
-        /*for (int i = 0; i < MONSTERTILEY; i++)
+        for (int i = 0; i < MonsterTileY; i++)
         {
-            for (int j = 0; j < MONSTERTILEX; j++)
+            for (int j = 0; j < MonsterTileX; j++)
             {
-                monsterTile[i * MONSTERTILEX + j].frame.x = j;
-                monsterTile[i * MONSTERTILEX + j].frame.y = i;
+                monsterTile[i * MonsterTileX + j].frame.x = j;
+                monsterTile[i * MonsterTileX + j].frame.y = i;
 
-                monsterTile[i * MONSTERTILEX + j].rcTile =
+                monsterTile[i * MonsterTileX + j].rc =
                     RectMake(
-                        TILEWIDTH * j, 300 + TILEHEIGHT * i,
-                        TILEWIDTH, TILEHEIGHT);
+                        tileSize * j, 300 + tileSize * i,
+                        tileSize, tileSize);
             }
-        }*/
+        }
         break;
     case 1:
         for (int i = 0; i < ObstacleTileY; i++)
@@ -149,6 +149,14 @@ void C_subWindowSetting::setMap()
         if (PtInRect(&objTile[i].rc, SUBWIN->GetMousePos()))
         {
             SUBWIN->SetObjFrame(PointMake(objTile[i].frame.x, objTile[i].frame.y));
+        }
+    }
+    for (int i = 0; i < MonsterTileX * MonsterTileY; i++)
+    {
+        if (PtInRect(&monsterTile[i].rc, SUBWIN->GetMousePos()))
+        {
+            SUBWIN->SetMonsterFrame(PointMake(monsterTile[i].frame.x, monsterTile[i].frame.y));
+            SUBWIN->SetObjFrame(PointMake(4, 2));
         }
     }
 }

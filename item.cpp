@@ -3,6 +3,7 @@
 
 C_item::C_item()
 {
+
 }
 
 C_item::~C_item()
@@ -15,6 +16,10 @@ HRESULT C_item::init(C_player* _player)
 }
 
 void C_item::release(C_player* _player)
+{
+}
+
+void C_item::update()
 {
 }
 

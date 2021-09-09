@@ -15,13 +15,14 @@ HRESULT mainGame::init()
 	gameNode::init(true);
 	PLAYERDATA->setPlayerData(player);
 
-	//SCENE->addScene("test", new testScene);
 	SCENE->addScene("stage", new stageScene);
-	SCENE->addScene("test", new testScene);
 	SCENE->addScene("create", new createScene);
 	SCENE->addScene("item", new itemScene);
-	SCENE->addScene("stagetest", new C_stage);
+	SCENE->addScene("start", new startScene);
+	SCENE->addScene("end", new endScene);
 	SCENE->changeScene("stage");
+	SCENE->init();
+	SCENE->changeScene("start");
 	SCENE->init();
 	return S_OK;
 }

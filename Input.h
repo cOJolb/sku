@@ -20,6 +20,7 @@ public:
 
 	//한번만 눌렀냐
 	bool isOnceKeyDown(int key);
+	bool KeyDown();
 	//눌렀다가 뗏냐
 	bool isOnceKeyUp(int key);
 	//누르고 있냐

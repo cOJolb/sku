@@ -115,50 +115,77 @@ inline RECT& movetoDown(RECT& rec, int speed)
 }
 inline int countUp(int& _start, int _end, int& _count , int _delay = 1)
 {
-	
-	_count++;
-	if (_count % _delay == 0) { _start++; }
-
-	if (_start >= _end)
+	if (_start < _end)
 	{
-		_start = _end;
+		_count++;
+		if (_count % _delay == 0) { _start++; }
+
+		if (_start >= _end)
+		{
+			_start = _end;
+		}
+		return _start;
 	}
-	return _start;
 }
 inline int countDown(int& _start, int _end, int& _count, int _delay = 1)
 {
-	_count++;
-	if (_count % _delay == 0) { _start--; }
-
-	if (_start <= _end)
+	if (_start > _end)
 	{
-		_start = _end;
+		_count++;
+		if (_count % _delay == 0) { _start--; }
+
+		if (_start <= _end)
+		{
+			_start = _end;
+		}
+		return _start;
 	}
-	return _start;
 }
 
 inline int countUpLoop(int& _number, int _start, int _end,  int& _count, int _delay = 1)
 {
-	
-	_count++;
-	if (_count % _delay == 0) { _number++; }
-	if (_number >= _end)
+	if (_start < _end)
 	{
-		_number = _start;
+		_count++;
+		if (_count % _delay == 0) { _number++; }
+		if (_number >= _end)
+		{
+			_number = _start;
+		}
+		return _number;
 	}
-	return _number;
 }
 inline int countDownLoop(int& _number, int _start, int _end, int& _count , int _delay = 1)
 {
-
-	_count++;
-	if (_count % _delay == 0) { _number--; }
-	
-	if (_number <= _end)
+	if (_start > _end)
 	{
-		_number = _start;
+		_count++;
+		if (_count % _delay == 0) { _number--; }
+
+		if (_number <= _end)
+		{
+			_number = _start;
+		}
+		return _number;
 	}
-	return _number;
+}
+
+bool afterCountstart = false;
+inline bool afterCount(bool _isStart, int _count, int _dd = 0)
+{
+	if (_isStart)
+	{
+		afterCountstart = true;
+	}
+	if (afterCountstart)
+	{
+		_dd++;
+		if (_dd == _count) {
+			afterCountstart = false;
+			return true; 
+		}
+		else { return false; }
+	}
 }
 const int tileSize = 36;
 const int tileX = 30;
@@ -167,9 +194,10 @@ const int GameSizeX = tileSize * tileX;
 const int GameSizeY = tileSize * tileY;
 const int MiniMapSizeX = 150;
 const int MiniMapSizeY = 100;
-const int ObstacleTileX = 6;
+const int ObstacleTileX = 7;
 const int ObstacleTileY = 4;
-
+const int MonsterTileX = 4;
+const int MonsterTileY = 1;
 
 enum class ROOM
 {
@@ -258,20 +286,24 @@ enum class OBSTACLE_TYPE
 	LCA_LAND,
 	NORMALDOOR,
 	ITEMDOOR,
-	SKULDOOR
+	SKULDOOR,
+	START
 };
 
 enum class SKUL_TYPE
 {
 	SKUL,
-	CLOWN
+	CLOWN,
+	WARRIOR
 };
 
 
 enum class UNIT_TYPE
 {
 	PLAYER,
-	KNIGHT
+	KNIGHT,
+	BIGKNIGHT,
+	BIGENT
 };
 
 enum class MONSTER_TYPE
@@ -292,7 +324,8 @@ enum class PASSIVEITEM
 {
 	BOOTS,
 	CRISTAL,
-	MEDAL
+	MEDAL,
+	SWORD
 };
 
 enum class SKULITEM
@@ -303,7 +336,8 @@ enum class SKULITEM
 
 enum class ACTIVEITEM
 {
-	IM,
+	NONE,
+	LITTLEBONEHEAD,
 	NOT,
 	OKAY
 };
@@ -313,9 +347,13 @@ enum class GOODSITEM
 	GOLD
 };
 
-enum class BULLET_TYPE
+enum class FRAME_TYPE
 {
-
+	FIX,
+	LOOP,
+	RANGE,
+	RANGELOOP,
+	NORMAL
 };
 
 struct S_skulInfo
@@ -327,9 +365,22 @@ struct S_skulInfo
 	float playerJumpPower;
 
 	bool canDoubleDash;
+	bool haveTwoSkill;
 
+	int changeDelay;
 	int atkDelay;
+	int jumpAtkDelay;
 	int DashDelay;
+	int skill1Delay;
+	int skill2Delay;
+	
+
+	int changeCoolTime;
+	int atkCoolTime;
+	int skill1CoolTime;
+	int skill2CoolTime;
+
+	int playerDamage;
 
 	vector2 playerSize;
 };
@@ -337,11 +388,13 @@ struct S_skulInfo
 struct S_tagTile
 {
 	OBSTACLE_TYPE type;
+	UNIT_TYPE monstertype;
+
 	int tileNumber;
 	RECT rc;
 
 	vector2 objFrame;
-	//vector2 monsterFrame;
+	vector2 monsterFrame;
 	vector2 pt;
 };
 

@@ -10,7 +10,7 @@ private:
 	int maxRoomNum[(UINT)FILE_TYPE::END];
 	int randomMap;
 public:
-	C_mapSetting();
+	C_mapSetting(int number);
 	~C_mapSetting();
 
 public:

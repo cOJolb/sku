@@ -15,7 +15,9 @@ HRESULT C_DimLightDarkcite::init(C_player* _player)
 {
 	S_skulInfo changeInfo;
 	changeInfo = _player->getPlayerInfo();
-	changeInfo.playerSpeed += 5;
+	//stats = changeInfo.playerSpeed / 10;
+	stats = 1;
+	changeInfo.playerSpeed += stats;
 	_player->setPlayerInfo(changeInfo);
 	return S_OK;
 }
@@ -24,7 +26,7 @@ void C_DimLightDarkcite::release(C_player* _player)
 {
 	S_skulInfo changeInfo;
 	changeInfo = _player->getPlayerInfo();
-	changeInfo.playerSpeed -= 5;
+	changeInfo.playerSpeed -= stats;
 	_player->setPlayerInfo(changeInfo);
 }
 
@@ -49,6 +51,8 @@ C_MedalOfCarleon::C_MedalOfCarleon(vector2 _pt)
 
 HRESULT C_MedalOfCarleon::init(C_player* _player)
 {
+	_player->sethp(_player->gethp() + 20);
+	if(_player->gethp() >= _player->getmaxHp()) { _player->sethp(_player->getmaxHp()); }
 	return S_OK;
 }
 
@@ -68,4 +72,41 @@ void C_MedalOfCarleon::render()
 void C_MedalOfCarleon::render(vector2 _pt)
 {
 	IMAGE->findImage("MedalOfCarleon")->renderCenter(getMemDC(), _pt);
+}
+
+C_BasicCaerleonSword::C_BasicCaerleonSword(vector2 _pt)
+{
+	pt = _pt;
+	collider = new C_collider(pt, { 30,30 });
+	itemType = ITEM_TYPE::PASSIVE;
+	passiveType = PASSIVEITEM::SWORD;
+}
+
+HRESULT C_BasicCaerleonSword::init(C_player* _player)
+{
+	S_skulInfo changeInfo;
+	changeInfo = _player->getPlayerInfo();
+	//stats = changeInfo.playerSpeed / 10;
+	stats = 5;
+	changeInfo.playerDamage += stats;
+	_player->setPlayerInfo(changeInfo);
+	return S_OK;
+}
+
+void C_BasicCaerleonSword::release(C_player* _player)
+{
+	S_skulInfo changeInfo;
+	changeInfo = _player->getPlayerInfo();
+	changeInfo.playerDamage -= stats;
+	_player->setPlayerInfo(changeInfo);
+}
+
+void C_BasicCaerleonSword::render()
+{
+	IMAGE->findImage("BasicCaerleonSword")->renderCenter(getCVOSDC(), pt);
+}
+
+void C_BasicCaerleonSword::render(vector2 _pt)
+{
+	IMAGE->findImage("BasicCaerleonSword")->renderCenter(getMemDC(), _pt);
 }

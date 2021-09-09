@@ -5,6 +5,8 @@
 #include "obstacle.h"
 
 #include "knightState.h"
+#include "BigEntState.h"
+#include "BigknightState.h"
 
 C_object::C_object()
 {
@@ -12,10 +14,27 @@ C_object::C_object()
 	prevPt = pt;
 	landCollision = false;
 	wallCollision = false;
+	floorCollision = false;
 	ani = new animation;
 	objectImage = new image;
+
 	frameX = 0;
 	frameY = 0;
+	maxFrameX = 0;
+	startFrameX = 0;
+	isStart = true;
+	frameType = FRAME_TYPE::LOOP;
+
+	delay = 0;
+	damage = 0;
+	ap = 250;
+
+	Bump = CreateRectRgn(0, 0, 0, 0);
+	hrgnRc = CreateRectRgn(1,1,1,1);
+	rc = RectMake(0,0, 0, 0);
+	lpRect = &rc;
+	testRc = RectMake(0, 0, 0, 0);
+	testLP = &testRc;
 	/*tile = { 0,0,0,0 };
 	NONEtile = false;*/
 	//searchList.push_back(0);
@@ -38,6 +57,7 @@ void C_object::release()
 
 void C_object::update()
 {
+
 }
 
 void C_object::render()
@@ -59,6 +79,20 @@ void C_object::AI_init(C_object* _object, UNIT_TYPE _type)
 		ai->AddState(new knight_Damage);
 		ai->SetState(STATE_TYPE::IDLE);
 		break;
+	case UNIT_TYPE::BIGENT:
+		ai->AddState(new BigEnt_Idle);
+		ai->AddState(new BigEnt_Trace);
+		ai->AddState(new BigEnt_Atk);
+		ai->AddState(new BigEnt_Die);
+		ai->AddState(new BigEnt_Damage);
+		ai->SetState(STATE_TYPE::IDLE);
+	case UNIT_TYPE::BIGKNIGHT:
+		ai->AddState(new Bigknight_Idle);
+		ai->AddState(new Bigknight_Trace);
+		ai->AddState(new Bigknight_Atk);
+		ai->AddState(new Bigknight_Die);
+		ai->AddState(new Bigknight_Damage);
+		ai->SetState(STATE_TYPE::IDLE);
 	default:
 		break;
 	}
@@ -74,6 +108,11 @@ STATE_TYPE C_object::getstate()
 {
 	STATE_TYPE st = ai->getState()->GetStateType();
 	return st;
+}
+
+void C_object::setState(STATE_TYPE _type)
+{
+	ai->ChangeState(_type);
 }
 
 bool C_object::isCollision(C_collider* _left, C_collider* _right)
@@ -96,6 +135,14 @@ bool C_object::isCollision(C_collider* _left, C_collider* _right)
 
 	return false;
 }
+
+void C_object::setFrameMaxMin(int _min, int _max)
+{
+	startFrameX = _min;
+	maxFrameX = IMAGE->findImage(unitImageInfo.unitName + unitImageInfo.unitState)->getMaxFrameX() - _max;
+}
+
+
 
 bool C_object::isCollision(RECT _left, RECT _right)
 {
@@ -140,72 +187,109 @@ void C_object::Gravity()
 
 void C_object::isLand()
 {
-	RECT bottomRc = RectMake(RectX(futureRc), futureRc.bottom, 1, 1);
+	/*RECT bottomRc = RectMake(RectX(futureRc), futureRc.bottom-1, 1, 1);
 	RECT testRc = RectMakeCenter(pt.x, pt.y + collider->getSize().y/2 -1, collider->getSize().x, 1);
-	RECT testRc2 = RectMakeCenter(pt.x, pt.y-10, collider->getSize().x,1);
-	//RECT testRc3 = RectMakeCenter(RectX(futureRc), RectY(futureRc) + 10, RectWidth(futureRc), 1);
+	RECT testRc2 = RectMakeCenter(pt.x, pt.y-9, collider->getSize().x,1);*/
+
 	bool isDown = pt.y < RectY(futureRc);
-	//bool isRight = prevPt.x < pt.x;
-	//bool isLeft = prevPt.x > pt.x;
-	//bool isDown = prevPt.y <= pt.y;
-	//bool isUp = prevPt.y > pt.y;
+
 	landCollision = RectInRegion(OBSTACLE->getTotalLand(), &futureRc);
-	//bool NotBump = RectInRegion(OBSTACLE->getTotalLand(), &futureRc);
 	bool dontDown = RectInRegion(OBSTACLE->getTotalLand(), &futureRcB);
-	bool testBool = RectInRegion(OBSTACLE->getTotalLand(), &testRc2);
-	//bool testBool2 = RectInRegion(OBSTACLE->getTotalLand(), &testRc3);
-	if (landCollision && isDown &&dontDown && !testBool  )
+	//bool testBool = RectInRegion(OBSTACLE->getTotalLand(), &testRc2);
+	//bool testBool2 = RectInRegion(OBSTACLE->getTotalLand(), &bottomRc);
+	if (/*landCollision &&*/ isDown &&dontDown /*&& !testBool */ )
 	{
 		isJump = false;
 		jumpPower = GRAVITY;
 		do
 		{
 			movetoUp(futureRc, 1);
-			landCollision = RectInRegion(OBSTACLE->getTotalLand(), &futureRc);
+			RECT test = RectMakeCenter(pt.x, futureRc.bottom-1,1, 1);
+			landCollision = RectInRegion(OBSTACLE->getTotalLand(), &test);
 		} while (landCollision);
-		/*while (landCollision)
-		{
-			movetoUp(futureRc, 1);
-		}*/
+
 	}
 	else isJump = true;
-
-	//rc = futureRc;
-	//pt = { RectX(rc), RectY(rc) };
-
 }
-
-//void C_object::isLand()
-//{
-//	for (int i = 0; i < OBSTACLE->getvLand().size(); i++)
-//	{
-//		bool inRangeX = (*OBSTACLE->getviLand(i))->getPt().x - (*OBSTACLE->getviLand(i))->getCollider()->getSize().x / 2 <= pt.x
-//			&& pt.x <= (*OBSTACLE->getviLand(i))->getPt().x + (*OBSTACLE->getviLand(i))->getCollider()->getSize().x / 2;
-//		bool inRangeY = (*OBSTACLE->getviLand(i))->getPt().y - (*OBSTACLE->getviLand(i))->getCollider()->getSize().y / 2 + GRAVITY >= pt.y + collider->getSize().y
-//			&& pt.y + collider->getSize().y >= (*OBSTACLE->getviLand(i))->getPt().y - (*OBSTACLE->getviLand(i))->getCollider()->getSize().y / 2;
-//		bool isDown = prevPt.y <= pt.y;
-//
-//		if (inRangeX && inRangeY && isDown)
-//		{
-//			pt.y = (*OBSTACLE->getviLand(i))->getPt().y - tileSize / 2 - collider->getSize().y;
-//			isJump = false;
-//			jumpPower = GRAVITY;
-//			break;
-//		}
-//		else isJump = true;
-//	}
-//}
 
 void C_object::isBump()
 {
+	wallCollision = RectInRegion(OBSTACLE->getTotalWall(), &futureRc);
+	CombineRgn(Bump, Bump, Bump, RGN_XOR);
+	CombineRgn(hrgnRc, hrgnRc, hrgnRc, RGN_XOR);
+	if (wallCollision)
+	{
+		CombineRgn(hrgnRc, CreateRectRgn(0,0,GameSizeX,GameSizeY), CreateRectRgn(futureRc.left, futureRc.top, futureRc.right, futureRc.bottom), RGN_AND);
+		CombineRgn(Bump, hrgnRc, OBSTACLE->getTotalWall(), RGN_AND);
+		getOut = RectInRegion(Bump, &futureRc);
+	}
+	GetRgnBox(Bump, lpRect);
+	RECT* temp = lpRect;
+	GetRgnBox(hrgnRc, testLP);
+
+
+	bool isRight = pt.x < RectX(futureRc);
+	bool isLeft = pt.x > RectX(futureRc);
+	bool isUp = pt.y > RectY(futureRc);
+	bool isDown = pt.y < RectY(futureRc);
+
+	if (isDown && getOut)
+	{
+		/*do
+		{*/
+			RECT temp;
+			isJump = false;
+			movetoUp(futureRc, RectHeight(*lpRect));
+		//	getOut = IntersectRect(&temp, lpRect, &futureRc);
+		//} while (getOut);
+	}
+	if (isRight && getOut)
+	{
+		do
+		{
+			RECT temp;
+			movetoLeft(futureRc, 1);
+			getOut = IntersectRect(&temp,lpRect, &futureRc);
+		} while (getOut);
+	}
+	
+	if (isLeft && getOut)
+	{
+		do
+		{
+			RECT temp;
+			movetoRight(futureRc, 1);
+			getOut = IntersectRect(&temp, lpRect, &futureRc);
+		} while (getOut);
+	}
+	if (isUp && getOut)
+	{
+		do
+		{
+			RECT temp;
+			movetoDown(futureRc, 1);
+			getOut = IntersectRect(&temp, lpRect, &futureRc);
+		} while (getOut);
+	}
 }
 
 void C_object::isClogged()
 {
-	
+
+	//RECT bottomRc = RectMake(RectX(futureRc), futureRc.bottom, 1, 1);
+	//RECT testRc = RectMakeCenter(pt.x, pt.y + collider->getSize().y / 2 - 1, collider->getSize().x, 1);
+	//RECT testRc2 = RectMakeCenter(pt.x, pt.y - 9, collider->getSize().x, 1);
+	//bool isDown = pt.y < RectY(futureRc);
+	//landCollision = RectInRegion(OBSTACLE->getTotalWall(), &futureRc);
+	//bool dontDown = RectInRegion(OBSTACLE->getTotalWall(), &futureRcB);
+	//bool testBool = RectInRegion(OBSTACLE->getTotalWall(), &testRc2);
+
+
 	bool isRight = pt.x < RectX(futureRc);
 	bool isLeft = pt.x > RectX(futureRc);
 	bool isUp = pt.y > RectY(futureRc);
+	//bool isDown = pt.y < RectY(futureRc);
+	//bool dontDown = RectInRegion(OBSTACLE->getTotalWall(), &futureRcB);
 	bool dontLeft = RectInRegion(OBSTACLE->getTotalWall(), &futureRcL);
 	bool dontRight = RectInRegion(OBSTACLE->getTotalWall(), &futureRcR);
 	bool dontUp = RectInRegion(OBSTACLE->getTotalWall(), &futureRcT);
@@ -213,12 +297,21 @@ void C_object::isClogged()
 	bool RightBump = RectInRegion(OBSTACLE->getTotalWall(), &futureRR);
 	bool UpBump = RectInRegion(OBSTACLE->getTotalWall(), &futureRT);
 	wallCollision = RectInRegion(OBSTACLE->getTotalWall(), &futureRc);
+	floorCollision = RectInRegion(OBSTACLE->getTotalFloor(), &futureRc);
 
-
-	//if (isUp && isLeft && )
-	if (wallCollision && isUp && dontUp )
+	
+	if (floorCollision)
 	{
-		//movetoDown(futureRc, 10);
+		do
+		{
+			movetoUp(futureRc, 1);
+			floorCollision = RectInRegion(OBSTACLE->getTotalFloor(), &futureRc);
+		} while (floorCollision);
+	}
+
+	if (wallCollision && isUp && dontUp)
+	{
+
 		jumpPower = GRAVITY;
 		do
 		{
@@ -226,22 +319,20 @@ void C_object::isClogged()
 			wallCollision = RectInRegion(OBSTACLE->getTotalWall(), &futureRc);
 		} while (wallCollision);
 	}
+	
 	if (isLeft && wallCollision && dontLeft)
 	{
-		
-		//movetoRight(futureRc, 10);
-		
 		do
 		{
 			movetoRight(futureRc, 1);
 			wallCollision = RectInRegion(OBSTACLE->getTotalWall(), &futureRc);
 		} while (wallCollision);
-		
+
 	}
-	
+
 	if (isRight && wallCollision && dontRight)
 	{
-		
+
 		//movetoLeft(futureRc, 10);
 
 		do
@@ -250,7 +341,9 @@ void C_object::isClogged()
 			wallCollision = RectInRegion(OBSTACLE->getTotalWall(), &futureRc);
 		} while (wallCollision);
 	}
-	
+
+
+
 
 	rc = futureRc;
 	pt = { RectX(rc), RectY(rc) };
@@ -312,10 +405,10 @@ void C_object::isWall()
 
 void C_object::futureRcLTRB()
 {
-	futureRcL = RectMakeCenter(futureRc.left-1, RectY(futureRc), 1, RectHeight(futureRc));
-	futureRcT = RectMakeCenter(RectX(futureRc), futureRc.top-1, RectWidth(futureRc), 1);
-	futureRcR = RectMakeCenter(futureRc.right+1, RectY(futureRc), 1, RectHeight(futureRc));
-	futureRcB = RectMakeCenter(RectX(futureRc), futureRc.bottom+1, RectWidth(futureRc), 1);
+	futureRcL = RectMakeCenter(futureRc.left-1, RectY(futureRc), 1, 1);
+	futureRcT = RectMakeCenter(RectX(futureRc), futureRc.top-1, 1, 1);
+	futureRcR = RectMakeCenter(futureRc.right+1, RectY(futureRc), 1, 1);
+	futureRcB = RectMakeCenter(RectX(futureRc), futureRc.bottom+1, 1, 1);
 	futureRL = RectMakeCenter(RectX(futureRc) - 1, RectY(futureRc), RectWidth(futureRc), RectHeight(futureRc));
 	futureRT = RectMakeCenter(RectX(futureRc), RectY(futureRc) - 1, RectWidth(futureRc), RectHeight(futureRc));
 	futureRR = RectMakeCenter(RectX(futureRc) + 1, RectY(futureRc), RectWidth(futureRc), RectHeight(futureRc));
